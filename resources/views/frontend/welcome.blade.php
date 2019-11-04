@@ -2,13 +2,17 @@
 
 @section('title', 'Welcome to our laravel blog site')
 
+@push('css')
+    <link href="{{ asset('frontend/layout-1/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/layout-1/css/responsive.css') }}" rel="stylesheet">
+@endpush
+
 @section('content')
 
     <div class="slider"></div>
 
     <section class="blog-area section">
         <div class="container">
-
             <div class="row">
 
                 <div class="col-lg-4 col-md-6">
