@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Blog') - {{ config('app.name', 'Laravel blog site') }}</title>
+    <title>@yield('title', 'Laravel blog') - {{ config('app.name', 'Laravel blog site') }}</title>
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
