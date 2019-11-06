@@ -10,7 +10,7 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Tags</h2>
+            <h2>All Tag</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route('admin.dashboard') }}">Home</a>
@@ -25,7 +25,7 @@
         </div>
         <div class="col-lg-2">
             <div class="ibox-tools">
-                <a href="" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
+                <a href="{{ route('admin.tags.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
             </div>
         </div>
     </div>
@@ -69,7 +69,14 @@
                                             </td>
                                             <td>{{ date("d-m-Y", strtotime($tag->created_at)) }}</td>
                                             <td>{{ date("d-m-Y", strtotime($tag->updated_at)) }}</td>
-                                            <td>{{ $tag->name }}</td>
+                                            <td>
+                                                <a title="Edit" class="btn btn-info cus_btn">
+                                                    <i class="fa fa-pencil-square-o"></i> Edit
+                                                </a>
+                                                <a title="Delete" class="btn btn-danger cus_btn">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                             </table>
