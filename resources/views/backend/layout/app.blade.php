@@ -27,6 +27,9 @@
     <link href="{{ asset('backend/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 
+    {{--custom style--}}
+    <link href="{{ asset('backend/css/custom_style.css') }}" rel="stylesheet">
+
     @stack('css')
 
 </head>

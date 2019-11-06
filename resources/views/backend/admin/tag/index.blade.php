@@ -24,7 +24,9 @@
             </ol>
         </div>
         <div class="col-lg-2">
-
+            <div class="ibox-tools">
+                <a href="" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
+            </div>
         </div>
     </div>
 
@@ -43,6 +45,7 @@
                                 <tr>
                                     <th>Sl No</th>
                                     <th>Name</th>
+                                    <th>Slug</th>
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
@@ -50,14 +53,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="gradeX">
-                                    <td>1</td>
-                                    <td>Internet</td>
-                                    <td>Win 95+</td>
-                                    <td class="center">Internet</td>
-                                    <td class="center">Abdullah</td>
-                                    <td class="center">Mamun</td>
-                                </tr>
+                                    @foreach($tags as $key => $tag)
+                                        <tr class="gradeX">
+                                            <td>1</td>
+                                            <td>{{ $tag->name }}</td>
+                                            <td>{{ $tag->slug }}</td>
+                                            <td>
+                                                <a href="" title="Change publication status">
+                                                    @if($tag->status)
+                                                        <span class="badge badge-primary">Active</span>
+                                                    @else
+                                                        <span class="badge badge-warning">Disable</span>
+                                                    @endif
+                                                </a>
+                                            </td>
+                                            <td>{{ date("d-m-Y", strtotime($tag->created_at)) }}</td>
+                                            <td>{{ date("d-m-Y", strtotime($tag->updated_at)) }}</td>
+                                            <td>{{ $tag->name }}</td>
+                                        </tr>
+                                    @endforeach
                             </table>
                         </div>
 

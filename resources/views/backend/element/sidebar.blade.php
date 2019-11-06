@@ -31,12 +31,14 @@
                 </div>
             </li>
 
+            @php($current_controller = class_basename(Route::current()->controller))
+
             @if(Request::is('admin*'))
 
-                <li>
+                <li class="{{ $current_controller === 'DashboardController' ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
-                <li>
+                <li class="{{ $current_controller === 'TagController' ? 'active' : '' }}">
                     <a href="{{ route('admin.tags.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Tag</span></a>
                 </li>
 
