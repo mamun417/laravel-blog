@@ -23,6 +23,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     function (){
 
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+        //Tag route
+        Route::resource('tags', 'TagController');
     }
 );
 

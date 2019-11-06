@@ -10,10 +10,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Laravel blog') | {{ config('app.name', 'Laravel blog') }}</title>
+    <title>@yield('title', 'Laravel blog') - {{ config('app.name', 'Laravel blog') }}</title>
 
     <link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+
+    {{--data table--}}
+    <link href="{{ asset('backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="{{ asset('backend/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
@@ -33,20 +36,13 @@
 
     @include('backend.element.sidebar')
 
-    <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div id="page-wrapper" class="gray-bg">
 
         @include('backend.element.header')
 
-        <div class="row  border-bottom white-bg dashboard-header">
-
-            @yield('content')
-
-            @include('backend.element.footer')
-
-        </div>
+        @yield('content')
 
     </div>
-
 </div>
 
 <!-- Mainly scripts -->
@@ -55,12 +51,8 @@
 <script src="{{ asset('backend/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('backend/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
-<!-- Flot -->
-<script src="{{ asset('backend/js/plugins/flot/jquery.flot.js') }}"></script>
-<script src="{{ asset('backend/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
-<script src="{{ asset('backend/js/plugins/flot/jquery.flot.spline.js') }}"></script>
-<script src="{{ asset('backend/js/plugins/flot/jquery.flot.resize.js') }}"></script>
-<script src="{{ asset('backend/js/plugins/flot/jquery.flot.pie.js') }}"></script>
+{{--data table--}}
+<script src="{{ asset('backend/js/plugins/dataTables/datatables.min.js') }}"></script>
 
 <!-- Peity -->
 <script src="{{ asset('backend/js/plugins/peity/jquery.peity.min.js') }}"></script>
@@ -87,6 +79,37 @@
 
 <!-- Toastr -->
 <script src="{{ asset('backend/js/plugins/toastr/toastr.min.js') }}"></script>
+
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function(){
+        $('.dataTables-example').DataTable({
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                { extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+
+                {extend: 'print',
+                    customize: function (win){
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>

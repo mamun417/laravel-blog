@@ -36,6 +36,9 @@
                 <li>
                     <a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.tags.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Tag</span></a>
+                </li>
 
             @elseif(Request::is('author*'))
 

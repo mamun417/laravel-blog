@@ -10,7 +10,9 @@ class TagController extends Controller
 {
     public function index()
     {
-        //
+        $tags = Tag::latest()->get();
+
+        return view('backend.admin.tag.index', compact('tags'));
     }
 
     public function create()
