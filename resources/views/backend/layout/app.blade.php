@@ -114,5 +114,30 @@
 
 </script>
 
+{{--toastr message--}}
+<script>
+
+$(function () {
+
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'slideDown',
+        timeOut: 2000
+    };
+
+    //Toastr message for domain event trigger
+    @if(session('successMsg'))
+        toastr.success('{{ session('successMsg') }}');
+    @endif
+
+    @if(session('errorMsg'))
+        toastr.error('{{ session('errorMsg') }}');
+    @endif
+
+})
+
+</script>
+
 </body>
 </html>

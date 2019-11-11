@@ -73,9 +73,16 @@
                                                 <a title="Edit" class="btn btn-info cus_btn">
                                                     <i class="fa fa-pencil-square-o"></i> Edit
                                                 </a>
-                                                <a title="Delete" class="btn btn-danger cus_btn">
+                                                <a title="Delete" class="btn btn-danger cus_btn" onclick="event.preventDefault();
+                                                    document.getElementById('class-delete-form{{ $tag->id }}').submit();">
                                                     <i class="fa fa-trash"></i> Delete
                                                 </a>
+
+                                                <form id="class-delete-form{{ $tag->id }}" method="POST" action="{{ route('admin.tags.destroy', $tag->id) }}" style="display: none" >
+                                                    @method('DELETE')
+                                                    @csrf()
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach

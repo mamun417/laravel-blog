@@ -31,7 +31,7 @@ class TagController extends Controller
 
         $create = Tag::create($request->all());
 
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('successMsg', 'Tag created successfully');
     }
 
     public function show(Tag $tag)
@@ -51,6 +51,8 @@ class TagController extends Controller
 
     public function destroy(Tag $tag)
     {
-        //
+        if ($tag->delete()){
+            return back()->with('successMsg', 'Tag delete successfully');
+        }
     }
 }

@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
                                     <a href="{{ route('admin.tags.index') }}" class="btn btn-sm btn-danger" type="submit">Cancel</a>
-                                    <button class="btn btn-sm btn-info" type="submit">Submit</button>
+                                    <button class="btn btn-sm btn-primary" type="submit">Submit</button>
                                 </div>
                             </div>
                         </form>
