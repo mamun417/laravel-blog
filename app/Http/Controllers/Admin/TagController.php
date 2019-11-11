@@ -50,7 +50,11 @@ class TagController extends Controller
             'name' => 'required|unique:tags,name,'.$tag->id,
         ]);
 
-        dd($request->all());
+        $update = $tag->update($request->all());
+
+        if ($update){
+            return redirect()->route('admin.tags.index')->with('successMsg', 'Tag updated successfully');
+        }
     }
 
     public function destroy(Tag $tag)
