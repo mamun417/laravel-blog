@@ -25,6 +25,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
         //Tag route
+        Route::get('tags/change-status/{tag}', 'TagController@changeStatus')->name('tags.change.status');
         Route::resource('tags', 'TagController');
     }
 );

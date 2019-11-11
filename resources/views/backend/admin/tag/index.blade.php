@@ -59,7 +59,7 @@
                                             <td>{{ $tag->name }}</td>
                                             <td>{{ $tag->slug }}</td>
                                             <td>
-                                                <a href="" title="Change publication status">
+                                                <a href="{{ route('admin.tags.change.status', $tag->id) }}" title="Change publication status">
                                                     @if($tag->status)
                                                         <span class="badge badge-primary">Active</span>
                                                     @else

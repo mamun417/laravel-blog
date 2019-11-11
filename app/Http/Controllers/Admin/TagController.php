@@ -52,15 +52,22 @@ class TagController extends Controller
 
         $update = $tag->update($request->all());
 
-        if ($update){
-            return redirect()->route('admin.tags.index')->with('successMsg', 'Tag updated successfully');
-        }
+        return redirect()->route('admin.tags.index')->with('successMsg', 'Tag updated successfully');
     }
 
     public function destroy(Tag $tag)
     {
-        if ($tag->delete()){
-            return back()->with('successMsg', 'Tag delete successfully');
-        }
+        $tag->delete();
+
+        return back()->with('successMsg', 'Tag delete successfully');
+    }
+
+    public function changeStatus(Tag $tag){
+
+        $status = $tag->status ? 0 : 1;
+
+        $update = $tag->update(['status' => $status]);
+
+        return redirect()->route('admin.tags.index')->with('successMsg', 'Tag status changed successfully');
     }
 }
