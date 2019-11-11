@@ -70,7 +70,7 @@
                                             <td>{{ date("d-m-Y", strtotime($tag->created_at)) }}</td>
                                             <td>{{ date("d-m-Y", strtotime($tag->updated_at)) }}</td>
                                             <td>
-                                                <a title="Edit" class="btn btn-info cus_btn">
+                                                <a href="{{ route('admin.tags.edit', $tag->id) }}" title="Edit" class="btn btn-info cus_btn">
                                                     <i class="fa fa-pencil-square-o"></i> Edit
                                                 </a>
                                                 <a title="Delete" class="btn btn-danger cus_btn" onclick="event.preventDefault();

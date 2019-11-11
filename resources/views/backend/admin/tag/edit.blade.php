@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Create Tag')
+@section('title', 'Edit Tag')
 
 @push('css')
 
@@ -19,7 +19,7 @@
                     <a>Tags</a>
                 </li>
                 <li class="active">
-                    <strong>Create</strong>
+                    <strong>Update</strong>
                 </li>
             </ol>
         </div>
@@ -35,15 +35,16 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Create tag</h5>
+                        <h5>Update tag</h5>
                     </div>
                     <div class="ibox-content">
-                        <form action="{{ route('admin.tags.store') }}" method="POST" class="form-horizontal">
+                        <form action="{{ route('admin.tags.update', $tag->id) }}" method="POST" class="form-horizontal">
+                            @method('PUT')
                             @csrf
 
                             <div class="form-group"><label class="col-lg-2 control-label">Name</label>
                                 <div class="col-lg-10">
-                                    <input name="name" type="text" placeholder="Enter name" class="form-control">
+                                    <input name="name" value="{{ $tag->name }}" type="text" placeholder="Enter name" class="form-control">
                                     @error('name')
                                         <span class="help-block m-b-none text-danger">{{ $message }}</span>
                                     @enderror

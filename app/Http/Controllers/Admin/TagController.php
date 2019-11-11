@@ -41,12 +41,16 @@ class TagController extends Controller
 
     public function edit(Tag $tag)
     {
-        //
+        return view('backend.admin.tag.edit', compact('tag'));
     }
 
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:tags,name,'.$tag->id,
+        ]);
+
+        dd($request->all());
     }
 
     public function destroy(Tag $tag)
