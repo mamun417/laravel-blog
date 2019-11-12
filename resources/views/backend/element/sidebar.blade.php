@@ -41,6 +41,9 @@
                 <li class="{{ $current_controller === 'TagController' ? 'active' : '' }}">
                     <a href="{{ route('admin.tags.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Tag</span></a>
                 </li>
+                <li class="{{ $current_controller === 'CategoryController' ? 'active' : '' }}">
+                    <a href="{{ route('admin.categories.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Category</span></a>
+                </li>
 
             @elseif(Request::is('author*'))
 

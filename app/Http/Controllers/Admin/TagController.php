@@ -29,7 +29,7 @@ class TagController extends Controller
 
         $request['slug'] = Str::slug($request->name);
 
-        $create = Tag::create($request->all());
+        Tag::create($request->all());
 
         return redirect()->route('admin.tags.index')->with('successMsg', 'Tag created successfully');
     }
@@ -50,7 +50,9 @@ class TagController extends Controller
             'name' => 'required|unique:tags,name,'.$tag->id,
         ]);
 
-        $update = $tag->update($request->all());
+        $request['slug'] = Str::slug($request->name);
+
+        $tag->update($request->all());
 
         return redirect()->route('admin.tags.index')->with('successMsg', 'Tag updated successfully');
     }
@@ -66,7 +68,7 @@ class TagController extends Controller
 
         $status = $tag->status ? 0 : 1;
 
-        $update = $tag->update(['status' => $status]);
+        $tag->update(['status' => $status]);
 
         return redirect()->route('admin.tags.index')->with('successMsg', 'Tag status changed successfully');
     }

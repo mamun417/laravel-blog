@@ -27,6 +27,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         //Tag route
         Route::get('tags/change-status/{tag}', 'TagController@changeStatus')->name('tags.change.status');
         Route::resource('tags', 'TagController');
+
+        //Category route
+        Route::get('categories/change-status/{category}', 'CategoryController@changeStatus')->name('categories.change.status');
+        Route::resource('categories', 'CategoryController');
     }
 );
 

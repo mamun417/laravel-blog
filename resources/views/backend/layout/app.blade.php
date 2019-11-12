@@ -123,7 +123,7 @@ $(function () {
         closeButton: true,
         progressBar: true,
         showMethod: 'slideDown',
-        timeOut: 2000
+        timeOut: 2500
     };
 
     //Toastr message for domain event trigger
