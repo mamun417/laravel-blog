@@ -63,7 +63,9 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return back()->with('successMsg', 'Category delete successfully');
     }
 
     public function changeStatus(Category $category){
