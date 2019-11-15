@@ -67,6 +67,13 @@ class CategoryController extends Controller
     }
 
     public function changeStatus(Category $category){
-        dd($category->toArray());
+
+        $status = $category->status ? 0 : 1;
+
+        $update = $category->update(['status' => $status]);
+
+        if ($update) {
+            return back()->with('successMsg', 'Category publication status changed successfully');
+        }
     }
 }
