@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Tag')
+@section('title', 'Tags')
 
 @push('css')
 
@@ -55,15 +55,15 @@
                                 <tbody>
                                     @foreach($tags as $key => $tag)
                                         <tr class="gradeX">
-                                            <td>1</td>
+                                            <td>{{ ++$key }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>{{ $tag->slug }}</td>
                                             <td>
                                                 <a href="{{ route('admin.tags.change.status', $tag->id) }}" title="Change publication status">
                                                     @if($tag->status)
-                                                        <span class="badge badge-primary">Active</span>
+                                                        <span class="badge badge-primary"><strong>Active</strong></span>
                                                     @else
-                                                        <span class="badge badge-warning">Disable</span>
+                                                        <span class="badge badge-warning"><strong>Disable</strong></span>
                                                     @endif
                                                 </a>
                                             </td>
@@ -71,11 +71,11 @@
                                             <td>{{ date("d-m-Y", strtotime($tag->updated_at)) }}</td>
                                             <td>
                                                 <a href="{{ route('admin.tags.edit', $tag->id) }}" title="Edit" class="btn btn-info cus_btn">
-                                                    <i class="fa fa-pencil-square-o"></i> Edit
+                                                    <i class="fa fa-pencil-square-o"></i> <strong>Edit</strong>
                                                 </a>
                                                 <a title="Delete" class="btn btn-danger cus_btn" onclick="event.preventDefault();
                                                     document.getElementById('class-delete-form{{ $tag->id }}').submit();">
-                                                    <i class="fa fa-trash"></i> Delete
+                                                    <i class="fa fa-trash"></i> <strong>Delete</strong>
                                                 </a>
 
                                                 <form id="class-delete-form{{ $tag->id }}" method="POST" action="{{ route('admin.tags.destroy', $tag->id) }}" style="display: none" >

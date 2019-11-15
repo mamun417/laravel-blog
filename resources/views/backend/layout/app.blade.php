@@ -21,6 +21,8 @@
     <!-- Toastr style -->
     <link href="{{ asset('backend/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('backend/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
+
     <!-- Gritter -->
     <link href="{{ asset('backend/js/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
 
@@ -65,20 +67,7 @@
 <script src="{{ asset('backend/js/inspinia.js') }}"></script>
 <script src="{{ asset('backend/js/plugins/pace/pace.min.js') }}"></script>
 
-<!-- jQuery UI -->
-<script src="{{ asset('backend/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-
-<!-- GITTER -->
-<script src="{{ asset('backend/js/plugins/gritter/jquery.gritter.min.js') }}"></script>
-
-<!-- Sparkline -->
-<script src="{{ asset('backend/js/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-
-<!-- Sparkline demo data  -->
-<script src="{{ asset('backend/js/demo/sparkline-demo.js') }}"></script>
-
-<!-- ChartJS-->
-<script src="{{ asset('backend/js/plugins/chartJs/Chart.min.js') }}"></script>
+<script src="{{ asset('backend/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
 
 <!-- Toastr -->
 <script src="{{ asset('backend/js/plugins/toastr/toastr.min.js') }}"></script>

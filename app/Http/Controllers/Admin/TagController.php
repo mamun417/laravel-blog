@@ -24,7 +24,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:tags',
+            'name' => 'required|max:191|unique:tags',
         ]);
 
         $request['slug'] = Str::slug($request->name);
@@ -47,7 +47,7 @@ class TagController extends Controller
     public function update(Request $request, Tag $tag)
     {
         $request->validate([
-            'name' => 'required|unique:tags,name,'.$tag->id,
+            'name' => 'required|max:191|unique:tags,name,'.$tag->id,
         ]);
 
         $request['slug'] = Str::slug($request->name);

@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Category')
+@section('title', 'Categories')
 
 @push('css')
 
@@ -55,15 +55,15 @@
                                 <tbody>
                                     @foreach($categories as $key => $category)
                                         <tr class="gradeX">
-                                            <td>1</td>
+                                            <td>{{ ++$key }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->slug }}</td>
                                             <td>
                                                 <a href="{{ route('admin.categories.change.status', $category->id) }}" title="Change publication status">
                                                     @if($category->status)
-                                                        <span class="badge badge-primary">Active</span>
+                                                        <span class="badge badge-primary"><strong>Active</strong></span>
                                                     @else
-                                                        <span class="badge badge-warning">Disable</span>
+                                                        <span class="badge badge-warning"><strong>Disable</strong></span>
                                                     @endif
                                                 </a>
                                             </td>
@@ -71,11 +71,11 @@
                                             <td>{{ date("d-m-Y", strtotime($category->updated_at)) }}</td>
                                             <td>
                                                 <a href="{{ route('admin.categories.edit', $category->id) }}" title="Edit" class="btn btn-info cus_btn">
-                                                    <i class="fa fa-pencil-square-o"></i> Edit
+                                                    <i class="fa fa-pencil-square-o"></i> <strong>Edit</strong>
                                                 </a>
                                                 <a title="Delete" class="btn btn-danger cus_btn" onclick="event.preventDefault();
                                                     document.getElementById('class-delete-form{{ $category->id }}').submit();">
-                                                    <i class="fa fa-trash"></i> Delete
+                                                    <i class="fa fa-trash"></i> <strong>Delete</strong>
                                                 </a>
 
                                                 <form id="class-delete-form{{ $category->id }}" method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" style="display: none" >

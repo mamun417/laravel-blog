@@ -42,8 +42,9 @@
                             @method('PUT')
                             @csrf
 
-                            <div class="form-group"><label class="col-lg-2 control-label">Name</label>
-                                <div class="col-lg-10">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Name</label>
+                                <div class="col-lg-8">
                                     <input name="name" value="{{ $tag->name }}" type="text" placeholder="Enter name" class="form-control">
                                     @error('name')
                                         <span class="help-block m-b-none text-danger">{{ $message }}</span>
