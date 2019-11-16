@@ -47,6 +47,7 @@
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Status</th>
+                                    <th>Image</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
@@ -67,6 +68,7 @@
                                                     @endif
                                                 </a>
                                             </td>
+                                            <td><img src="{{ asset('images/category').'/'.$category->image }}" class="cus_thumbnail" alt=""></td>
                                             <td>{{ date("d-m-Y", strtotime($category->created_at)) }}</td>
                                             <td>{{ date("d-m-Y", strtotime($category->updated_at)) }}</td>
                                             <td>

@@ -66,6 +66,9 @@
                                         </span>
                                         <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                     </div>
+                                    @error('img')
+                                        <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
