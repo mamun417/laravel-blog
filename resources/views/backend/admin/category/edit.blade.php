@@ -39,7 +39,7 @@
                     </div>
                     <div class="ibox-content">
                         <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                            @method('put')
+                            @method('PUT')
                             @csrf
 
                             <div class="form-group">

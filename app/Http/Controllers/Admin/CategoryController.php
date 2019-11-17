@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Storage;
 use Str;
 
 class CategoryController extends Controller
@@ -29,18 +31,40 @@ class CategoryController extends Controller
             'img' => 'mimes:jpg,jpeg,bmp,png|max:200'
         ]);
 
+        $slug = Str::slug($request->name);
+
         if ($request->hasFile('img')) {
 
             $image = $request->file('img');
 
-            $image_name = strtolower(rand(10000, 999999).'_'.$image->getClientOriginalName());
+            $currentDate = Carbon::now()->toDateString();
 
-            Image::make($image)->save(public_path('images/category/'.$image_name));
+            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            // check is exits directory
+            if (!Storage::disk('public')->exists('category')){
+
+                Storage::disk('public')->makeDirectory('category');
+            }
+
+            // resize image for category and upload
+            $category_image = Image::make($image)->resize(1600, 479)->save();
+            Storage::disk('public')->put('category/'.$image_name, $category_image);
+
+            // check is exits directory
+            if (!Storage::disk('public')->exists('category/slider')){
+
+                Storage::disk('public')->makeDirectory('category/slider');
+            }
+
+            // resize image for category slider and upload
+            $slider_image = Image::make($image)->resize(500, 333)->save();
+            Storage::disk('public')->put('category/slider/'.$image_name, $slider_image);
 
             $request['image'] = $image_name;
         }
 
-        $request['slug'] = Str::slug($request->name);
+        $request['slug'] = $slug;
 
         Category::create($request->all());
 
@@ -64,11 +88,15 @@ class CategoryController extends Controller
             'img' => 'mimes:jpg,jpeg,bmp,png|max:200'
         ]);
 
+        $slug = Str::slug($request->name);
+
         if ($request->hasFile('img')) {
 
             $image = $request->file('img');
 
-            $image_name = strtolower(rand(10000, 999999).'_'.$image->getClientOriginalName());
+            $currentDate = Carbon::now()->toDateString();
+
+            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
             Image::make($image)->save(public_path('images/category/'.$image_name));
 
@@ -83,6 +111,8 @@ class CategoryController extends Controller
                 }
             }
         }
+
+        $request['slug'] = $slug;
 
         $category->update($request->all());
 

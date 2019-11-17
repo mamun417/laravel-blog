@@ -84,7 +84,6 @@
                                                     @method('DELETE')
                                                     @csrf()
                                                 </form>
-
                                             </td>
                                         </tr>
                                     @endforeach
