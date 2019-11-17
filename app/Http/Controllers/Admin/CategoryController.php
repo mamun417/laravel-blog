@@ -98,17 +98,37 @@ class CategoryController extends Controller
 
             $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
-            Image::make($image)->save(public_path('images/category/'.$image_name));
+            // check is exits directory
+            if (!Storage::disk('public')->exists('category')){
+
+                Storage::disk('public')->makeDirectory('category');
+            }
+
+            // resize image for category and upload
+            $category_image = Image::make($image)->resize(1600, 479)->save();
+            Storage::disk('public')->put('category/'.$image_name, $category_image);
+
+            // check is exits directory
+            if (!Storage::disk('public')->exists('category/slider')){
+
+                Storage::disk('public')->makeDirectory('category/slider');
+            }
+
+            // resize image for category slider and upload
+            $slider_image = Image::make($image)->resize(500, 333)->save();
+            Storage::disk('public')->put('category/slider/'.$image_name, $slider_image);
 
             $request['image'] = $image_name;
 
-            //delete image
-            if ($category->image){
-                $image_path = public_path('images/category/'.$category->image);
+            // delete old image
+            if (Storage::disk('public')->exists('category/'.$category->image)){
 
-                if (file_exists($image_path)){
-                    unlink($image_path);
-                }
+                Storage::disk('public')->delete('category/'.$category->image);
+            }
+
+            if (Storage::disk('public')->exists('category/slider/'.$category->image)){
+
+                Storage::disk('public')->delete('category/slider/'.$category->image);
             }
         }
 
