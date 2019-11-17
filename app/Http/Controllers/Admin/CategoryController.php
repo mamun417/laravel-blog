@@ -141,6 +141,17 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        // delete old image
+        if (Storage::disk('public')->exists('category/'.$category->image)){
+
+            Storage::disk('public')->delete('category/'.$category->image);
+        }
+
+        if (Storage::disk('public')->exists('category/slider/'.$category->image)){
+
+            Storage::disk('public')->delete('category/slider/'.$category->image);
+        }
+
         $category->delete();
 
         return back()->with('successMsg', 'Category delete successfully');
