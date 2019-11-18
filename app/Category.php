@@ -13,6 +13,6 @@ class Category extends Model
     protected $fillable = ['name', 'slug', 'image', 'status'];
 
     public function posts(){
-        return $this->belongsToMany(Post::class)->withTimestamps();
+        return $this->belongsToMany(Post::class);
     }
 }
