@@ -35,7 +35,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Tags</h5>
+                        <h5>Tags <span class="badge badge-info">{{ $tags->count() }}</span></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -46,6 +46,7 @@
                                     <th>Sl No</th>
                                     <th>Name</th>
                                     <th>Slug</th>
+                                    <th>Post Count</th>
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
@@ -58,6 +59,7 @@
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>{{ $tag->slug }}</td>
+                                            <td>{{ $tag->posts->count() }}</td>
                                             <td>
                                                 <a href="{{ route('admin.tags.change.status', $tag->id) }}" title="Change publication status">
                                                     @if($tag->status)
@@ -86,6 +88,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                </tbody>
                             </table>
                         </div>
 

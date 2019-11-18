@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static latest()
+ */
 class Tag extends Model
 {
     protected $fillable = ['name', 'slug', 'status'];

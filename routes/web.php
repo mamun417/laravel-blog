@@ -31,6 +31,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         //Category route
         Route::get('categories/change-status/{category}', 'CategoryController@changeStatus')->name('categories.change.status');
         Route::resource('categories', 'CategoryController');
+
+        //Post route
+        Route::get('posts/change-status/{category}', 'PostController@changeStatus')->name('posts.change.status');
+        Route::resource('posts', 'PostController');
     }
 );
 

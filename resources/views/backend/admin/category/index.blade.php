@@ -35,7 +35,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Categories</h5>
+                        <h5>Categories <span class="badge badge-info">{{ $categories->count() }}</span></h5>
                     </div>
                     <div class="ibox-content">
 
@@ -46,6 +46,7 @@
                                     <th>Sl No</th>
                                     <th>Name</th>
                                     <th>Slug</th>
+                                    <th>Post Count</th>
                                     <th>Status</th>
                                     <th>Image</th>
                                     <th>Created at</th>
@@ -59,6 +60,7 @@
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->slug }}</td>
+                                            <td>{{ $category->posts->count() }}</td>
                                             <td>
                                                 <a href="{{ route('admin.categories.change.status', $category->id) }}" title="Change publication status">
                                                     @if($category->status)
@@ -87,6 +89,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                </tbody>
                             </table>
                         </div>
 
