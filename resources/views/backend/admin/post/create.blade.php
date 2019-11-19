@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Create Category')
+@section('title', 'Create Post')
 
 @push('css')
 
@@ -10,13 +10,13 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Create Category</h2>
+            <h2>Create Post</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route('admin.dashboard') }}">Home</a>
                 </li>
                 <li>
-                    <a>Categories</a>
+                    <a>Posts</a>
                 </li>
                 <li class="active">
                     <strong>Create</strong>
@@ -25,69 +25,74 @@
         </div>
         <div class="col-lg-2">
             <div class="ibox-tools">
-                <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
+                <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
             </div>
         </div>
     </div>
 
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
+            <div class="col-lg-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Create new post</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form role="form">
+                                    <div class="form-group"><label>Email</label> <input type="text" placeholder="Enter email" class="form-control"></div>
+                                    <div class="form-group"><label>Password</label> <input type="text" placeholder="Password" class="form-control"></div>
+                                    <div>
+                                        <label> <input type="checkbox" class="i-checks"> Publication Status </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Categories and Tags</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form role="form">
+                                    <div class="form-group"><label>Email</label> <input type="text" placeholder="Enter email" class="form-control"></div>
+                                    <div class="form-group"><label>Password</label> <input type="text" placeholder="Password" class="form-control"></div>
+                                    <div>
+                                        <button class="btn btn-danger" type="submit"><strong><i class="fa fa-arrow-left"></i> Back</strong></button>
+                                        <button class="btn btn-success pull-right" type="submit"><strong><i class="fa fa-upload"></i> Published</strong></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Create category</h5>
+                        <h5>Body</h5>
                     </div>
                     <div class="ibox-content">
-                        <form action="{{ route('admin.categories.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Name</label>
-                                <div class="col-lg-6">
-                                    <input name="name" type="text" placeholder="Enter name" class="form-control">
-                                    @error('name')
-                                        <span class="help-block m-b-none text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Name</label>
-                                <div class="col-lg-6">
-                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                        <div class="form-control" data-trigger="fileinput">
-                                            <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                                            <span class="fileinput-filename"></span>
-                                        </div>
-                                        <span class="input-group-addon btn btn-default btn-file">
-                                            <span class="fileinput-new">Select file</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input name="img" type="file" accept="image/*">
-                                        </span>
-                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Password" class="form-control">
                                     </div>
-                                    @error('img')
-                                        <span class="help-block m-b-none text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                </form>
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                    <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-danger" type="submit"><strong>Cancel</strong></a>
-                                    <button class="btn btn-sm btn-primary" type="submit"><strong>Submit</strong></button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

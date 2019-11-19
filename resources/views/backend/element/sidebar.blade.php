@@ -40,15 +40,15 @@
                 </li>
 
                 <li class="{{ $current_controller === 'TagController' ? 'active' : '' }}">
-                    <a href="{{ route('admin.tags.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Tag</span></a>
+                    <a href="{{ route('admin.tags.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Tags</span></a>
                 </li>
 
                 <li class="{{ $current_controller === 'CategoryController' ? 'active' : '' }}">
-                    <a href="{{ route('admin.categories.index') }}"><i class="fa fa-th"></i> <span class="nav-label">Category</span></a>
+                    <a href="{{ route('admin.categories.index') }}"><i class="fa fa-th"></i> <span class="nav-label">Categories</span></a>
                 </li>
 
                 <li class="{{ $current_controller === 'PostController' ? 'active' : '' }}">
-                    <a href="{{ route('admin.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Post</span></a>
+                    <a href="{{ route('admin.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Posts</span></a>
                 </li>
 
             @elseif(Request::is('author*'))

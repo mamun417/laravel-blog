@@ -23,6 +23,8 @@
 
     <link href="{{ asset('backend/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('backend/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+
     <!-- Gritter -->
     <link href="{{ asset('backend/js/plugins/gritter/jquery.gritter.css') }}" rel="stylesheet">
 
@@ -72,6 +74,17 @@
 <!-- Toastr -->
 <script src="{{ asset('backend/js/plugins/toastr/toastr.min.js') }}"></script>
 
+<script src="{{ asset('backend/js/plugins/iCheck/icheck.min.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function(){
@@ -106,25 +119,25 @@
 {{--toastr message--}}
 <script>
 
-$(function () {
+    $(function () {
 
-    toastr.options = {
-        closeButton: true,
-        progressBar: true,
-        showMethod: 'slideDown',
-        timeOut: 2500
-    };
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2500
+        };
 
-    //Toastr message for domain event trigger
-    @if(session('successMsg'))
-        toastr.success('{{ session('successMsg') }}');
-    @endif
+        //Toastr message for domain event trigger
+        @if(session('successMsg'))
+            toastr.success('{{ session('successMsg') }}');
+        @endif
 
-    @if(session('errorMsg'))
-        toastr.error('{{ session('errorMsg') }}');
-    @endif
+        @if(session('errorMsg'))
+            toastr.error('{{ session('errorMsg') }}');
+        @endif
 
-})
+    })
 
 </script>
 
