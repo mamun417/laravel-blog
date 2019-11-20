@@ -31,6 +31,15 @@
     <link href="{{ asset('backend/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 
+    <script src="{{ asset('backend/js/jquery-3.1.1.min.js') }}"></script>
+
+    {{--Tokenize2--}}
+    <link href="{{ asset('backend/extra-plugin/tokenize2/tokenize2.min.css') }}" rel="stylesheet">
+
+    {{--Summernote editor--}}
+    <link href="{{ asset('backend/css/plugins/summernote/summernote.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/plugins/summernote/summernote-bs3.css') }}" rel="stylesheet">
+
     {{--custom style--}}
     <link href="{{ asset('backend/css/custom_style.css') }}" rel="stylesheet">
 
@@ -53,7 +62,6 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="{{ asset('backend/js/jquery-3.1.1.min.js') }}"></script>
 <script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('backend/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('backend/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
@@ -75,6 +83,21 @@
 <script src="{{ asset('backend/js/plugins/toastr/toastr.min.js') }}"></script>
 
 <script src="{{ asset('backend/js/plugins/iCheck/icheck.min.js') }}"></script>
+
+{{--Tokenize2--}}
+<script src="{{ asset('backend/extra-plugin/tokenize2/tokenize2.min.js') }}"></script>
+
+<!-- SUMMERNOTE -->
+<script src="{{ asset('backend/js/plugins/summernote/summernote.min.js') }}"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('.summernote').summernote();
+
+    });
+</script>
+
 
 <script>
     $(document).ready(function () {
@@ -140,6 +163,8 @@
     })
 
 </script>
+
+@yield('custom-js')
 
 </body>
 </html>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -17,12 +19,16 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('backend.admin.post.create');
+        $categories = Category::latest()->get();
+
+        $tags = Tag::latest()->get();
+
+        return view('backend.admin.post.create', compact('categories', 'tags'));
     }
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function show(Post $post)

@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-lg-2 control-label">Name</label>
+                                <label class="col-lg-2 control-label">Image</label>
                                 <div class="col-lg-6">
                                     <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                         <div class="form-control" data-trigger="fileinput">

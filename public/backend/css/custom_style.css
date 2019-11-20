@@ -33,6 +33,12 @@ html, body{
 .search_sec {
     margin-bottom: 8px;
 }
+.note-editing-area{
+    min-height: 200px;
+}
+.note-editor.note-frame {
+    border: 1px solid #e5e6e7!important;
+}
 .table > thead > tr > th, .table > tbody > tr > th,
 .table > tfoot > tr > th, .table > thead > tr > td,
 .table > tbody > tr > td, .table > tfoot > tr > td{

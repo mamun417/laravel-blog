@@ -32,7 +32,7 @@
 
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Create new post</h5>
@@ -40,19 +40,40 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form role="form">
-                                    <div class="form-group"><label>Email</label> <input type="text" placeholder="Enter email" class="form-control"></div>
-                                    <div class="form-group"><label>Password</label> <input type="text" placeholder="Password" class="form-control"></div>
+                                <form action="{{ route('admin.posts.store') }}" method="post" role="form">
+                                    @csrf
+
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input name="title" type="text" placeholder="Enter title" class="form-control">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label>Image</label>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                            <div class="form-control" data-trigger="fileinput">
+                                                <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                                <span class="fileinput-filename"></span>
+                                            </div>
+                                            <span class="input-group-addon btn btn-default btn-file">
+                                            <span class="fileinput-new">Select file</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input name="img" type="file" accept="image/*">
+                                        </span>
+                                            <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        </div>
+                                        @error('img')
+                                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     <div>
                                         <label> <input type="checkbox" class="i-checks"> Publication Status </label>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Categories and Tags</h5>
@@ -60,14 +81,26 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form role="form">
-                                    <div class="form-group"><label>Email</label> <input type="text" placeholder="Enter email" class="form-control"></div>
-                                    <div class="form-group"><label>Password</label> <input type="text" placeholder="Password" class="form-control"></div>
-                                    <div>
-                                        <button class="btn btn-danger" type="submit"><strong><i class="fa fa-arrow-left"></i> Back</strong></button>
-                                        <button class="btn btn-success pull-right" type="submit"><strong><i class="fa fa-upload"></i> Published</strong></button>
-                                    </div>
-                                </form>
+                                <div class="form-group" style="margin-bottom: 0">
+                                    <label>Select Categories</label>
+                                    <select name="categories[]" class="tokenize-categories" multiple>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0">
+                                    <label>Select Tags</label>
+                                    <select name="tags[]" class="tokenize-tags" multiple>
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <button class="btn btn-danger" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-arrow-left"></i> Back</strong></button>
+                                    <button class="btn btn-success pull-right" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-upload"></i> Published</strong></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,10 +116,9 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Password" class="form-control">
-                                    </div>
+                                <div class="form-group">
+                                    <textarea rows="6" class="summernote form-control"></textarea>
+                                </div>
                                 </form>
                             </div>
                         </div>
@@ -95,4 +127,26 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom-js')
+
+    <script>
+
+        $('.tokenize-categories').tokenize2({
+            placeholder: "e.g. (laravel javascript vueJs)",
+            searchFromStart: false,
+            displayNoResultsMessage: true,
+            noResultsMessageText: "No results mached '%s'",
+        });
+
+        $('.tokenize-tags').tokenize2({
+            placeholder: "e.g. (wordpress jquery regex)",
+            searchFromStart: false,
+            displayNoResultsMessage: true,
+            noResultsMessageText: "No results mached '%s'",
+        });
+
+    </script>
+
 @endsection
