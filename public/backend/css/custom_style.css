@@ -33,6 +33,9 @@ html, body{
 .search_sec {
     margin-bottom: 8px;
 }
+.note-editable{
+    min-height: 200px;
+}
 .note-editing-area{
     min-height: 200px;
 }

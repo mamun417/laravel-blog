@@ -117,7 +117,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <textarea rows="6" class="summernote form-control"></textarea>
+                                    <textarea name="body" rows="6" class="summernote form-control"></textarea>
                                 </div>
                                 </form>
                             </div>
