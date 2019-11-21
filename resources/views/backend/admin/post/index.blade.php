@@ -84,12 +84,11 @@
                                                 <a href="{{ route('admin.posts.edit', $post->id) }}" title="Edit" class="btn btn-info cus_btn">
                                                     <i class="fa fa-pencil-square-o"></i> <strong>Edit</strong>
                                                 </a>
-                                                <a title="Delete" class="btn btn-danger cus_btn" onclick="event.preventDefault();
-                                                    document.getElementById('class-delete-form{{ $post->id }}').submit();">
+                                                <a onclick="deleteRow({{ $post->id }})" href="JavaScript:void(0)" title="Delete" class="btn btn-danger cus_btn">
                                                     <i class="fa fa-trash"></i> <strong>Delete</strong>
                                                 </a>
 
-                                                <form id="class-delete-form{{ $post->id }}" method="POST" action="{{ route('admin.posts.destroy', $post->id) }}" style="display: none" >
+                                                <form id="row-delete-form{{ $post->id }}" method="POST" action="{{ route('admin.posts.destroy', $post->id) }}" style="display: none" >
                                                     @method('DELETE')
                                                     @csrf()
                                                 </form>

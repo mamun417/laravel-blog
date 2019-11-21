@@ -40,6 +40,9 @@
     <link href="{{ asset('backend/css/plugins/summernote/summernote.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/plugins/summernote/summernote-bs3.css') }}" rel="stylesheet">
 
+    {{--sweet alert--}}
+    <link href="{{ asset('backend/css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
+
     {{--custom style--}}
     <link href="{{ asset('backend/css/custom_style.css') }}" rel="stylesheet">
 
@@ -90,14 +93,14 @@
 <!-- SUMMERNOTE -->
 <script src="{{ asset('backend/js/plugins/summernote/summernote.min.js') }}"></script>
 
+{{--Sweetalert--}}
+<script src="{{ asset('backend/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
 <script>
     $(document).ready(function(){
-
         $('.summernote').summernote();
-
     });
 </script>
-
 
 <script>
     $(document).ready(function () {
@@ -106,6 +109,47 @@
             radioClass: 'iradio_square-green',
         });
     });
+</script>
+
+{{--toastr message--}}
+<script>
+
+    $(function () {
+
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2500
+        };
+
+        //Toastr message for domain event trigger
+        @if(session('successMsg'))
+            toastr.success('{{ session('successMsg') }}');
+        @endif
+
+        @if(session('errorMsg'))
+            toastr.error('{{ session('errorMsg') }}');
+        @endif
+
+    });
+
+    //show confirm message when delete table row
+    function deleteRow(rowId) {
+
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this item!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: true
+        }, function () {
+            document.getElementById('row-delete-form'+rowId).submit();
+        });
+    }
+
 </script>
 
 <!-- Page-Level Scripts -->
@@ -132,35 +176,8 @@
                     }
                 }
             ]
-
         });
-
     });
-
-</script>
-
-{{--toastr message--}}
-<script>
-
-    $(function () {
-
-        toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            showMethod: 'slideDown',
-            timeOut: 2500
-        };
-
-        //Toastr message for domain event trigger
-        @if(session('successMsg'))
-            toastr.success('{{ session('successMsg') }}');
-        @endif
-
-        @if(session('errorMsg'))
-            toastr.error('{{ session('errorMsg') }}');
-        @endif
-
-    })
 
 </script>
 

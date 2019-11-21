@@ -2,6 +2,11 @@
   <dictionary name="mamun">
     <words>
       <w>fillable</w>
+      <w>icheckbox</w>
+      <w>iradio</w>
+      <w>summernote</w>
+      <w>sweetalert</w>
+      <w>toastr</w>
     </words>
   </dictionary>
 </component>
