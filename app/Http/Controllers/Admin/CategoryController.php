@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|max:191|unique:categories',
-            'img' => 'mimes:jpg,jpeg,bmp,png|max:200'
+            'img' => 'mimes:jpg,jpeg,bmp,png|max:1024'
         ]);
 
         $slug = Str::slug($request->name);

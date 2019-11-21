@@ -40,7 +40,7 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form action="{{ route('admin.posts.store') }}" method="post" role="form">
+                                <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data" role="form">
                                     @csrf
 
                                     <div class="form-group">
@@ -66,7 +66,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label> <input type="checkbox" class="i-checks"> Publication Status </label>
+                                        <label> <input name="status" type="checkbox" class="i-checks"> Publication Status </label>
                                     </div>
                             </div>
                         </div>

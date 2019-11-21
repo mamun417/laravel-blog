@@ -6,13 +6,20 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Image;
+use Storage;
+use Str;
 
 class PostController extends Controller
 {
     public function index()
     {
         $posts = Post::with('user')->latest()->get();
+
+        //dd($posts->toArray());
 
         return view('backend.admin.post.index', compact('posts'));
     }
@@ -28,7 +35,48 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'title' => 'required|max:191|unique:posts',
+            'img' => 'mimes:jpg,jpeg,bmp,png|max:1024',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required'
+        ]);
+
+        $request['user_id'] = Auth::id();
+        $slug = Str::slug($request->title);
+
+        if ($request->hasFile('img')) {
+
+            $image = $request->file('img');
+
+            $currentDate = Carbon::now()->toDateString();
+
+            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            // check is exits directory
+            if (!Storage::disk('public')->exists('post')){
+
+                Storage::disk('public')->makeDirectory('post');
+            }
+
+            // resize image for post and upload
+            $category_image = Image::make($image)->resize(1600, 1066)->stream();
+            Storage::disk('public')->put('post/'.$image_name, $category_image);
+
+            $request['image'] = $image_name;
+        }
+
+        $request['slug'] = $slug;
+        $request['status'] = $request->status ? 1 : 0;
+        $request['is_approved'] = true;
+
+        $post = Post::create($request->all());
+
+        $post->categories()->attach($request->categories);
+        $post->tags()->attach($request->tags);
+
+        return redirect()->route('admin.posts.index');
     }
 
     public function show(Post $post)

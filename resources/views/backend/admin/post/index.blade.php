@@ -46,8 +46,8 @@
                                         <th>Title</th>
                                         <th>Author</th>
                                         <th><i class="fa fa-eye"></i></th>
-                                        <th>Is Approve</th>
                                         <th>Status</th>
+                                        <th>Is Approve</th>
                                         <th>Image</th>
                                         <th>Created at</th>
                                         <th>Action</th>
@@ -57,24 +57,24 @@
                                 <tbody>
                                     @foreach($posts as $key => $post)
                                         <tr class="gradeX">
-                                            <td>{{ Str::limit($post->title, 20) }}</td>
+                                            <td>{{ $post->title }}</td>
                                             <td>{{ $post->user->name }}</td>
                                             <td>{{ $post->view_count }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.posts.change.status', $post->id) }}" title="Change publication status">
-                                                    @if($post->is_approved)
-                                                        <span class="badge badge-primary"><strong>Approved</strong></span>
-                                                    @else
-                                                        <span class="badge badge-warning"><strong>Pending</strong></span>
-                                                    @endif
-                                                </a>
-                                            </td>
                                             <td>
                                                 <a href="{{ route('admin.posts.change.status', $post->id) }}" title="Change publication status">
                                                     @if($post->status)
                                                         <span class="badge badge-primary"><strong>Active</strong></span>
                                                     @else
                                                         <span class="badge badge-warning"><strong>Disable</strong></span>
+                                                    @endif
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.posts.change.status', $post->id) }}" title="Change publication status">
+                                                    @if($post->is_approved)
+                                                        <span class="badge badge-primary"><strong>Approved</strong></span>
+                                                    @else
+                                                        <span class="badge badge-warning"><strong>Pending</strong></span>
                                                     @endif
                                                 </a>
                                             </td>

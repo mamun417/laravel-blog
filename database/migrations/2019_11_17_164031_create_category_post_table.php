@@ -17,7 +17,6 @@ class CreateCategoryPostTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('post_id');
             $table->bigInteger('category_id');
-            $table->timestamps();
         });
     }
 
