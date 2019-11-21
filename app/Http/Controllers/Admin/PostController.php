@@ -76,7 +76,7 @@ class PostController extends Controller
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('successMsg', 'Post created successfully');
     }
 
     public function show(Post $post)
@@ -96,6 +96,16 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        //
+        if (Storage::disk('public')->exists('post/'.$post->image)){
+
+            Storage::disk('public')->delete('post/'.$post->image);
+        }
+
+        $post->categories()->detach();
+        $post->tags()->detach();
+
+        $post->delete();
+
+        return back()->with('successMsg', 'Post delete successfully');
     }
 }

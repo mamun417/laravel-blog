@@ -78,7 +78,7 @@
                                                     @endif
                                                 </a>
                                             </td>
-                                            <td><img src="{{ asset('images/category').'/'.$post->image }}" class="cus_thumbnail" alt=""></td>
+                                            <td>{{--<img src="{{ asset('images/category').'/'.$post->image }}" class="cus_thumbnail" alt="">--}}</td>
                                             <td>{{ date("d-m-Y", strtotime($post->created_at)) }}</td>
                                             <td>
                                                 <a href="{{ route('admin.posts.edit', $post->id) }}" title="Edit" class="btn btn-info cus_btn">
