@@ -37,31 +37,21 @@
                 <div class="social-feed-box">
                     <div class="social-avatar">
                         <div class="media-body">
-                            <button class="btn btn-xs btn-primary pull-right"><strong><i class="fa fa-check"></i> Approved</strong></button>
+
+                            @if($post->is_approved)
+                                <button class="btn btn-xs btn-primary pull-right"><strong><i class="fa fa-check"></i> Approved</strong></button>
+                            @else
+                                <button class="btn btn-xs btn-warning pull-right"><strong><i class="fa fa-refresh"></i> Pending</strong></button>
+                            @endif
+
                             <a href="#">
-                                Andrew Williams
+                                {{ $post->user->name }}
                             </a>
-                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                            <small class="text-muted">{{ $post->created_at->toFormattedDateString() }}</small>
                         </div>
                     </div>
                     <div class="social-body">
-                        <p>
-                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                            default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                            in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                            default model text.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident
-                            rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste
-                            voluptatibus minus veritatis qui ut
-                        </p>
-
-                        <p>
-                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                            default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                            in their infancy. Packages and web page editors now use Lorem Ipsum as their
-                            default model text.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident
-                            rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste
-                            voluptatibus minus veritatis qui ut
-                        </p>
+                        {!! $post->body !!}
                     </div>
                 </div>
 
@@ -71,28 +61,25 @@
                     <div class="vertical-timeline-block">
                         <div class="vertical-timeline-content float-e-margins">
                             <h2>Categories</h2>
-                            <button class="btn btn-xs btn-info"><strong>Information</strong></button>
-                            <button class="btn btn-xs btn-info"><strong>Information</strong></button>
-                            <button class="btn btn-xs btn-info"><strong>Information</strong></button>
-                            <button class="btn btn-xs btn-info"><strong>Information</strong></button>
-                            <button class="btn btn-xs btn-info"><strong>Information</strong></button>
+                            @foreach($post->categories as $category)
+                                <button class="btn btn-xs btn-info"><strong>{{ $category->name }}</strong></button>
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="vertical-timeline-block">
                         <div class="vertical-timeline-content float-e-margins">
                             <h2>Tags</h2>
-                            <button class="btn btn-xs btn-success"><strong>Information</strong></button>
-                            <button class="btn btn-xs btn-success"><strong>Information</strong></button>
-                            <button class="btn btn-xs btn-success"><strong>Info</strong></button>
-                            <button class="btn btn-xs btn-success"><strong>Infooo</strong></button>
+                            @foreach($post->tags as $tag)
+                                <button class="btn btn-xs btn-success"><strong>{{ $tag->name }}</strong></button>
+                            @endforeach
                         </div>
                     </div>
 
                     <div class="vertical-timeline-block">
                         <div class="vertical-timeline-content">
                             <h2>Featured Image</h2>
-                            <img alt="image" class="img-responsive b-r-sm" src="http://66.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg">
+                            <img alt="image" class="img-responsive b-r-sm" src="{{ Storage::disk('public')->url('post/'.$post->image) }}">
                         </div>
                     </div>
                 </div>

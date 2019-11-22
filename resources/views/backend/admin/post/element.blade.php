@@ -82,7 +82,7 @@
 
                         <div>
                             <button class="btn btn-danger" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-arrow-left"></i> Back</strong></button>
-                            <button class="btn btn-success pull-right" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-upload"></i> Published</strong></button>
+                            <button class="btn btn-primary" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-upload"></i> Published</strong></button>
                         </div>
                     </div>
                 </div>

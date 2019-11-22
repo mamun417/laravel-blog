@@ -58,7 +58,7 @@
                                     @foreach($categories as $key => $category)
                                         <tr class="gradeX">
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ $category->name }}</td>
+                                            <td>{{ ucfirst($category->name) }}</td>
                                             <td>{{ $category->slug }}</td>
                                             <td>{{ $category->posts->count() }}</td>
                                             <td>
