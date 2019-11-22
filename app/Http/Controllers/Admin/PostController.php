@@ -86,12 +86,26 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        //
+        //$post = $post->with('categories', 'tags');
+
+        $categories = Category::latest()->get();
+
+        $tags = Tag::latest()->get();
+
+        return view('backend.admin.post.edit', compact('post','categories', 'tags'));
     }
 
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:191|unique:posts,title,'.$post->id,
+            'img' => 'mimes:jpg,jpeg,bmp,png|max:1024',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required'
+        ]);
+
+        dd($request->all());
     }
 
     public function destroy(Post $post)
