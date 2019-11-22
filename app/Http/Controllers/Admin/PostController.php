@@ -81,7 +81,9 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        //
+        //dd($post->with('categories', 'tags')->get()->toArray());
+
+        return view('backend.admin.post.view', compact('post'));
     }
 
     public function edit(Post $post)

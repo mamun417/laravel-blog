@@ -198,3 +198,10 @@ th.trash-table.sorting_desc::after {
     position: relative;
     padding-top: 0!important;
 }
+.vertical-timeline-content{
+    margin-left: 0!important;
+}
+.vertical-timeline-content .btn {
+    float: left!important;
+    margin-right: 5px;
+}

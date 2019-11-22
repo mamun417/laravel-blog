@@ -81,6 +81,9 @@
                                             <td>{{--<img src="{{ asset('images/category').'/'.$post->image }}" class="cus_thumbnail" alt="">--}}</td>
                                             <td>{{ date("d-m-Y", strtotime($post->created_at)) }}</td>
                                             <td>
+                                                <a href="{{ route('admin.posts.show', $post->id) }}" title="Edit" class="btn btn-success cus_btn">
+                                                    <i class="fa fa-eye"></i> <strong>View</strong>
+                                                </a>
                                                 <a href="{{ route('admin.posts.edit', $post->id) }}" title="Edit" class="btn btn-info cus_btn">
                                                     <i class="fa fa-pencil-square-o"></i> <strong>Edit</strong>
                                                 </a>
