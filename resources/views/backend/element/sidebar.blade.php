@@ -57,6 +57,10 @@
                     <a href="{{ route('author.dashboard') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'PostController' ? 'active' : '' }}">
+                    <a href="{{ route('author.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Posts</span></a>
+                </li>
+
             @endif
 
         </ul>

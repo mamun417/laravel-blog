@@ -19,8 +19,6 @@ class PostController extends Controller
     {
         $posts = Post::with('user')->latest()->get();
 
-        //dd($posts->toArray());
-
         return view('backend.admin.post.index', compact('posts'));
     }
 
@@ -81,8 +79,6 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        //dd($post->with('categories', 'tags')->get()->toArray());
-
         return view('backend.admin.post.view', compact('post'));
     }
 
