@@ -29,13 +29,16 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{ route('admin.posts.change.approve-status', $post->id) }}">
+                    <a onclick="changeApproveStatus({{ $post->id }}, {{ $post->is_approved }})" href="JavaScript:void(0)" >
                         @if($post->is_approved)
                             <span class="badge badge-primary"><strong>Approved</strong></span>
                         @else
                             <span class="badge badge-warning"><strong>Pending</strong></span>
                         @endif
                     </a>
+                    <form id="approve-form{{ $post->id }}" method="GET" action="{{ route('admin.posts.change.approve-status', $post->id) }}" style="display: none" >
+                        @csrf()
+                    </form>
                 </td>
                 <td>{{--<img src="{{ asset('images/category').'/'.$post->image }}" class="cus_thumbnail" alt="">--}}</td>
                 <td>{{ date("d-m-Y", strtotime($post->created_at)) }}</td>
@@ -60,3 +63,32 @@
         </tbody>
     </table>
 </div>
+
+
+@section('custom-js')
+    <script>
+
+        //show confirm message when delete table row
+        function changeApproveStatus(rowId, approveStatus) {
+
+            console.log(approveStatus);
+
+            var status = (approveStatus === 1)?"unapprove":"approve";
+
+            swal({
+                title: "Are you sure?",
+                text: "You went to "+status+" this post!",
+                type: "warning",
+                showCancelButton: true,
+                allowOutsideClick: true,
+                cancelButtonColor: "#1ab394",
+                confirmButtonColor: "#1ab394",
+                confirmButtonText: "Yes, "+status+" it!",
+                closeOnConfirm: true
+            }, function () {
+                document.getElementById('approve-form'+rowId).submit();
+            });
+        }
+
+    </script>
+@endsection

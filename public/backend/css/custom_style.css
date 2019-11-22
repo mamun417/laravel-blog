@@ -208,3 +208,9 @@ th.trash-table.sorting_desc::after {
 .social-feed-box{
     min-height: 473px;
 }
+.sweet-alert button.cancel {
+    background-color: #ec4758!important;
+}
+.sweet-alert button.cancel:hover {
+    background-color: #ec4758!important;
+}
