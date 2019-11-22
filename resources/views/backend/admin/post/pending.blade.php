@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Posts')
+@section('title', 'Pending Posts')
 
 @push('css')
 
@@ -10,7 +10,7 @@
 
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Post</h2>
+            <h2>Pending Post</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route('admin.dashboard') }}">Home</a>
@@ -35,7 +35,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Posts <span class="badge badge-info">{{ $posts->count() }}</span></h5>
+                        <h5>Pending Posts <span class="badge badge-warning">{{ $posts->count() }}</span></h5>
                     </div>
                     <div class="ibox-content">
                         @include('backend.admin.post.post-list')

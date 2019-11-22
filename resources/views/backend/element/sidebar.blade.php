@@ -31,7 +31,10 @@
                 </div>
             </li>
 
-            @php($current_controller = class_basename(Route::current()->controller))
+            @php
+                $cur_route_name = Route::currentRouteName();
+                $current_controller = class_basename(Route::current()->controller)
+            @endphp
 
             @if(Request::is('admin*'))
 
@@ -48,7 +51,11 @@
                 </li>
 
                 <li class="{{ $current_controller === 'PostController' ? 'active' : '' }}">
-                    <a href="{{ route('admin.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Posts</span></a>
+                    <a href=""><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span class="nav-label">Posts</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li class="{{ $cur_route_name === 'admin.posts.index' ? 'active' : '' }}"><a href="{{ route('admin.posts.index') }}">All Post</a></li>
+                        <li class="{{ $cur_route_name === 'admin.posts.pending' ? 'active' : '' }}"><a href="{{ route('admin.posts.pending') }}">Pending Post</a></li>
+                    </ul>
                 </li>
 
             @elseif(Request::is('author*'))

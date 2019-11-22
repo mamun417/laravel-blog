@@ -22,6 +22,13 @@ class PostController extends Controller
         return view('backend.admin.post.index', compact('posts'));
     }
 
+    public function pending()
+    {
+        $posts = Post::where('is_approved', false)->with('user')->latest()->get();
+
+        return view('backend.admin.post.pending', compact('posts'));
+    }
+
     public function create()
     {
         $categories = Category::latest()->get();
