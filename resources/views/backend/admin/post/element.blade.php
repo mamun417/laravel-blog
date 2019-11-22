@@ -27,10 +27,10 @@
                                     <span class="fileinput-filename"></span>
                                 </div>
                                 <span class="input-group-addon btn btn-default btn-file">
-                                            <span class="fileinput-new">Select file</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input name="img" type="file" accept="image/*">
-                                        </span>
+                                    <span class="fileinput-new">Select file</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input name="img" type="file" accept="image/*">
+                                </span>
                                 <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                             </div>
                             @error('img')
@@ -39,7 +39,7 @@
                         </div>
 
                         <div>
-                            <label> <input name="status" {{ isset($post)?'checked':old('status') ? 'checked':''}}  type="checkbox" class="i-checks"> Publication Status </label>
+                            <label> <input name="status" {{ isset($post) && $post->status?'checked':old('status') ? 'checked':''}}  type="checkbox" class="i-checks"> Publication Status </label>
                         </div>
                     </div>
                 </div>
@@ -57,9 +57,10 @@
 
                         <div class="form-group" style="margin-bottom: 0">
                             <label>Select Categories</label>
+
                             <select name="categories[]" class="tokenize-categories" multiple>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ in_array($category->id, $post->categories->pluck('id')->toArray()) ? 'selected':'' }} >{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('categories')
@@ -71,7 +72,7 @@
                             <label>Select Tags</label>
                             <select name="tags[]" class="tokenize-tags" multiple>
                                 @foreach($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    <option value="{{ $tag->id }}" {{ in_array($tag->id, $post->tags->pluck('id')->toArray()) ? 'selected':'' }}>{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tags')
