@@ -13,7 +13,7 @@
             <h2>Edit Post</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}">Home</a>
+                    <a href="{{ route('author.dashboard') }}">Home</a>
                 </li>
                 <li>
                     <a>Posts</a>
@@ -25,17 +25,17 @@
         </div>
         <div class="col-lg-2">
             <div class="ibox-tools">
-                <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
+                <a href="{{ route('author.posts.create') }}" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><i class="fa fa-plus"></i> <strong>Create</strong></a>
             </div>
         </div>
     </div>
 
     <div class="wrapper wrapper-content animated fadeInRight">
-        <form action="{{ route('admin.posts.update', $post->id) }}" method="post" enctype="multipart/form-data" role="form">
+        <form action="{{ route('author.posts.update', $post->id) }}" method="post" enctype="multipart/form-data" role="form">
             @method('PUT')
             @csrf
 
-            @include('backend.admin.post.element', ['is_create' => false])
+            @include('backend.author.post.element', ['is_create' => false])
 
         </form>
     </div>

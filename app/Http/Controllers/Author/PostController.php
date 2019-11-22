@@ -84,12 +84,62 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        //
+        $categories = Category::latest()->get();
+
+        $tags = Tag::latest()->get();
+
+        return view('backend.author.post.edit', compact('post','categories', 'tags'));
     }
 
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:191|unique:posts,title,'.$post->id,
+            'img' => 'mimes:jpg,jpeg,bmp,png|max:1024',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required'
+        ]);
+
+        $request['user_id'] = Auth::id();
+        $slug = Str::slug($request->title);
+
+        if ($request->hasFile('img')) {
+
+            $image = $request->file('img');
+
+            $currentDate = Carbon::now()->toDateString();
+
+            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+
+            // check is exits directory
+            if (!Storage::disk('public')->exists('post')){
+
+                Storage::disk('public')->makeDirectory('post');
+            }
+
+            // resize image for post and upload
+            $category_image = Image::make($image)->resize(1600, 1066)->stream();
+            Storage::disk('public')->put('post/'.$image_name, $category_image);
+
+            $request['image'] = $image_name;
+
+            // delete old image
+            if (Storage::disk('public')->exists('post/'.$post->image)){
+
+                Storage::disk('public')->delete('post/'.$post->image);
+            }
+        }
+
+        $request['slug'] = $slug;
+        $request['status'] = $request->status ? 1 : 0;
+
+        $post->update($request->all());
+
+        $post->categories()->sync($request->categories);
+        $post->tags()->sync($request->tags);
+
+        return redirect()->route('author.posts.index')->with('successMsg', 'Post updated successfully');
     }
 
     public function destroy(Post $post)
