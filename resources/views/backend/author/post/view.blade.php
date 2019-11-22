@@ -44,10 +44,8 @@
                                 <button class="btn btn-xs btn-warning pull-right"><strong><i class="fa fa-refresh"></i> Pending</strong></button>
                             @endif
 
-                            <a href="#">
-                                {{ $post->user->name }}
-                            </a>
-                            <small class="text-muted">{{ $post->created_at->toFormattedDateString() }}</small>
+                            <h4><strong>{{ $post->title }}</strong></h4>
+                            <p class="text-muted">Posted by <strong>{{ $post->user->name }}</strong> on {{ $post->created_at->toFormattedDateString() }}</p>
                         </div>
                     </div>
                     <div class="social-body">

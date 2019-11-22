@@ -79,7 +79,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        //
+        return view('backend.author.post.view', compact('post'));
     }
 
     public function edit(Post $post)
@@ -144,6 +144,16 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        //
+        if (Storage::disk('public')->exists('post/'.$post->image)){
+
+            Storage::disk('public')->delete('post/'.$post->image);
+        }
+
+        $post->categories()->detach();
+        $post->tags()->detach();
+
+        $post->delete();
+
+        return back()->with('successMsg', 'Post delete successfully');
     }
 }
