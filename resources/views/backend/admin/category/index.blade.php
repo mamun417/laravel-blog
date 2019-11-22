@@ -77,8 +77,7 @@
                                                 <a href="{{ route('admin.categories.edit', $category->id) }}" title="Edit" class="btn btn-info cus_btn">
                                                     <i class="fa fa-pencil-square-o"></i> <strong>Edit</strong>
                                                 </a>
-                                                <a title="Delete" class="btn btn-danger cus_btn" onclick="event.preventDefault();
-                                                    document.getElementById('class-delete-form{{ $category->id }}').submit();">
+                                                <a onclick="deleteRow({{ $category->id }})" href="JavaScript:void(0)" title="Delete" class="btn btn-danger cus_btn">
                                                     <i class="fa fa-trash"></i> <strong>Delete</strong>
                                                 </a>
 

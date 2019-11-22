@@ -71,8 +71,6 @@
         //show confirm message when delete table row
         function changeApproveStatus(rowId, approveStatus) {
 
-            console.log(approveStatus);
-
             var status = (approveStatus === 1)?"unapprove":"approve";
 
             swal({
