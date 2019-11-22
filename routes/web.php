@@ -44,7 +44,7 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
         //Post route
-        Route::get('posts/change-status/{category}', 'PostController@changeStatus')->name('posts.change.status');
+        Route::get('posts/change-status/{post}', 'PostController@changeStatus')->name('posts.change.status');
         Route::resource('posts', 'PostController');
     }
 );
