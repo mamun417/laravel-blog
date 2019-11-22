@@ -70,7 +70,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.posts.change.status', $post->id) }}" title="Change publication status">
+                                                <a href="">
                                                     @if($post->is_approved)
                                                         <span class="badge badge-primary"><strong>Approved</strong></span>
                                                     @else

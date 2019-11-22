@@ -156,4 +156,13 @@ class PostController extends Controller
 
         return back()->with('successMsg', 'Post delete successfully');
     }
+
+    public function changeStatus(Post $post){
+
+        $status = $post->status ? 0 : 1;
+
+        $post->update(['status' => $status]);
+
+        return back()->with('successMsg', 'Post publication status changed successfully');
+    }
 }

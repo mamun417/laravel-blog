@@ -163,8 +163,6 @@ class CategoryController extends Controller
 
         $update = $category->update(['status' => $status]);
 
-        if ($update) {
-            return back()->with('successMsg', 'Category publication status changed successfully');
-        }
+        return back()->with('successMsg', 'Category publication status changed successfully');
     }
 }
