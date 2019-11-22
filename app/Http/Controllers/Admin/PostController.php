@@ -22,11 +22,20 @@ class PostController extends Controller
         return view('backend.admin.post.index', compact('posts'));
     }
 
-    public function pending()
+    public function pendingList()
     {
         $posts = Post::where('is_approved', false)->with('user')->latest()->get();
 
         return view('backend.admin.post.pending', compact('posts'));
+    }
+
+    public function changeApproveStatus(Post $post){
+
+        $approve = $post->is_approved ? 0 : 1;
+
+        $post->update(['is_approved' => $approve]);
+
+        return back()->with('successMsg', 'Post approve status changed successfully');
     }
 
     public function create()

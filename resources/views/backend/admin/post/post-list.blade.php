@@ -29,7 +29,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="">
+                    <a href="{{ route('admin.posts.change.approve-status', $post->id) }}">
                         @if($post->is_approved)
                             <span class="badge badge-primary"><strong>Approved</strong></span>
                         @else

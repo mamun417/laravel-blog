@@ -34,7 +34,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 
         //Post route
         Route::get('posts/change-status/{post}', 'PostController@changeStatus')->name('posts.change.status');
-        Route::get('posts/pending', 'PostController@pending')->name('posts.pending');
+        Route::get('posts/change-approve/{post}', 'PostController@changeApproveStatus')->name('posts.change.approve-status');
+        Route::get('posts/pending', 'PostController@pendingList')->name('posts.pending');
         Route::resource('posts', 'PostController');
     }
 );
