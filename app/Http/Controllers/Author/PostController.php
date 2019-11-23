@@ -79,11 +79,19 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         return view('backend.author.post.view', compact('post'));
     }
 
     public function edit(Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         $categories = Category::latest()->get();
 
         $tags = Tag::latest()->get();
@@ -93,6 +101,10 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         $request->validate([
             'title' => 'required|max:191|unique:posts,title,'.$post->id,
             'img' => 'mimes:jpg,jpeg,bmp,png|max:1024',
@@ -144,6 +156,10 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         if (Storage::disk('public')->exists('post/'.$post->image)){
 
             Storage::disk('public')->delete('post/'.$post->image);
@@ -158,6 +174,10 @@ class PostController extends Controller
     }
 
     public function changeStatus(Post $post){
+
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
 
         $status = $post->status ? 0 : 1;
 
