@@ -39,10 +39,14 @@
                         <div class="media-body">
 
                             @if($post->is_approved)
-                                <button class="btn btn-xs btn-primary pull-right"><strong><i class="fa fa-check"></i> Approved</strong></button>
+                                <button onclick="changeApproveStatus({{ $post->id }}, {{ $post->is_approved }})"  class="btn btn-xs btn-primary pull-right"><strong><i class="fa fa-check"></i> Approved</strong></button>
                             @else
-                                <button class="btn btn-xs btn-warning pull-right"><strong><i class="fa fa-refresh"></i> Pending</strong></button>
+                                <button onclick="changeApproveStatus({{ $post->id }}, {{ $post->is_approved }})"  class="btn btn-xs btn-warning pull-right"><strong><i class="fa fa-refresh"></i> Pending</strong></button>
                             @endif
+
+                            <form id="approve-form{{ $post->id }}" method="GET" action="{{ route('admin.posts.change.approve-status', $post->id) }}" style="display: none" >
+                                @csrf()
+                            </form>
 
                             <h4><strong>{{ $post->title }}</strong></h4>
                             <p class="text-muted">Posted by <strong>{{ $post->user->name }}</strong> on {{ $post->created_at->toFormattedDateString() }}</p>

@@ -63,30 +63,3 @@
         </tbody>
     </table>
 </div>
-
-
-@section('custom-js')
-    <script>
-
-        //show confirm message when delete table row
-        function changeApproveStatus(rowId, approveStatus) {
-
-            var status = (approveStatus === 1)?"unapprove":"approve";
-
-            swal({
-                title: "Are you sure?",
-                text: "You went to "+status+" this post!",
-                type: "warning",
-                showCancelButton: true,
-                allowOutsideClick: true,
-                cancelButtonColor: "#1ab394",
-                confirmButtonColor: "#1ab394",
-                confirmButtonText: "Yes, "+status+" it!",
-                closeOnConfirm: true
-            }, function () {
-                document.getElementById('approve-form'+rowId).submit();
-            });
-        }
-
-    </script>
-@endsection
