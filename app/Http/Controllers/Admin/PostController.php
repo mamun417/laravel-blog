@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Notifications\AuthorPostApproved;
+use App\Notifications\AuthorPostCreate;
+use App\Notifications\NewPostCreateNotify;
 use App\Post;
+use App\Subscriber;
 use App\Tag;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Image;
+use Notification;
 use Storage;
 use Str;
 
@@ -40,7 +44,15 @@ class PostController extends Controller
 
         $post->update(['is_approved' => $approve]);
 
+        //send notification to author
         $post->user->notify(new AuthorPostApproved($post));
+
+        //send notification to subscriber
+        $subscribers = Subscriber::all();
+
+        foreach ($subscribers as $subscriber){
+            Notification::send($subscriber, new NewPostCreateNotify($post));
+        }
 
         return back()->with('successMsg', 'Post approve status changed successfully');
     }
@@ -96,6 +108,13 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        //send notification to subscriber
+        $subscribers = Subscriber::all();
+
+        foreach ($subscribers as $subscriber){
+            Notification::send($subscriber, new NewPostCreateNotify($post));
+        }
 
         return redirect()->route('admin.posts.index')->with('successMsg', 'Post created successfully');
     }

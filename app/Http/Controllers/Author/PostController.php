@@ -11,7 +11,7 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
+    use Illuminate\Support\Facades\Notification;
 use Image;
 use Storage;
 use Str;
