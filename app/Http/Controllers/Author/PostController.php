@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Author;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Notifications\AuthorPostCreate;
 use App\Post;
 use App\Tag;
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Image;
 use Storage;
 use Str;
@@ -73,6 +76,10 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        //send notification to admin
+        $admins = User::where('role_id', 1)->get();
+        Notification::send($admins, new AuthorPostCreate($post));
 
         return redirect()->route('author.posts.index')->with('successMsg', 'Post created successfully');
     }
