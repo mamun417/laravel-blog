@@ -14,4 +14,11 @@ class ManageSubscriberController extends Controller
 
         return view('backend.admin.subscriber.index', compact('subscribers'));
     }
+
+    public function destroy(Subscriber $subscriber){
+
+        $subscriber->delete();
+
+        return back()->with('successMsg', 'Subscriber remove successfully');
+    }
 }

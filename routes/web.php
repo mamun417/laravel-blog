@@ -43,6 +43,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 
         //Subscriber route
         Route::get('subscribers', 'ManageSubscriberController@index')->name('subscribers.index');
+        Route::delete('subscribers/{subscriber}', 'ManageSubscriberController@destroy')->name('subscribers.destroy');
     }
 );
 
