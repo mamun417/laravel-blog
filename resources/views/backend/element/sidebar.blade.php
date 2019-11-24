@@ -58,6 +58,10 @@
                     </ul>
                 </li>
 
+                <li class="{{ $current_controller === 'ManageSubscriberController' ? 'active' : '' }}">
+                    <a href="{{ route('admin.subscribers.index') }}"><i class="fa fa-youtube-play"></i> <span class="nav-label">Subscribers</span></a>
+                </li>
+
             @elseif(Request::is('author*'))
 
                 <li>
