@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Notifications\AuthorPostApproved;
 use App\Post;
 use App\Tag;
 use Auth;
@@ -31,9 +32,15 @@ class PostController extends Controller
 
     public function changeApproveStatus(Post $post){
 
+        if ($post->is_approved){
+            return back()->with('successMsg', 'Post already approved by admin');
+        }
+
         $approve = $post->is_approved ? 0 : 1;
 
         $post->update(['is_approved' => $approve]);
+
+        $post->user->notify(new AuthorPostApproved($post));
 
         return back()->with('successMsg', 'Post approve status changed successfully');
     }
