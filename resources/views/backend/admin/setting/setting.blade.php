@@ -50,6 +50,9 @@
                                                     <label class="col-sm-1 control-label">Name</label>
                                                     <div class="col-sm-11">
                                                         <input name="name" value="{{ Auth::user()->name }}" type="text" class="form-control">
+                                                        @error('name')
+                                                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
@@ -57,6 +60,9 @@
                                                     <label class="col-sm-1 control-label">Email</label>
                                                     <div class="col-sm-11">
                                                         <input name="email" value="{{ Auth::user()->email }}" type="text" class="form-control">
+                                                        @error('email')
+                                                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
@@ -75,6 +81,9 @@
                                                             </span>
                                                             <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                                         </div>
+                                                        @error('img')
+                                                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
