@@ -11,16 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 
 // subscriber route
-Route::post('subscribers', 'SubscriberController@store')->name('subscribers.store');
+Route::post('subscribers', 'Frontend\SubscriberController@store')->name('subscribers.store');
+
+
+
+
+
+
+Auth::routes();
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']],
     function (){
