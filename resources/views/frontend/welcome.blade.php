@@ -33,9 +33,9 @@
                     </div>
                 @endforeach
 
-            </div><!-- swiper-wrapper -->
+            </div>
 
-        </div><!-- swiper-container -->
+        </div>
 
     </div><!-- slider -->
 

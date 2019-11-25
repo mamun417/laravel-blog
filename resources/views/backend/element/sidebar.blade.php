@@ -11,13 +11,11 @@
                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
-                        <li><a href="mailbox.html">Mailbox</a></li>
+                        <li><a href="{{ route('admin.settings.update') }}"><i class="fa fa-user-circle-o"></i> Profile</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">Logout</a>
+                           document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a>
                         </li>
                     </ul>
 

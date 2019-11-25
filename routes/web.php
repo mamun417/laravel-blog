@@ -28,6 +28,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+        //Setting route
+        Route::get('settings', 'SettingController@index')->name('settings.update');
+        Route::post('settings', 'SettingController@profileUpdate')->name('settings.profile.update');
+
         //Tag route
         Route::get('tags/change-status/{tag}', 'TagController@changeStatus')->name('tags.change.status');
         Route::resource('tags', 'TagController');
