@@ -8,6 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Session;
 use Storage;
 use Str;
 
@@ -63,5 +64,16 @@ class SettingController extends Controller
         $user->save();
 
         return back()->with('successMsg', 'Profile updated successfully');
+    }
+
+    public function hideSidebar(){
+
+        if (Session::has('hideSidebar')){
+
+            Session::forget('hideSidebar');
+
+        }else{
+            Session::put('hideSidebar', true);
+        }
     }
 }

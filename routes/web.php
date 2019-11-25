@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/hide-sidebar', 'Admin\SettingController@hideSidebar')->name('hide-sidebar');
+
 Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 
 // subscriber route
