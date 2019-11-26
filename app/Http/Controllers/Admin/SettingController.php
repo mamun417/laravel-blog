@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Session;
@@ -64,6 +65,36 @@ class SettingController extends Controller
         $user->save();
 
         return back()->with('successMsg', 'Profile updated successfully');
+    }
+
+    public function changePassword(Request $request){
+
+        //dd($request->all());
+
+        $this->validate($request, [
+            'old_password' => 'required',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+        $hashPassword = Auth::user()->password;
+
+        $check_password = Hash::check($request->old_password, $hashPassword);
+
+        if ($check_password){
+
+            $new_password = Hash::make($request->password);
+
+            User::where('id', Auth::id())->update(['password' => $new_password]);
+
+            Session::flash('successMsg', 'Password changed successfully');
+
+            //Auth::logout();
+
+        }else{
+            Session::flash('errorMsg', 'Old password does not match with your current password');
+        }
+
+        return back();
     }
 
     public function hideSidebar(){

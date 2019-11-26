@@ -33,6 +33,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
         //Setting route
         Route::get('settings', 'SettingController@index')->name('settings.update');
         Route::post('settings', 'SettingController@profileUpdate')->name('settings.profile.update');
+        Route::post('settings/change-password', 'SettingController@changePassword')->name('settings.password.change');
 
         //Tag route
         Route::get('tags/change-status/{tag}', 'TagController@changeStatus')->name('tags.change.status');

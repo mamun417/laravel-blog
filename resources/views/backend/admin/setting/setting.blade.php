@@ -90,13 +90,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-1 control-label">About</label>
                                                     <div class="col-sm-11">
-                                                        <textarea name="about" class="form-control" rows="6">{{ Auth::user()->about }}</textarea>
+                                                        <textarea name="about" class="form-control" rows="4">{{ Auth::user()->about }}</textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="col-lg-offset-1 col-lg-10">
-                                                        <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-danger" type="submit"><strong>Cancel</strong></a>
+                                                        <a href="{{ url()->previous() }}" class="btn btn-sm btn-danger" type="submit"><strong>Cancel</strong></a>
                                                         <button class="btn btn-sm btn-primary" type="submit"><strong>Submit</strong></button>
                                                     </div>
                                                 </div>
@@ -107,13 +107,46 @@
                                 </div>
                                 <div id="tab-2" class="tab-pane">
                                     <div class="panel-body">
-                                        <strong>Donec quam felis</strong>
+                                        <div class="ibox float-e-margins">
+                                            <form action="{{ route('admin.settings.password.change') }}" method="POST" class="form-horizontal">
+                                                @csrf
 
-                                        <p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects
-                                            and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Old Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="old_password" type="password" class="form-control">
+                                                        @error('old_password')
+                                                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
 
-                                        <p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite
-                                            sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">New Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="password" type="password" class="form-control">
+                                                        @error('password')
+                                                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Confirm Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="password_confirmation" type="password" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-offset-2 col-lg-10">
+                                                        <a href="{{ url()->previous() }}" class="btn btn-sm btn-danger" type="submit"><strong>Cancel</strong></a>
+                                                        <button class="btn btn-sm btn-primary" type="submit"><strong>Submit</strong></button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
