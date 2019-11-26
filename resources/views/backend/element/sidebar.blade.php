@@ -11,7 +11,7 @@
                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="{{ route('admin.settings.update') }}"><i class="fa fa-user-circle-o"></i> Profile</a></li>
+                        <li><a href="{{ Auth::user()->role->name === 'admin' ? route('admin.settings.update') : route('author.settings.update') }}"><i class="fa fa-user-circle-o"></i> Profile</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -60,6 +60,10 @@
                     <a href="{{ route('admin.subscribers.index') }}"><i class="fa fa-youtube-play"></i> <span class="nav-label">Subscribers</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'SettingController' ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings.update') }}"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span></a>
+                </li>
+
             @elseif(Request::is('author*'))
 
                 <li>
@@ -70,7 +74,15 @@
                     <a href="{{ route('author.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Posts</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'SettingController' ? 'active' : '' }}">
+                    <a href="{{ route('author.settings.update') }}"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span></a>
+                </li>
+
             @endif
+
+            <li>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>
+            </li>
 
         </ul>
 

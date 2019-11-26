@@ -63,5 +63,11 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 
         //Post route
         Route::get('posts/change-status/{post}', 'PostController@changeStatus')->name('posts.change.status');
         Route::resource('posts', 'PostController');
+
+        //Setting route
+        Route::get('settings', 'SettingController@index')->name('settings.update');
+        Route::post('settings', 'SettingController@profileUpdate')->name('settings.profile.update');
+        Route::post('settings/change-password', 'SettingController@changePassword')->name('settings.password.change');
+
     }
 );

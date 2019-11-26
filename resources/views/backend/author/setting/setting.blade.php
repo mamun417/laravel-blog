@@ -13,7 +13,7 @@
             <h2>Update Setting</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}">Home</a>
+                    <a href="{{ route('author.dashboard') }}">Home</a>
                 </li>
                 <li>
                     <a>Setting</a>
@@ -43,7 +43,7 @@
                                 <div id="tab-1" class="tab-pane active">
                                     <div class="panel-body">
                                         <div class="ibox float-e-margins">
-                                            <form action="{{ route('admin.settings.profile.update') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                            <form action="{{ route('author.settings.profile.update') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                                 @csrf
 
                                                 <div class="form-group">
@@ -108,7 +108,7 @@
                                 <div id="tab-2" class="tab-pane">
                                     <div class="panel-body">
                                         <div class="ibox float-e-margins">
-                                            <form action="{{ route('admin.settings.password.change') }}" method="POST" class="form-horizontal">
+                                            <form action="{{ route('author.settings.password.change') }}" method="POST" class="form-horizontal">
                                                 @csrf
 
                                                 <div class="form-group">
