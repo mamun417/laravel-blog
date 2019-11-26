@@ -50,8 +50,6 @@
 
 </head>
 
-{{ Session::has('hideSidebar') ? 'ok':'' }}
-
 <body class="{{ Session::has('hideSidebar') ? 'mini-navbar':'' }}">
 <div id="wrapper">
 

@@ -40,7 +40,7 @@
                         @csrf()
                     </form>
                 </td>
-                <td>{{--<img src="{{ asset('images/category').'/'.$post->image }}" class="cus_thumbnail" alt="">--}}</td>
+                <td><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" class="cus_thumbnail" alt="{{ $post->title }}"></td>
                 <td>{{ date("d-m-Y", strtotime($post->created_at)) }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post->id) }}" title="Edit" class="btn btn-success cus_btn">

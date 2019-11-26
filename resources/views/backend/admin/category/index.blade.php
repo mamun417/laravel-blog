@@ -50,7 +50,6 @@
                                     <th>Status</th>
                                     <th>Image</th>
                                     <th>Created at</th>
-                                    <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -70,9 +69,8 @@
                                                     @endif
                                                 </a>
                                             </td>
-                                            <td><img src="{{ asset('images/category').'/'.$category->image }}" class="cus_thumbnail" alt=""></td>
+                                            <td><img src="{{ Storage::disk('public')->url('category/'.$category->image) }}" class="cus_thumbnail" alt="{{ $category->name }}"></td>
                                             <td>{{ date("d-m-Y", strtotime($category->created_at)) }}</td>
-                                            <td>{{ date("d-m-Y", strtotime($category->updated_at)) }}</td>
                                             <td>
                                                 <a href="{{ route('admin.categories.edit', $category->id) }}" title="Edit" class="btn btn-info cus_btn">
                                                     <i class="fa fa-pencil-square-o"></i> <strong>Edit</strong>
