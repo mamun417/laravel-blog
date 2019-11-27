@@ -23,7 +23,10 @@ class FavoritePostController extends Controller
             Session::flash('successMsg', 'Post added to your favorite list');
 
         }else{
-            Session::flash('errorMsg', 'This post already added in your favorite list');
+
+            $user->favoritePosts()->detach($post);
+
+            Session::flash('successMsg', 'Post remove from favorite list');
         }
 
         return back();

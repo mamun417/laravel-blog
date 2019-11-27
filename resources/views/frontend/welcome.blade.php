@@ -65,7 +65,10 @@
                                             @guest
                                                 <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
                                             @else
-                                                <a href="{{ route('frontend.post.favorite.store', $post->id) }}"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
+                                                <a href="{{ route('frontend.post.favorite.store', $post->id) }}">
+                                                    <i class="ion-heart {{ Auth::user()->favoritePosts()->where('post_id', $post->id)->count() != 0 ? 'active-favorite-post':'' }}"></i>
+                                                    {{ $post->favorite_users_count }}
+                                                </a>
                                             @endguest
                                         </li>
                                         <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>

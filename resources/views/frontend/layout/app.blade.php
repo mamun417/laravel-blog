@@ -23,6 +23,8 @@
     <!-- Toastr style -->
     <link href="{{ asset('backend/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('frontend/common-css/custom_style.css') }}" rel="stylesheet">
+
     @stack('css')
 
 </head>

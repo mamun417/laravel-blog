@@ -1,3 +1,6 @@
 .invalid-feedback{
     color: red;
 }
+.active-favorite-post{
+    color: #e8702a;
+}
