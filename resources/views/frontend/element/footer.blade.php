@@ -40,7 +40,7 @@
 
                     <h4 class="title"><b>SUBSCRIBE</b></h4>
                     <div class="input-area">
-                        <form action="{{ route('subscribers.store') }}" method="POST">
+                        <form action="{{ route('frontend.subscribers.store') }}" method="POST">
                             @csrf
 
                             <input name="email" class="email-input" type="email" placeholder="Enter your email">

@@ -61,9 +61,15 @@
                                     </h4>
 
                                     <ul class="post-footer">
-                                        <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                        <li>
+                                            @guest
+                                                <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
+                                            @else
+                                                <a href="{{ route('frontend.post.favorite.store', $post->id) }}"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
+                                            @endguest
+                                        </li>
                                         <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                        <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                        <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                                     </ul>
 
                                 </div>

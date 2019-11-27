@@ -11,17 +11,32 @@
 |
 */
 
+########### Start frontend route ############
+
+// Hide sidebar route
 Route::get('/hide-sidebar', 'Admin\SettingController@hideSidebar')->name('hide-sidebar');
 
+// Frontend home route
 Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 
+
+Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function (){
+
+    // Favorite post route
+    Route::get('favorite/{post}/store', 'FavoritePostController@store')->name('post.favorite.store');
+
+});
+
 // subscriber route
-Route::post('subscribers', 'Frontend\SubscriberController@store')->name('subscribers.store');
+Route::post('subscribers', 'Frontend\SubscriberController@store')->name('frontend.subscribers.store');
+
+######### End frontend route ###############
 
 
 
 
 
+########## Admin route start ###############
 
 Auth::routes();
 

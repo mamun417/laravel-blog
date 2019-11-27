@@ -59,11 +59,11 @@
 
         //Toastr message for domain event trigger
         @if(session('successMsg'))
-        toastr.success('{{ session('successMsg') }}');
+            toastr.success('{{ session('successMsg') }}');
         @endif
 
         @if(session('errorMsg'))
-        toastr.error('{{ session('errorMsg') }}');
+            toastr.error('{{ session('errorMsg') }}');
         @endif
 
     });
