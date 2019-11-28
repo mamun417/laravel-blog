@@ -80,6 +80,10 @@
 
             @endif
 
+            <li class="{{ $current_controller === 'FavoritePostController' ? 'active' : '' }}">
+                <a href="{{ route('favorite.posts.index') }}"><i class="fa fa-heart"></i> <span class="nav-label">Favorite Posts</span></a>
+            </li>
+
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>
             </li>

@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend\Author;
 
 use App\Category;
 use App\Http\Controllers\Controller;
-use App\Notifications\AuthorPostApproved;
 use App\Notifications\AuthorPostCreate;
-use App\Notifications\NewPostCreateNotify;
 use App\Post;
-use App\Subscriber;
 use App\Tag;
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Image;
-use Notification;
 use Storage;
 use Str;
 
@@ -22,39 +20,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('user')->latest()->get();
+        $posts = Auth::User()->posts()->with('user')->latest()->get();
 
-        return view('backend.admin.post.index', compact('posts'));
-    }
-
-    public function pendingList()
-    {
-        $posts = Post::where('is_approved', false)->with('user')->latest()->get();
-
-        return view('backend.admin.post.pending', compact('posts'));
-    }
-
-    public function changeApproveStatus(Post $post){
-
-        if ($post->is_approved){
-            return back()->with('successMsg', 'Post already approved by admin');
-        }
-
-        $approve = $post->is_approved ? 0 : 1;
-
-        $post->update(['is_approved' => $approve]);
-
-        //send notification to author
-        $post->user->notify(new AuthorPostApproved($post));
-
-        //send notification to subscriber
-        $subscribers = Subscriber::all();
-
-        foreach ($subscribers as $subscriber){
-            Notification::send($subscriber, new NewPostCreateNotify($post));
-        }
-
-        return back()->with('successMsg', 'Post approve status changed successfully');
+        return view('backend.author.post.index', compact('posts'));
     }
 
     public function create()
@@ -63,7 +31,7 @@ class PostController extends Controller
 
         $tags = Tag::latest()->get();
 
-        return view('backend.admin.post.create', compact('categories', 'tags'));
+        return view('backend.author.post.create', compact('categories', 'tags'));
     }
 
     public function store(Request $request)
@@ -102,39 +70,48 @@ class PostController extends Controller
 
         $request['slug'] = $slug;
         $request['status'] = $request->status ? 1 : 0;
-        $request['is_approved'] = true;
+        $request['is_approved'] = false;
 
         $post = Post::create($request->all());
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
-        //send notification to subscriber
-        $subscribers = Subscriber::all();
+        //send notification to admin
+        $admins = User::where('role_id', 1)->get();
+        Notification::send($admins, new AuthorPostCreate($post));
 
-        foreach ($subscribers as $subscriber){
-            Notification::send($subscriber, new NewPostCreateNotify($post));
-        }
-
-        return redirect()->route('admin.posts.index')->with('successMsg', 'Post created successfully');
+        return redirect()->route('author.posts.index')->with('successMsg', 'Post created successfully');
     }
 
     public function show(Post $post)
     {
-        return view('backend.admin.post.view', compact('post'));
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
+        return view('backend.author.post.view', compact('post'));
     }
 
     public function edit(Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         $categories = Category::latest()->get();
 
         $tags = Tag::latest()->get();
 
-        return view('backend.admin.post.edit', compact('post','categories', 'tags'));
+        return view('backend.author.post.edit', compact('post','categories', 'tags'));
     }
 
     public function update(Request $request, Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         $request->validate([
             'title' => 'required|max:191|unique:posts,title,'.$post->id,
             'img' => 'mimes:jpg,jpeg,bmp,png|max:1024',
@@ -181,11 +158,15 @@ class PostController extends Controller
         $post->categories()->sync($request->categories);
         $post->tags()->sync($request->tags);
 
-        return redirect()->route('admin.posts.index')->with('successMsg', 'Post updated successfully');
+        return redirect()->route('author.posts.index')->with('successMsg', 'Post updated successfully');
     }
 
     public function destroy(Post $post)
     {
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
+
         if (Storage::disk('public')->exists('post/'.$post->image)){
 
             Storage::disk('public')->delete('post/'.$post->image);
@@ -200,6 +181,10 @@ class PostController extends Controller
     }
 
     public function changeStatus(Post $post){
+
+        if ($post->user_id != Auth::id()){
+            return back()->with('errorMsg', 'Permission denied');
+        }
 
         $status = $post->status ? 0 : 1;
 

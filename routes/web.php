@@ -14,11 +14,10 @@
 ########### Start frontend route ############
 
 // Hide sidebar route
-Route::get('/hide-sidebar', 'Admin\SettingController@hideSidebar')->name('hide-sidebar');
+Route::get('hide-sidebar', 'Backend\Admin\SettingController@hideSidebar')->name('hide-sidebar');
 
 // Frontend home route
 Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
-
 
 Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function (){
 
@@ -40,7 +39,7 @@ Route::post('subscribers', 'Frontend\SubscriberController@store')->name('fronten
 
 Auth::routes();
 
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']],
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Backend\Admin', 'middleware' => ['auth', 'admin']],
     function (){
 
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -70,7 +69,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     }
 );
 
-Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 'middleware' => ['auth', 'author']],
+Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\Author', 'middleware' => ['auth', 'author']],
     function (){
 
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -84,5 +83,13 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 
         Route::post('settings', 'SettingController@profileUpdate')->name('settings.profile.update');
         Route::post('settings/change-password', 'SettingController@changePassword')->name('settings.password.change');
 
+    }
+);
+
+//Partial route (admin, author)
+Route::group(['as' => 'favorite.', 'prefix' => 'admin/favorite', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
+    function (){
+
+        Route::get('posts', 'FavoritePostController@index')->name('posts.index');
     }
 );
