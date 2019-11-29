@@ -19,6 +19,9 @@ Route::get('hide-sidebar', 'Backend\Admin\SettingController@hideSidebar')->name(
 // Frontend home route
 Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 
+// Post details route
+Route::get('post/{slug}', 'Frontend\PostController@view')->name('frontend.post.view');
+
 Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function (){
 
     // Favorite post route

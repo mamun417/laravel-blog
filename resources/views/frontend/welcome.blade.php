@@ -55,7 +55,7 @@
                                 <div class="blog-info">
 
                                     <h4 class="title">
-                                        <a href="#">
+                                        <a href="{{ route('frontend.post.view', $post->slug) }}">
                                             <b>{{ $post->title }}</b>
                                         </a>
                                     </h4>
