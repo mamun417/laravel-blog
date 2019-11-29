@@ -101,7 +101,7 @@
 
                         <div class="tag-area">
 
-                            <h4 class="title"><b>TAG</b></h4>
+                            <h4 class="title"><b>TAGS</b></h4>
                             <ul>
                                 @foreach($tags as $tag)
                                     <li><a href="#">{{ $tag->name }}</a></li>
@@ -146,12 +146,12 @@
                                         <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                         <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                                     </ul>
-                                </div><!-- blog-info -->
+                                </div>
 
-                            </div><!-- single-post -->
+                            </div>
 
-                        </div><!-- card -->
-                    </div><!-- col-md-6 col-sm-12 -->
+                        </div>
+                    </div>
                 @endforeach
 
             </div><!-- row -->
@@ -166,29 +166,20 @@
 
                 <div class="col-lg-8 col-md-12">
                     <div class="comment-form">
-                        <form method="post">
+                        <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
+                            @csrf
+
                             <div class="row">
-
-                                <div class="col-sm-6">
-                                    <input type="text" aria-required="true" name="contact-form-name" class="form-control"
-                                           placeholder="Enter your name" aria-invalid="true" required >
-                                </div><!-- col-sm-6 -->
-                                <div class="col-sm-6">
-                                    <input type="email" aria-required="true" name="contact-form-email" class="form-control"
-                                           placeholder="Enter your email" aria-invalid="true" required>
-                                </div><!-- col-sm-6 -->
-
                                 <div class="col-sm-12">
-									<textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
+									<textarea name="comment" rows="2" class="text-area-messge form-control"
                                               placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
-                                </div><!-- col-sm-12 -->
+                                </div>
                                 <div class="col-sm-12">
                                     <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
-                                </div><!-- col-sm-12 -->
-
-                            </div><!-- row -->
+                                </div>
+                            </div>
                         </form>
-                    </div><!-- comment-form -->
+                    </div>
 
                     <h4><b>COMMENTS(12)</b></h4>
 

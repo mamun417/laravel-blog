@@ -23,12 +23,16 @@ Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 Route::get('posts', 'Frontend\PostController@allPost')->name('frontend.all-posts');
 Route::get('post/{slug}', 'Frontend\PostController@view')->name('frontend.post.view');
 
-Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['auth']], function (){
+Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend', 'middleware' => ['auth']],
+    function (){
 
-    // Favorite post route
-    Route::get('favorite/{post}/store', 'FavoritePostController@store')->name('post.favorite.store');
+        // Favorite post route
+        Route::get('favorite/{post}/store', 'FavoritePostController@store')->name('post.favorite.store');
 
-});
+        //Comment route
+        Route::post('comment/{post}', 'CommentController@store')->name('post.comment.store');
+    }
+);
 
 // subscriber route
 Route::post('subscribers', 'Frontend\SubscriberController@store')->name('frontend.subscribers.store');
