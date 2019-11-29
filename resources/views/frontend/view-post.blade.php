@@ -10,6 +10,9 @@
         .info-area .tag-area {
             padding: 0 30px 30px!important;
         }
+        .slider{
+            background-image: url("{{ Storage::disk('public')->url('post/'.$post->image) }}");
+        }
     </style>
 
 @endpush
@@ -18,7 +21,7 @@
 
     <div class="slider">
         <div class="display-table  center-text">
-            <h1 class="title display-table-cell"><b>DESIGN</b></h1>
+            {{--<h1 class="title display-table-cell"><b>DESIGN</b></h1>--}}
         </div>
     </div><!-- slider -->
 
@@ -36,39 +39,33 @@
                             <div class="post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
                                 </div>
 
                                 <div class="middle-area">
-                                    <a class="name" href="#"><b>Katy Liu</b></a>
-                                    <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+                                    <a class="name" href="#"><b>{{ $post->user->name }}</b></a>
+                                    <h6 class="date">on {{ $post->created_at->diffForHumans() }}</h6>
                                 </div>
 
                             </div><!-- post-info -->
 
-                            <h3 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex Concepts in Physics?</b></a></h3>
+                            <h3 class="title">
+                                <a href="#">
+                                    <b>{{ $post->title }}</b>
+                                </a>
+                            </h3>
 
-                            <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint
-                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-
-                            <div class="post-image"><img src="images/blog-1-1000x600.jpg" alt="Blog Image"></div>
-
-                            <p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint
-                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                            <p class="para">
+                                {!! html_entity_decode($post->body) !!}
                             </p>
+
                         </div><!-- blog-post-inner -->
 
                         <div class="post-icons-area">
                             <ul class="post-icons">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li><a href="#"><i class="ion-heart"></i>{{ $post->favoriteUsers->count() }}</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                             </ul>
 
                             <ul class="icons">
@@ -88,19 +85,16 @@
 
                         <div class="sidebar-area about-area">
                             <h4 class="title"><b>ABOUT AUTHOR</b></h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+                            <p>{{ $post->user->about }}</p>
                         </div>
 
                         <div class="tag-area sidebar-area">
 
                             <h4 class="title"><b>CATEGORIES</b></h4>
                             <ul>
-                                <li><a href="#">Manual</a></li>
-                                <li><a href="#">Liberty</a></li>
-                                <li><a href="#">Recomendation</a></li>
-                                <li><a href="#">Interpritation</a></li>
-                                <li><a href="#">Manual</a></li>
-                                <li><a href="#">Liberty</a></li>
+                                @foreach($categories as $category)
+                                    <li><a href="#">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
 
                         </div><!-- subscribe-area -->
@@ -109,12 +103,9 @@
 
                             <h4 class="title"><b>TAG</b></h4>
                             <ul>
-                                <li><a href="#">Manual</a></li>
-                                <li><a href="#">Liberty</a></li>
-                                <li><a href="#">Recomendation</a></li>
-                                <li><a href="#">Interpritation</a></li>
-                                <li><a href="#">Manual</a></li>
-                                <li><a href="#">Liberty</a></li>
+                                @foreach($tags as $tag)
+                                    <li><a href="#">{{ $tag->name }}</a></li>
+                                @endforeach
                             </ul>
 
                         </div><!-- subscribe-area -->
@@ -134,77 +125,34 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="single-post post-style-1">
+                @foreach($random_posts as $post)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100">
+                            <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="images/alex-lambley-205711.jpg" alt="Blog Image"></div>
+                                <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="Blog Image"></div>
 
-                            <a class="avatar" href="#"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
+                                <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
 
-                            <div class="blog-info">
+                                <div class="blog-info">
+                                    <h4 class="title">
+                                        <a href="#">
+                                            <b>{{ $post->title }}</b>
+                                        </a>
+                                    </h4>
 
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                    <ul class="post-footer">
+                                        <li><a href="#"><i class="ion-heart"></i>{{ $post->favoriteUsers->count() }}</a></li>
+                                        <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                        <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
+                                    </ul>
+                                </div><!-- blog-info -->
 
-                                <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
-                                </ul>
+                            </div><!-- single-post -->
 
-                            </div><!-- blog-info -->
-                        </div><!-- single-post -->
-                    </div><!-- card -->
-                </div><!-- col-md-6 col-sm-12 -->
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="single-post post-style-1">
-
-                            <div class="blog-image"><img src="images/caroline-veronez-165944.jpg" alt="Blog Image"></div>
-
-                            <a class="avatar" href="#"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
-
-                            <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
-
-                                <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
-                                </ul>
-                            </div><!-- blog-info -->
-
-                        </div><!-- single-post -->
-
-                    </div><!-- card -->
-                </div><!-- col-md-6 col-sm-12 -->
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="single-post post-style-1">
-
-                            <div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
-
-                            <a class="avatar" href="#"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
-
-                            <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
-
-                                <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
-                                </ul>
-                            </div><!-- blog-info -->
-
-                        </div><!-- single-post -->
-
-                    </div><!-- card -->
-                </div><!-- col-md-6 col-sm-12 -->
+                        </div><!-- card -->
+                    </div><!-- col-md-6 col-sm-12 -->
+                @endforeach
 
             </div><!-- row -->
 

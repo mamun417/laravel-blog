@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="social-body">
-                        {!! $post->body !!}
+                        {!! html_entity_decode($post->body) !!}
                     </div>
                 </div>
 

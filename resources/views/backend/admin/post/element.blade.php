@@ -99,7 +99,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <textarea name="body" rows="6" class="summernote form-control">{{ isset($post)?$post->body:old('body') }}</textarea>
+                            <textarea name="body" rows="6" class="summernote form-control">{{ html_entity_decode(isset($post)?$post->body:old('body')) }}</textarea>
                             @error('body')
                                 <span class="help-block m-b-none text-danger">{{ $message }}</span>
                             @enderror
