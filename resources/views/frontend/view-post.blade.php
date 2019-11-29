@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
 
-@section('title', 'post title')
+@section('title', $post->title)
 
 @push('css')
     <link href="{{ asset('frontend/single-post-1/css/styles.css') }}" rel="stylesheet">
@@ -136,7 +136,7 @@
 
                                 <div class="blog-info">
                                     <h4 class="title">
-                                        <a href="#">
+                                        <a href="{{ route('frontend.post.view', $post->slug) }}">
                                             <b>{{ $post->title }}</b>
                                         </a>
                                     </h4>

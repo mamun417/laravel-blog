@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Session;
 
 class PostController extends Controller
 {
@@ -19,6 +20,15 @@ class PostController extends Controller
         $tags = Tag::latest()->get();
 
         $random_posts = Post::all()->random(3);
+
+
+        //view count
+        $post_key = 'view_count_'.$post->id;
+
+        if (!Session::has($post_key)){
+            $post->increment('view_count');
+            Session::put($post_key, 1);
+        }
 
         return view('frontend.view-post', compact('post','categories', 'tags', 'random_posts'));
     }
