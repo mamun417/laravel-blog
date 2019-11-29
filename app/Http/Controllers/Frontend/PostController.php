@@ -37,6 +37,8 @@ class PostController extends Controller
             Session::put($post_key, 1);
         }
 
+        //dd($post->comments);
+
         return view('frontend.view-post', compact('post','categories', 'tags', 'random_posts'));
     }
 }
