@@ -11,6 +11,13 @@ use Session;
 
 class PostController extends Controller
 {
+    public function allPost(){
+
+        $posts = Post::latest()->paginate(12);
+
+        return view('frontend.posts', compact('posts'));
+    }
+
     public function view($slug){
 
         $post = Post::where('slug', $slug)->first();
