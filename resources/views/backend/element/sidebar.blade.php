@@ -82,6 +82,10 @@
                     <a href="{{ route('author.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Posts</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'CommentController' ? 'active' : '' }}">
+                    <a href="{{ route('author.comments.index') }}"><i class="fa fa-comment"></i> <span class="nav-label">Comments</span></a>
+                </li>
+
                 <li class="{{ $current_controller === 'FavoritePostController' ? 'active' : '' }}">
                     <a href="{{ route('author.favorite.posts.index') }}"><i class="fa fa-heart"></i> <span class="nav-label">Favorite Posts</span></a>
                 </li>

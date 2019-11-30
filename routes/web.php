@@ -95,7 +95,7 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\A
 );
 
 //Partial route (admin, author)
-Route::group(['as' => 'admin.', 'prefix' => 'admin/favorite', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
     function (){
 
         //Comment route
@@ -103,13 +103,17 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin/favorite', 'namespace' => 'Ba
         Route::delete('comments/{comment}', 'CommentController@delete')->name('comments.delete');
 
         //Favorite post route
-        Route::get('posts', 'FavoritePostController@index')->name('favorite.posts.index');
+        Route::get('favorite/posts', 'FavoritePostController@index')->name('favorite.posts.index');
     }
 );
 
-Route::group(['as' => 'author.', 'prefix' => 'author/favorite', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
+Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
     function (){
 
-        Route::get('posts', 'FavoritePostController@index')->name('favorite.posts.index');
+        //Comment route
+        Route::get('comments', 'CommentController@index')->name('comments.index');
+        Route::delete('comments/{comment}', 'CommentController@delete')->name('comments.delete');
+
+        Route::get('favorite/posts', 'FavoritePostController@index')->name('favorite.posts.index');
     }
 );

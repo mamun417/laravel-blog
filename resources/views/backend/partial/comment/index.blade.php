@@ -30,7 +30,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Comments <span class="badge badge-info">{{ $comments->count() }}</span></h5>
+                        <h5>Comments <span class="badge badge-info">{{ count($comments) }}</span></h5>
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
@@ -44,6 +44,7 @@
                                 </thead>
 
                                 <tbody>
+
                                 @foreach($comments as $comment)
                                     <tr class="gradeX">
                                         <td>
