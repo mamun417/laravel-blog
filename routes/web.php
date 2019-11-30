@@ -100,6 +100,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin/favorite', 'namespace' => 'Ba
 
         //Comment route
         Route::get('comments', 'CommentController@index')->name('comments.index');
+        Route::delete('comments/{comment}', 'CommentController@delete')->name('comments.delete');
 
         //Favorite post route
         Route::get('posts', 'FavoritePostController@index')->name('favorite.posts.index');

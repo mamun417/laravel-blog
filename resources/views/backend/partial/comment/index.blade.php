@@ -78,13 +78,13 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="" title="Remove" class="btn btn-danger cus_btn">
-                                                <i class="fa fa-trash"></i> <strong>Remove</strong>
+                                            <a onclick="deleteRow({{ $comment->id }})" href="JavaScript:void(0)" title="Remove" class="btn btn-danger cus_btn">
+                                                <i class="fa fa-trash"></i> <strong>Delete</strong>
                                             </a>
 
-                                            <form id="delete-form-{{ $comment->id }}" method="POST" action="{{--{{ route('admin.comment.destroy', $comment->id) }}--}}" style="display: none;">
-                                                @csrf
+                                            <form id="row-delete-form{{ $comment->id }}" method="POST" action="{{ route('admin.comments.delete', $comment->id) }}" style="display: none" >
                                                 @method('DELETE')
+                                                @csrf()
                                             </form>
                                         </td>
                                     </tr>

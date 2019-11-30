@@ -14,4 +14,11 @@ class CommentController extends Controller
 
         return view('backend.partial.comment.index', compact('comments'));
     }
+
+    public function delete(Comment $comment){
+
+       $comment->delete();
+
+       return back()->with('successMsg', 'Comment delete successfully');
+    }
 }
