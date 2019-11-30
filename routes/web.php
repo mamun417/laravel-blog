@@ -23,6 +23,9 @@ Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 Route::get('posts', 'Frontend\PostController@allPost')->name('frontend.all-posts');
 Route::get('post/{slug}', 'Frontend\PostController@view')->name('frontend.post.view');
 
+//Post by category
+Route::get('posts/{slug}', 'Frontend\PostController@postByCategory')->name('frontend.posts.by-category');
+
 Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend', 'middleware' => ['auth']],
     function (){
 

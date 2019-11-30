@@ -18,6 +18,11 @@ class PostController extends Controller
         return view('frontend.posts', compact('posts'));
     }
 
+    public function postByCategory($slug){
+
+        return view('frontend.category-posts');
+    }
+
     public function view($slug){
 
         $post = Post::where('slug', $slug)->first();
