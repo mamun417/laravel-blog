@@ -1,0 +1,103 @@
+@extends('backend.layout.app')
+
+@section('title', 'Comments')
+
+@push('css')
+
+@endpush
+
+@section('content')
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>All Post</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ route('admin.dashboard') }}">Home</a>
+                </li>
+                <li>
+                    <a>Comments</a>
+                </li>
+                <li class="active">
+                    <strong>Index</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Comments <span class="badge badge-info">{{ $comments->count() }}</span></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Comments Info</th>
+                                    <th class="text-center">Post Info</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($comments as $comment)
+                                    <tr class="gradeX">
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" src="{{ Storage::disk('public')->url('profile/'.$comment->user->image) }}" width="64" height="64">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">
+                                                        {{ $comment->user->name }} <small>{{ $comment->created_at->diffForHumans() }}</small>
+                                                    </h4>
+                                                    <p>{{ $comment->comment }}</p>
+                                                    <a target="_blank" href="{{ route('frontend.post.view',$comment->post->slug.'#comments') }}">Reply</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->post->slug) }}">
+                                                        <img class="media-object" src="{{ Storage::disk('public')->url('post/'.$comment->post->image) }}" width="64" height="64">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->post->slug) }}">
+                                                        <h4 class="media-heading">{{ $comment->post->title }}</h4>
+                                                    </a>
+                                                    <p>by <strong>{{ $comment->post->user->name }}</strong></p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="" title="Remove" class="btn btn-danger cus_btn">
+                                                <i class="fa fa-trash"></i> <strong>Remove</strong>
+                                            </a>
+
+                                            <form id="delete-form-{{ $comment->id }}" method="POST" action="{{--{{ route('admin.comment.destroy', $comment->id) }}--}}" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+

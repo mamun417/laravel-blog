@@ -60,6 +60,14 @@
                     <a href="{{ route('admin.subscribers.index') }}"><i class="fa fa-youtube-play"></i> <span class="nav-label">Subscribers</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'CommentController' ? 'active' : '' }}">
+                    <a href="{{ route('admin.comments.index') }}"><i class="fa fa-comment"></i> <span class="nav-label">Comments</span></a>
+                </li>
+
+                <li class="{{ $current_controller === 'FavoritePostController' ? 'active' : '' }}">
+                    <a href="{{ route('admin.favorite.posts.index') }}"><i class="fa fa-heart"></i> <span class="nav-label">Favorite Posts</span></a>
+                </li>
+
                 <li class="{{ $current_controller === 'SettingController' ? 'active' : '' }}">
                     <a href="{{ route('admin.settings.update') }}"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span></a>
                 </li>
@@ -74,15 +82,15 @@
                     <a href="{{ route('author.posts.index') }}"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Posts</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'FavoritePostController' ? 'active' : '' }}">
+                    <a href="{{ route('author.favorite.posts.index') }}"><i class="fa fa-heart"></i> <span class="nav-label">Favorite Posts</span></a>
+                </li>
+
                 <li class="{{ $current_controller === 'SettingController' ? 'active' : '' }}">
                     <a href="{{ route('author.settings.update') }}"><i class="fa fa-gear"></i> <span class="nav-label">Settings</span></a>
                 </li>
 
             @endif
-
-            <li class="{{ $current_controller === 'FavoritePostController' ? 'active' : '' }}">
-                <a href="{{ route('favorite.posts.index') }}"><i class="fa fa-heart"></i> <span class="nav-label">Favorite Posts</span></a>
-            </li>
 
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>

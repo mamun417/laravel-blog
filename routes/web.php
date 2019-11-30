@@ -95,9 +95,20 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\A
 );
 
 //Partial route (admin, author)
-Route::group(['as' => 'favorite.', 'prefix' => 'admin/favorite', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
+Route::group(['as' => 'admin.', 'prefix' => 'admin/favorite', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
     function (){
 
-        Route::get('posts', 'FavoritePostController@index')->name('posts.index');
+        //Comment route
+        Route::get('comments', 'CommentController@index')->name('comments.index');
+
+        //Favorite post route
+        Route::get('posts', 'FavoritePostController@index')->name('favorite.posts.index');
+    }
+);
+
+Route::group(['as' => 'author.', 'prefix' => 'author/favorite', 'namespace' => 'Backend\Partial', 'middleware' => ['auth']],
+    function (){
+
+        Route::get('posts', 'FavoritePostController@index')->name('favorite.posts.index');
     }
 );

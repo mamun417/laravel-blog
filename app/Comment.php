@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static latest()
+ */
 class Comment extends Model
 {
     public function post(){
