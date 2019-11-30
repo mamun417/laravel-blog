@@ -6,6 +6,7 @@ use App\Comment;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
+use Session;
 
 class CommentController extends Controller
 {
@@ -35,8 +36,17 @@ class CommentController extends Controller
 
     public function delete(Comment $comment){
 
-       $comment->delete();
+        if ($comment->post->user_id == Auth::id()){
 
-       return back()->with('successMsg', 'Comment delete successfully');
+            $comment->delete();
+
+            Session::flash('successMsg', 'Comment delete successfully');
+
+        }else{
+
+            Session::flash('errorMsg', 'You are not authorize to delete this comment');
+        }
+
+        return back();
     }
 }
