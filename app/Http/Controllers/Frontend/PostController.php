@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function allPost(){
 
-        $posts = Post::latest()->paginate(3);
+        $posts = Post::latest()->paginate(6);
 
         return view('frontend.posts', compact('posts'));
     }
@@ -56,8 +56,6 @@ class PostController extends Controller
             $post->increment('view_count');
             Session::put($post_key, 1);
         }
-
-        //dd($post->comments);
 
         return view('frontend.view-post', compact('post','categories', 'tags', 'random_posts'));
     }
