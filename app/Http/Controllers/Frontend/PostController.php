@@ -13,16 +13,29 @@ class PostController extends Controller
 {
     public function allPost(){
 
-        $posts = Post::latest()->paginate(12);
+        $posts = Post::latest()->paginate(3);
 
         return view('frontend.posts', compact('posts'));
     }
 
     public function postByCategory($slug){
 
-        $category = Category::with('posts')->where('slug', $slug)->first();
+        $result = Category::with('posts')->where('slug', $slug)->first();
 
-        return view('frontend.category-posts', compact('category'));
+        $posts = $result->posts()->paginate(3);
+
+        $search_by = 'category';
+
+        return view('frontend.posts', compact('result', 'posts', 'search_by'));
+    }
+
+    public function postByTag($slug){
+
+        $result = Tag::with('posts')->where('slug', $slug)->first();
+
+        $posts = $result->posts()->paginate(3);
+
+        return view('frontend.posts', compact('result', 'posts'));
     }
 
     public function view($slug){

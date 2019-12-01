@@ -24,7 +24,10 @@ Route::get('posts', 'Frontend\PostController@allPost')->name('frontend.all-posts
 Route::get('post/{slug}', 'Frontend\PostController@view')->name('frontend.post.view');
 
 //Post by category
-Route::get('posts/{slug}', 'Frontend\PostController@postByCategory')->name('frontend.posts.by-category');
+Route::get('posts/category/{slug}', 'Frontend\PostController@postByCategory')->name('frontend.category.posts');
+
+//Post by tag
+Route::get('posts/tag/{slug}', 'Frontend\PostController@postByTag')->name('frontend.tag.posts');
 
 Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend', 'middleware' => ['auth']],
     function (){
