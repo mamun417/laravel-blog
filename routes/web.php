@@ -123,3 +123,11 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\P
         Route::get('favorite/posts', 'FavoritePostController@index')->name('favorite.posts.index');
     }
 );
+
+
+//view composer
+View::composer('frontend/element/footer', function ($view) {
+    $categories = \App\Category::all();
+    $view->with('categories', $categories);
+});
+
