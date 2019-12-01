@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $categories = Category::latest()->get();
 
-        $posts = Post::with('user')->withCount('favoriteUsers')->latest()->get();
+        $posts = Post::publishedAndActive()->with('user')->withCount('favoriteUsers')->latest()->get();
 
         return view('frontend.welcome', compact('categories', 'posts'));
     }

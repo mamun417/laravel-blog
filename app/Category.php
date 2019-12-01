@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static latest()
  * @method static create(array $all)
+ * @method static whereHas(string $string, \Closure $param)
  */
 class Category extends Model
 {

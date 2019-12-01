@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static latest()
  * @method static create(array $all)
+ * @method static publishedAndActive()
  */
 class Post extends Model
 {
@@ -30,5 +31,18 @@ class Post extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function scopePublished($query){
+        return $query->where('is_approved', 1);
+    }
+
+    public function scopeActive($query){
+        return $query->where('status', 1);
+    }
+
+    public function scopePublishedAndActive($query){
+        return $query->published()->active();
+        //return $query->where('status', 1)->where('is_approved', 1);
     }
 }

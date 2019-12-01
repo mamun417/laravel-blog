@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Session;
 
@@ -13,7 +14,7 @@ class PostController extends Controller
 {
     public function allPost(){
 
-        $posts = Post::latest()->paginate(6);
+        $posts = Post::publishedAndActive()->latest()->paginate(6);
 
         return view('frontend.posts', compact('posts'));
     }
@@ -22,7 +23,7 @@ class PostController extends Controller
 
         $result = Category::with('posts')->where('slug', $slug)->first();
 
-        $posts = $result->posts()->paginate(3);
+        $posts = $result->posts()->publishedAndActive()->paginate(3);
 
         $search_by = 'category';
 
@@ -33,21 +34,20 @@ class PostController extends Controller
 
         $result = Tag::with('posts')->where('slug', $slug)->first();
 
-        $posts = $result->posts()->paginate(3);
+        $posts = $result->posts()->publishedAndActive()->paginate(3);
 
         return view('frontend.posts', compact('result', 'posts'));
     }
 
     public function view($slug){
 
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::publishedAndActive()->where('slug', $slug)->first();
 
         $categories = Category::latest()->get();
 
         $tags = Tag::latest()->get();
 
-        $random_posts = Post::all()->random(3);
-
+        $random_posts = Post::publishedAndActive()->inRandomOrder()->take(3)->get();
 
         //view count
         $post_key = 'view_count_'.$post->id;
