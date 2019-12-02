@@ -83,6 +83,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Backend\Adm
         //Subscriber route
         Route::get('subscribers', 'ManageSubscriberController@index')->name('subscribers.index');
         Route::delete('subscribers/{subscriber}', 'ManageSubscriberController@destroy')->name('subscribers.destroy');
+
+        //Author route
+        Route::get('authors', 'ManageAuthorController@index')->name('authors.index');
+        Route::delete('authors/{author}', 'ManageAuthorController@destroy')->name('authors.destroy');
     }
 );
 

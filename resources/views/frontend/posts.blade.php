@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
 
-@section('title', isset($result) ? $result->name : 'Posts')
+@section('title', isset($result) ? $result->name : (request('query') ? request('query') : 'Posts'))
 
 @php($slider_image_url = isset($search_by) ? Storage::disk('public')->url($search_by.'/'.$result->image) : asset('frontend/images/slider-1.jpg'))
 

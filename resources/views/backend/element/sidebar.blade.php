@@ -40,6 +40,10 @@
                     <a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
+                <li class="{{ $current_controller === 'ManageAuthorController' ? 'active' : '' }}">
+                    <a href="{{ route('admin.authors.index') }}"><i class="fa fa-user-circle"></i> <span class="nav-label">Authors</span></a>
+                </li>
+
                 <li class="{{ $current_controller === 'TagController' ? 'active' : '' }}">
                     <a href="{{ route('admin.tags.index') }}"><i class="fa fa-tags"></i> <span class="nav-label">Tags</span></a>
                 </li>
