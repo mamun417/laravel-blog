@@ -103,7 +103,6 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\A
         Route::get('settings', 'SettingController@index')->name('settings.update');
         Route::post('settings', 'SettingController@profileUpdate')->name('settings.profile.update');
         Route::post('settings/change-password', 'SettingController@changePassword')->name('settings.password.change');
-
     }
 );
 

@@ -48,26 +48,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {{--@foreach($auhtors as $key => $auhtor)
+                                    @foreach($authors as $key => $author)
                                         <tr class="gradeX">
                                             <td>{{ ++$key }}</td>
-                                            <td>{{ ucfirst($auhtor->name) }}</td>
-                                            <td>{{ $auhtor->slug }}</td>
-                                            <td>{{ $auhtor->posts->count() }}</td>
-                                            <td><img src="{{ Storage::disk('public')->url('category/'.$auhtor->image) }}" class="cus_thumbnail" alt="{{ $auhtor->name }}"></td>
-                                            <td>{{ date("d-m-Y", strtotime($auhtor->created_at)) }}</td>
+                                            <td>{{ ucfirst($author->name) }}</td>
+                                            <td><img src="{{ Storage::disk('public')->url('profile/'.$author->image) }}" class="cus_thumbnail" alt="{{ $author->name }}"></td>
+                                            <td>{{ $author->posts_count }}</td>
+                                            <td>{{ $author->comments_count }}</td>
+                                            <td>{{ $author->favorite_posts_count }}</td>
                                             <td>
-                                                <a onclick="deleteRow({{ $auhtor->id }})" href="JavaScript:void(0)" title="Delete" class="btn btn-danger cus_btn">
+                                                <a onclick="deleteRow({{ $author->id }})" href="JavaScript:void(0)" title="Delete" class="btn btn-danger cus_btn">
                                                     <i class="fa fa-trash"></i> <strong>Delete</strong>
                                                 </a>
 
-                                                <form id="class-delete-form{{ $auhtor->id }}" method="POST" action="{{ route('admin.categories.destroy', $auhtor->id) }}" style="display: none" >
+                                                <form id="row-delete-form{{ $author->id }}" method="POST" action="{{ route('admin.authors.destroy', $author->id) }}" style="display: none" >
                                                     @method('DELETE')
                                                     @csrf()
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach--}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

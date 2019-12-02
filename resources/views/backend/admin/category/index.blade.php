@@ -79,7 +79,7 @@
                                                     <i class="fa fa-trash"></i> <strong>Delete</strong>
                                                 </a>
 
-                                                <form id="class-delete-form{{ $category->id }}" method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" style="display: none" >
+                                                <form id="row-delete-form{{ $category->id }}" method="POST" action="{{ route('admin.categories.destroy', $category->id) }}" style="display: none" >
                                                     @method('DELETE')
                                                     @csrf()
                                                 </form>

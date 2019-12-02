@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static where(string $string, int|null $id)
+ * @method static author()
  */
 class User extends Authenticatable
 {
@@ -39,6 +40,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeAuthor($jquery){
+        return $jquery->where('role_id', 2);
+    }
 
     public function role(){
         return $this->belongsTo(Role::class);
