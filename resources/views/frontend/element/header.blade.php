@@ -22,9 +22,10 @@
         </ul><!-- main-menu -->
 
         <div class="src-area">
-            <form>
+            <form action="{{ route('frontend.posts.search') }}" method="GET">
+
                 <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                <input class="src-input" type="text" placeholder="Type of search">
+                <input name="query" value="{{ request('query') }}" class="src-input" type="text" placeholder="Type of search">
             </form>
         </div>
     </div><!-- conatiner -->

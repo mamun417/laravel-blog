@@ -8,10 +8,11 @@
                     <a class="logo" href="#"><img src="{{ asset('frontend/images/logo.png') }}" alt="Logo Image"></a>
                     <p class="copyright">{{ config('app.name') }} @ 2017. All rights reserved.</p>
                     <p class="copyright">
-                        Develop by <a href="https://github.com/mamun417" target="_blank" class="text" style="font-weight: bold">Abdullah Al Mamun</a>
+                        Develop by <a href="https://github.com/mamun417" target="_blank" style="font-weight: bold">Abdullah Al Mamun</a>
                     </p>
                     <ul class="icons">
                         <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+                        <li><a href="https://github.com/mamun417" target="_blank"><i class="ion-social-github-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>

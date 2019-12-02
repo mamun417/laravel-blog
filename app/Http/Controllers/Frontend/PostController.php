@@ -59,4 +59,15 @@ class PostController extends Controller
 
         return view('frontend.view-post', compact('post','categories', 'tags', 'random_posts'));
     }
+
+    public function search(){
+
+        $query = request('query');
+
+        $posts = Post::publishedAndActive()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(3);
+
+        return view('frontend.posts', compact('posts'));
+    }
 }

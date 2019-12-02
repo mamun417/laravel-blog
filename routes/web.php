@@ -29,6 +29,9 @@ Route::get('posts/category/{slug}', 'Frontend\PostController@postByCategory')->n
 //Post by tag
 Route::get('posts/tag/{slug}', 'Frontend\PostController@postByTag')->name('frontend.tag.posts');
 
+//Search
+Route::get('posts/search', 'Frontend\PostController@search')->name('frontend.posts.search');
+
 Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend', 'middleware' => ['auth']],
     function (){
 

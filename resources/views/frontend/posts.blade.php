@@ -18,7 +18,9 @@
 @section('content')
 
     <div class="slider display-table center-text">
-        <h1 class="title display-table-cell"><b>{{ isset($result) ? $result->name : 'ALL POSTS' }}</b></h1>
+        <h1 class="title display-table-cell">
+            <b>{{ isset($result) ? $result->name : (request('query') ? $posts->total().' results for “'.request('query').'”' : 'ALL POSTS') }}</b>
+        </h1>
     </div><!-- slider -->
 
     <section class="blog-area section">
@@ -69,11 +71,15 @@
 
                 {{-- <a class="load-more-btn" href="#"><b>LOAD MORE</b></a>--}}
 
+                <p class="text-left" style="margin: -16px 0px 10px 0px;">Showing 1 to {{ $posts->lastItem() }} of {{ $posts->total() }} entries</p>
+
             @else
-                <h4 style="margin-top: -25px">No post available for this category!</h4>
+                <h4 style="margin-top: -25px">No post available!</h4>
             @endif
 
-            {{ $posts->links() }}
+
+
+            {{ $posts->appends(['query' => request('query')])->links() }}
 
         </div><!-- container -->
     </section><!-- section -->
