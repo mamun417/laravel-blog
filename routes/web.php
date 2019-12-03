@@ -23,10 +23,13 @@ Route::get('/', 'Frontend\HomeController@index')->name('frontend.home');
 Route::get('posts', 'Frontend\PostController@allPost')->name('frontend.all-posts');
 Route::get('post/{slug}', 'Frontend\PostController@view')->name('frontend.post.view');
 
-//Post by category
+// Author posts
+Route::get('profile/{author}', 'Frontend\AuthorPostController@index')->name('frontend.author.posts');
+
+//Posts by category
 Route::get('posts/category/{slug}', 'Frontend\PostController@postByCategory')->name('frontend.category.posts');
 
-//Post by tag
+//Posts by tag
 Route::get('posts/tag/{slug}', 'Frontend\PostController@postByTag')->name('frontend.tag.posts');
 
 //Search

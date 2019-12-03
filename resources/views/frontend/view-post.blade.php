@@ -110,7 +110,6 @@
 
                         </div><!-- subscribe-area -->
 
-
                     </div><!-- info-area -->
 
                 </div><!-- col-lg-4 col-md-12 -->
