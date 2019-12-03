@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @method static where(string $string, int|null $id)
  * @method static author()
+ * @method static findOrFail($id)
+ * @method static create(array $array)
  */
 class User extends Authenticatable
 {
@@ -20,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'role_id', 'name', 'username', 'email', 'password',
     ];
 
     /**
