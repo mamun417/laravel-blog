@@ -9,56 +9,94 @@
             <div class="col-lg-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-success pull-right">Monthly</span>
-                        <h5>Income</h5>
+                        <span class="label label-success pull-right"><i class="fa fa-th-list"></i></span>
+                        <h5>Post</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">40 886,200</h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                        <small>Total income</small>
+                        <small>Total post</small>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-info pull-right">Annual</span>
-                        <h5>Orders</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">275,800</h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                        <small>New orders</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">Today</span>
-                        <h5>visits</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">106,120</h1>
-                        <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
-                        <small>New visits</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-danger pull-right">Low value</span>
-                        <h5>User activity</h5>
+                        <span class="label label-primary pull-right"><i class="fa fa-eye"></i></span>
+                        <h5>Views</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">80,600</h1>
-                        <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
-                        <small>In first month</small>
+                        <small>Total views</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right"><i class="fa fa-heart"></i></span>
+                        <h5>Favorite</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">275,800</h1>
+                        <small>Favorite post</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-warning pull-right"><i class="fa fa-history"></i></span>
+                        <h5>Pending</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">106,120</h1>
+                        <small>Pending post</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>TOP <span class="badge badge-danger"><strong>5</strong></span> POPULAR POSTS</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Rank List</th>
+                                    <th>Title</th>
+                                    <th>Views</th>
+                                    <th>Favorite</th>
+                                    <th>Comments</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($posts as $key => $post)
+                                    <tr class="gradeX">
+                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $post->title }}</td>
+                                        <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->view_count }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 @endsection

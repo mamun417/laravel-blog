@@ -78,7 +78,7 @@
 
             @elseif(Request::is('author*'))
 
-                <li>
+                <li class="{{ $current_controller === 'DashboardController' ? 'active' : '' }}">
                     <a href="{{ route('author.dashboard') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span></a>
                 </li>
 
