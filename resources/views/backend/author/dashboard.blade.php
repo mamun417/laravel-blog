@@ -13,7 +13,7 @@
                         <h5>Post</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">{{ $posts->count() }}</h1>
+                        <a href="{{ route('author.posts.index') }}"><h1 class="no-margins"><b>{{ $posts->count() }}</b></h1></a>
                         <small>Total post</small>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <h5>Views</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">{{ $all_views }}</h1>
+                        <a href="{{ route('author.posts.index') }}" style="color: #1ab394"><h1 class="no-margins"><b>{{ $all_views }}</b></h1></a>
                         <small>Total views</small>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                         <h5>Favorite</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">{{ Auth::user()->favoritePosts()->count() }}</h1>
+                        <a href="{{ route('author.posts.index') }}" class="text-info"><h1 class="no-margins"><b>{{ $total_favorite_posts }}</b></h1></a>
                         <small>Favorite post</small>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <h5>Pending</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">{{ $total_pending_posts }}</h1>
+                        <a href="{{ route('author.posts.index') }}" class="text-warning"><h1 class="no-margins"><b>{{ $total_pending_posts }}</b></h1></a>
                         <small>Pending post</small>
                     </div>
                 </div>
@@ -82,10 +82,10 @@
                                 @foreach($popular_posts as $key => $post)
                                     <tr class="gradeX">
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $post->title }}</td>
+                                        <td style="text-align: left">{{ Str::limit($post->title, 50) }}</td>
                                         <td>{{ $post->view_count }}</td>
-                                        <td>{{ $post->comments->count() }}</td>
-                                        <td>{{ $post->favoriteUsers()->count() }}</td>
+                                        <td>{{ $post->comments_count }}</td>
+                                        <td>{{ $post->favorite_users_count }}</td>
                                         <td>
                                             <a>
                                                 @if($post->is_approved)

@@ -52,7 +52,7 @@
                                 @foreach($posts as $post)
                                     <tr class="gradeX">
                                         <td>{{ $post->id }}</td>
-                                        <td>{{ $post->title }}</td>
+                                        <td style="text-align: left">{{ Str::limit($post->title, 30) }}</td>
                                         <td>{{ $post->user->name }}</td>
                                         <td>{{ $post->favorite_users_count }}</td>
                                         <td>{{ $post->view_count }}</td>
