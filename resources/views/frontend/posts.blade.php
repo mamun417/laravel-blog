@@ -36,7 +36,7 @@
 
                                     <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="Blog Image"></div>
 
-                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
+                                    <a class="avatar" href="{{ route('frontend.author.posts', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
 
                                     <div class="blog-info">
 
@@ -76,8 +76,6 @@
             @else
                 <h4 style="margin-top: -25px">No post available!</h4>
             @endif
-
-
 
             {{ $posts->appends(['query' => request('query')])->links() }}
 

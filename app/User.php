@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static author()
  * @method static findOrFail($id)
  * @method static create(array $array)
+ * @method static withCount(array $array)
  */
 class User extends Authenticatable
 {

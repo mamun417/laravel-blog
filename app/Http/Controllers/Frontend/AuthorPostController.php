@@ -12,9 +12,11 @@ class AuthorPostController extends Controller
 {
     public function index($username){
 
-        $author = User::where('username', $username)->first();
+        $author = User::withCount(['posts' => function($query){
+                    $query->publishedAndActive();
+                }])->where('username', $username)->first();
 
-        $posts = $author->posts()->publishedAndActive()->get();
+        $posts = $author->posts()->publishedAndActive()->paginate(4);
 
         $categories = Category::latest()->get();
 

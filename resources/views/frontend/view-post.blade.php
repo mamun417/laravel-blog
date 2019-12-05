@@ -131,7 +131,7 @@
 
                                 <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/'.$random_post->image) }}" alt="Blog Image"></div>
 
-                                <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$random_post->user->image) }}" alt="Profile Image"></a>
+                                <a class="avatar" href="{{ route('frontend.author.posts', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/'.$random_post->user->image) }}" alt="Profile Image"></a>
 
                                 <div class="blog-info">
                                     <h4 class="title">
