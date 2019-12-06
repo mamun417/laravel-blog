@@ -135,8 +135,8 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Backend\P
 
 
 //view composer
-View::composer('frontend/element/footer', function ($view) {
+/*View::composer('frontend/element/footer', function ($view) {
     $categories = \App\Category::all();
     $view->with('categories', $categories);
-});
+});*/
 

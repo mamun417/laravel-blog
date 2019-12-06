@@ -63,8 +63,8 @@
 
                         <div class="post-icons-area">
                             <ul class="post-icons">
-                                <li><a href="#"><i class="ion-heart"></i>{{ $post->favoriteUsers->count() }}</a></li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>{{ $post->comments_count }}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                             </ul>
 
@@ -92,7 +92,7 @@
 
                             <h4 class="title"><b>CATEGORIES</b></h4>
                             <ul>
-                                @foreach($categories as $category)
+                                @foreach(getCategories() as $category)
                                     <li><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>
                                 @endforeach
                             </ul>
@@ -124,6 +124,8 @@
         <div class="container">
             <div class="row">
 
+                @php($auth_user_favorite_posts = Auth::user()->favoritePosts()->pluck('post_id')->toArray())
+
                 @foreach($random_posts as $random_post)
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100">
@@ -131,9 +133,10 @@
 
                                 <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/'.$random_post->image) }}" alt="Blog Image"></div>
 
-                                <a class="avatar" href="{{ route('frontend.author.posts', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/'.$random_post->user->image) }}" alt="Profile Image"></a>
+                                <a class="avatar" href="{{ route('frontend.author.posts', $random_post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="Profile Image"></a>
 
                                 <div class="blog-info">
+
                                     <h4 class="title">
                                         <a href="{{ route('frontend.post.view', $random_post->slug) }}">
                                             <b>{{ $random_post->title }}</b>
@@ -141,14 +144,22 @@
                                     </h4>
 
                                     <ul class="post-footer">
-                                        <li><a href="#"><i class="ion-heart"></i>{{ $random_post->favoriteUsers->count() }}</a></li>
-                                        <li><a href="#"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
+                                        <li>
+                                            @guest
+                                                <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $random_post->favorite_users_count }}</a>
+                                            @else
+                                                <a href="{{ route('frontend.post.favorite.store', $random_post->id) }}">
+                                                    <i class="ion-heart {{ in_array($random_post->id, $auth_user_favorite_posts ) ? 'active-favorite-post':'' }}"></i>
+                                                    {{ $random_post->favorite_users_count }}
+                                                </a>
+                                            @endguest
+                                        </li>
+                                        <li><a href="#"><i class="ion-chatbubble"></i>{{ $random_post->comments_count }}</a></li>
                                         <li><a href="#"><i class="ion-eye"></i>{{ $random_post->view_count }}</a></li>
                                     </ul>
+
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 @endforeach
@@ -192,62 +203,8 @@
                     </div>
 
                     @if($post->comments->count() > 0)
-                        <h4><b>COMMENTS({{ $post->comments->count() }})</b></h4>
 
-                        {{--<div class="commnets-area">
-
-                            <div class="comment">
-
-                                <div class="post-info">
-
-                                    <div class="left-area">
-                                        <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                                    </div>
-
-                                    <div class="middle-area">
-                                        <a class="name" href="#"><b>Katy Liu</b></a>
-                                        <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                                    </div>
-
-                                    <div class="right-area">
-                                        <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                    </div>
-
-                                </div><!-- post-info -->
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                                    Ut enim ad minim veniam</p>
-
-                            </div>
-
-                            <div class="comment">
-                                <h5 class="reply-for">Reply for <a href="#"><b>Katy Lui</b></a></h5>
-
-                                <div class="post-info">
-
-                                    <div class="left-area">
-                                        <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                                    </div>
-
-                                    <div class="middle-area">
-                                        <a class="name" href="#"><b>Katy Liu</b></a>
-                                        <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                                    </div>
-
-                                    <div class="right-area">
-                                        <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                    </div>
-
-                                </div><!-- post-info -->
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                                    Ut enim ad minim veniam</p>
-
-                            </div>
-
-                        </div>--}}
+                        <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
 
                         <div class="commnets-area ">
 

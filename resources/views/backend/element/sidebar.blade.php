@@ -1,5 +1,8 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
+        <div class="go_to_site">
+            <a href="/" target="_blank"><i class="fa fa-globe" aria-hidden="true"></i> Go to website</a>
+        </div>
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">

@@ -15,7 +15,7 @@
              data-swiper-breakpoints="true" data-swiper-loop="true" >
             <div class="swiper-wrapper">
 
-                @foreach($categories as $category)
+                @foreach(getCategories() as $category)
                     <div class="swiper-slide">
                         <a class="slider-category" href="{{ route('frontend.category.posts', $category->slug) }}">
                             <div class="blog-image">
@@ -43,6 +43,8 @@
         <div class="container">
             <div class="row">
 
+                @php($auth_user_favorite_posts = Auth::user()->favoritePosts()->pluck('post_id')->toArray())
+
                 @foreach($posts as $post)
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100">
@@ -66,7 +68,7 @@
                                                 <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
                                             @else
                                                 <a href="{{ route('frontend.post.favorite.store', $post->id) }}">
-                                                    <i class="ion-heart {{ Auth::user()->favoritePosts()->where('post_id', $post->id)->count() != 0 ? 'active-favorite-post':'' }}"></i>
+                                                    <i class="ion-heart {{ in_array($post->id, (array) $auth_user_favorite_posts ) ? 'active-favorite-post':'' }}"></i>
                                                     {{ $post->favorite_users_count }}
                                                 </a>
                                             @endguest

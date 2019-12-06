@@ -9,12 +9,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //60745
-
     public function index()
     {
-        $categories = Category::latest()->get();
-
         $posts = Post::publishedAndActive()->with('user')
                 ->withCount(['favoriteUsers', 'comments'])
                 ->latest()->get();

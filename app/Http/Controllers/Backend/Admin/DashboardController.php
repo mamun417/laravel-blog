@@ -9,7 +9,6 @@ use App\Tag;
 use App\User;
 use Auth;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

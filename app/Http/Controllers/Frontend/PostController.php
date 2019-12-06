@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function allPost(){
 
-        $posts = Post::publishedAndActive()->latest()->paginate(6);
+        $posts = Post::with('user')->withCount('favoriteUsers')->publishedAndActive()->latest()->paginate(6);
 
         return view('frontend.posts', compact('posts'));
     }
@@ -41,13 +41,17 @@ class PostController extends Controller
 
     public function view($slug){
 
-        $post = Post::publishedAndActive()->where('slug', $slug)->first();
-
-        $categories = Category::latest()->get();
+        $post = Post::with(['user', 'comments'])
+            ->withCount(['favoriteUsers', 'comments'])
+            ->publishedAndActive()
+            ->where('slug', $slug)->first();
 
         $tags = Tag::latest()->get();
 
-        $random_posts = Post::publishedAndActive()->inRandomOrder()->take(3)->get();
+        $random_posts = Post::with(['user', 'comments'])
+            ->withCount(['favoriteUsers', 'comments'])
+            ->publishedAndActive()
+            ->inRandomOrder()->take(3)->get();
 
         //view count
         $post_key = 'view_count_'.$post->id;

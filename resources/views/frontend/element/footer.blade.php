@@ -26,7 +26,7 @@
                 <div class="footer-section">
                     <h4 class="title"><b>CATEGORIES</b></h4>
                     <ul>
-                        @foreach($categories as $category)
+                        @foreach(getCategories() as $category)
                             <li><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
