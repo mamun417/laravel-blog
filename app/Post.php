@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static latest()
  * @method static create(array $all)
  * @method static publishedAndActive()
+ * @method static withCount(string $string)
+ * @method static sum(string $string)
  */
 class Post extends Model
 {

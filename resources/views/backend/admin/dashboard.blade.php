@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span><b>Total Posts</b></span>
-                            <h2 class="font-bold">122</h2>
+                            <h2 class="font-bold">{{ $posts->count() }}</h2>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span><b>Total Views</b></span>
-                            <h2 class="font-bold">122</h2>
+                            <h2 class="font-bold">{{ $total_views }}</h2>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span><b>Total Favorite</b></span>
-                            <h2 class="font-bold">260</h2>
+                            <h2 class="font-bold">{{ $total_favorite_posts }}</h2>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-xs-8 text-right">
                             <span><b>Total Pending</b></span>
-                            <h2 class="font-bold">12</h2>
+                            <h2 class="font-bold">{{ $total_pending_posts }}</h2>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-xs-8 text-right">
                                     <span><b>Total Authors</b></span>
-                                    <h2 class="font-bold">122</h2>
+                                    <h2 class="font-bold">{{ $total_authors }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-xs-8 text-right">
                                     <span><b>Today Authors</b></span>
-                                    <h2 class="font-bold">122</h2>
+                                    <h2 class="font-bold">{{ $today_authors }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="col-xs-8 text-right">
                                     <span><b>Total Categories</b></span>
-                                    <h2 class="font-bold">122</h2>
+                                    <h2 class="font-bold">{{ $total_categories }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="col-xs-8 text-right">
                                     <span><b>Total Tags</b></span>
-                                    <h2 class="font-bold">122</h2>
+                                    <h2 class="font-bold">{{ $total_tags }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -129,9 +129,9 @@
             </div>
 
             <div class="col-lg-9">
-                    <div class="ibox float-e-margins" style="margin-top: 15px">
+                    <div class="ibox float-e-margins" style="margin-top: 12px">
                         <div class="ibox-title">
-                            <h5>TOP <span class="badge badge-danger"><strong>5</strong></span> POPULAR POSTS</h5>
+                            <h5>TOP <span class="badge badge-danger"><strong>6</strong></span> POPULAR POSTS</h5>
                         </div>
                         <div class="ibox-content">
 
@@ -150,21 +150,29 @@
                                     </thead>
 
                                     <tbody>
+                                    @foreach($popular_posts as $key => $post)
                                         <tr class="gradeX">
-                                            <td>1</td>
-                                            <td style="text-align: left">Automate App Setup with Laravel Initializer</td>
-                                            <td>6</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>{{ $key+1 }}</td>
+                                            <td style="text-align: left">{{ Str::limit($post->title, 50) }}</td>
+                                            <td>{{ $post->view_count }}</td>
+                                            <td>{{ $post->comments_count }}</td>
+                                            <td>{{ $post->favorite_users_count }}</td>
                                             <td>
-                                                <span class="badge badge-primary"><strong>Published</strong></span>
+                                                <a>
+                                                    @if($post->is_approved)
+                                                        <span class="badge badge-primary"><strong>Approved</strong></span>
+                                                    @else
+                                                        <span class="badge badge-warning"><strong>Pending</strong></span>
+                                                    @endif
+                                                </a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.posts.show', 23) }}" title="Edit" class="btn btn-success cus_btn">
+                                                <a target="_blank" href="{{ route('frontend.post.view', $post->slug) }}" title="Edit" class="btn btn-success cus_btn">
                                                     <i class="fa fa-eye"></i> <strong>View</strong>
                                                 </a>
                                             </td>
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
