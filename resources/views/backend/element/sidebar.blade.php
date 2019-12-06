@@ -41,7 +41,7 @@
                 </li>
 
                 <li class="{{ $current_controller === 'ManageAuthorController' ? 'active' : '' }}">
-                    <a href="{{ route('admin.authors.index') }}"><i class="fa fa-user-circle"></i> <span class="nav-label">Authors</span></a>
+                    <a href="{{ route('admin.authors.index') }}"><i class="fa fa-users"></i> <span class="nav-label">Authors</span></a>
                 </li>
 
                 <li class="{{ $current_controller === 'TagController' ? 'active' : '' }}">

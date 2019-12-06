@@ -4,61 +4,175 @@
 
 @section('content')
 
-    <div class="wrapper wrapper-content">
+    <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-success pull-right">Monthly</span>
-                    <h5>Income</h5>
+            <div class="col-lg-3">
+                <div class="widget style1 bg-success">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-newspaper-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span><b>Total Posts</b></span>
+                            <h2 class="font-bold">122</h2>
+                        </div>
+                    </div>
                 </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">40 886,200</h1>
-                    <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                    <small>Total income</small>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-eye fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span><b>Total Views</b></span>
+                            <h2 class="font-bold">122</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 lazur-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-heart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span><b>Total Favorite</b></span>
+                            <h2 class="font-bold">260</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 yellow-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-refresh fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span><b>Total Pending</b></span>
+                            <h2 class="font-bold">12</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-info pull-right">Annual</span>
-                    <h5>Orders</h5>
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="widget style1 bg-danger">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span><b>Total Authors</b></span>
+                                    <h2 class="font-bold">122</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">275,800</h1>
-                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                    <small>New orders</small>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="widget style1 bg-info">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-user-circle fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span><b>Today Authors</b></span>
+                                    <h2 class="font-bold">122</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="widget style1 bg-warning">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-th fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span><b>Total Categories</b></span>
+                                    <h2 class="font-bold">122</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="widget style1 bg-success">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <i class="fa fa-tags fa-5x"></i>
+                                </div>
+                                <div class="col-xs-8 text-right">
+                                    <span><b>Total Tags</b></span>
+                                    <h2 class="font-bold">122</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                    <div class="ibox float-e-margins" style="margin-top: 15px">
+                        <div class="ibox-title">
+                            <h5>TOP <span class="badge badge-danger"><strong>5</strong></span> POPULAR POSTS</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Rank List</th>
+                                        <th>Title</th>
+                                        <th>Views</th>
+                                        <th>Comments</th>
+                                        <th>Favorite</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr class="gradeX">
+                                            <td>1</td>
+                                            <td style="text-align: left">Automate App Setup with Laravel Initializer</td>
+                                            <td>6</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>
+                                                <span class="badge badge-primary"><strong>Published</strong></span>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.posts.show', 23) }}" title="Edit" class="btn btn-success cus_btn">
+                                                    <i class="fa fa-eye"></i> <strong>View</strong>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-primary pull-right">Today</span>
-                    <h5>visits</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">106,120</h1>
-                    <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
-                    <small>New visits</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <span class="label label-danger pull-right">Low value</span>
-                    <h5>User activity</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins">80,600</h1>
-                    <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
-                    <small>In first month</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
 
 @endsection

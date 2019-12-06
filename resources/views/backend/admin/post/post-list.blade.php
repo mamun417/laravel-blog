@@ -16,7 +16,7 @@
         <tbody>
         @foreach($posts as $key => $post)
             <tr class="gradeX">
-                <td>{{ $post->title }}</td>
+                <td>{{ Str::limit($post->title, 30) }}</td>
                 <td>{{ $post->user->name }}</td>
                 <td>{{ $post->view_count }}</td>
                 <td>
