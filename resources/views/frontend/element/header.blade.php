@@ -1,5 +1,5 @@
 <header>
-    <div class="container-fluid position-relative no-side-padding">
+    <div id="root" class="container-fluid position-relative no-side-padding">
 
         <a href="/" class="logo"><img src="{{ asset('frontend/images/logo.png') }}" alt="Logo Image"></a>
 
@@ -23,10 +23,40 @@
 
         <div class="src-area">
             <form action="{{ route('frontend.posts.search') }}" method="GET">
-
                 <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
                 <input name="query" value="{{ request('query') }}" class="src-input" type="text" placeholder="Type of search">
             </form>
         </div>
     </div><!-- conatiner -->
 </header>
+
+@push('js')
+    <script src="{{ asset('js/app.js') }}"></script>
+@endpush
+
+@section('custom-js')
+
+    <script>
+
+        var App = new Vue({
+            el: "#root",
+            data: {
+                change_password:{
+                    old_password: '',
+                    password: '',
+                    password_confirmation: ''
+                },
+            },
+
+            mounted() {
+                console.log('Yap, vueJs run properly!');
+            },
+
+            methods:{
+
+            }
+        })
+
+    </script>
+
+@endsection

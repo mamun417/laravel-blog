@@ -73,5 +73,7 @@
 
 @stack('js')
 
+@yield('custom-js')
+
 </body>
 </html>

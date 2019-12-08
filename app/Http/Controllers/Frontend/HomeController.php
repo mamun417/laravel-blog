@@ -15,6 +15,6 @@ class HomeController extends Controller
                 ->withCount(['favoriteUsers', 'comments'])
                 ->latest()->get();
 
-        return view('frontend.welcome', compact('categories', 'posts'));
+        return view('frontend.welcome', compact('posts'));
     }
 }
