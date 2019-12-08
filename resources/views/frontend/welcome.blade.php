@@ -43,7 +43,11 @@
         <div class="container">
             <div class="row">
 
-                @php($auth_user_favorite_posts = Auth::user()->favoritePosts()->pluck('post_id')->toArray())
+                @auth
+                    @php($auth_user_favorite_posts = Auth::user()->favoritePosts()->pluck('post_id')->toArray())
+                @elseauth
+                    @php($auth_user_favorite_posts = [])
+                @endauth
 
                 @foreach($posts as $post)
                     <div class="col-lg-4 col-md-6">

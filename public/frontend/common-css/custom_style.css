@@ -4,3 +4,6 @@
 .active-favorite-post{
     color: #e8702a;
 }
+.main-slider .category:hover{
+    z-index: auto;
+}
