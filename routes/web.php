@@ -34,6 +34,7 @@ Route::get('posts/tag/{slug}', 'Frontend\PostController@postByTag')->name('front
 
 //Search
 Route::get('posts/search', 'Frontend\PostController@search')->name('frontend.posts.search');
+Route::get('posts/autocomplete', 'Frontend\PostController@getAutoCompletePosts')->name('frontend.posts.get-autocomplete-posts');
 
 Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend', 'middleware' => ['auth']],
     function (){

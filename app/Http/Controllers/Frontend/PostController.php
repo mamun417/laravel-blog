@@ -74,4 +74,15 @@ class PostController extends Controller
 
         return view('frontend.posts', compact('posts'));
     }
+
+    public function getAutoCompletePosts(){
+
+        $query = request('query');
+
+        $posts = Post::publishedAndActive()
+            ->where('title', 'LIKE', "%$query%")
+            ->take(10)->get();
+
+        return response()->json($posts);
+    }
 }
