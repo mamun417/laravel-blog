@@ -5,6 +5,7 @@
 @push('css')
     <link href="{{ asset('frontend/front-page-category/css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/front-page-category/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/custom/style.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')

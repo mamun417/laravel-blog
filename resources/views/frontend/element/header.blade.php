@@ -24,11 +24,68 @@
         <div class="src-area">
             <form action="{{ route('frontend.posts.search') }}" method="GET">
                 <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                <input name="query" value="{{ request('query') }}" class="src-input" type="text" placeholder="Type of search">
+                <input name="query" autocomplete="off" value="{{ request('query') }}" class="src-input" type="text" placeholder="Type of search">
+
+
+
             </form>
         </div>
-    </div><!-- conatiner -->
+    </div>
 </header>
+
+<div class="autocomplete-result">
+    <ul>
+        <li>
+            <a href="">
+                <div>
+                    <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
+                    <span>This is text lorem ipsum goine here text lorem ipsum goine here</span><br>
+                    <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div>
+                    <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
+                    <span>This is text lorem ipsum goine here text lorem ipsum goine here</span><br>
+                    <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
+                </div>
+            </a>
+        </li>
+
+        <li>
+            <a href="">
+                <div>
+                    <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
+                    <span>This is text lorem ipsum goine here text lorem ipsum goine here</span><br>
+                    <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
+                </div>
+            </a>
+        </li>
+
+        <li>
+            <a href="">
+                <div>
+                    <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
+                    <span>This is text lorem ipsum goine here text lorem ipsum goine here</span><br>
+                    <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
+                </div>
+            </a>
+        </li>
+
+        <li>
+            <a href="">
+                <div>
+                    <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
+                    <span>This is text lorem ipsum goine here text lorem ipsum goine here</span><br>
+                    <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
+                </div>
+            </a>
+        </li>
+
+    </ul>
+</div>
 
 @push('js')
     <script src="{{ asset('js/app.js') }}"></script>
@@ -41,11 +98,7 @@
         var App = new Vue({
             el: "#root",
             data: {
-                change_password:{
-                    old_password: '',
-                    password: '',
-                    password_confirmation: ''
-                },
+
             },
 
             mounted() {

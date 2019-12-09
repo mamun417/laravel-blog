@@ -1,0 +1,38 @@
+.autocomplete-result{
+    position: absolute;
+    width: 50%;
+    background: #fff;
+    z-index: 999;
+    float: right!important;
+    padding: 20px;
+    right: 0;
+}
+
+.autocomplete-result{
+    -webkit-box-shadow: -38px 37px 35px -24px rgba(158,168,165,1);
+    -moz-box-shadow: -38px 37px 35px -24px rgba(158,168,165,1);
+    box-shadow: -38px 37px 35px -24px rgba(158,168,165,1);
+}
+.autocomplete-result li{
+    display: block;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+.autocomplete-result li:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.autocomplete-result img{
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    float: left;
+    margin-right: 12px;
+}
+
+@media only screen and (max-width: 992px) {
+    .autocomplete-result {
+        width: 100%;
+    }
+}
