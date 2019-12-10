@@ -11,10 +11,12 @@
     right: 0;
 }
 
-.autocomplete-result{
-    -webkit-box-shadow: -38px 37px 35px -24px rgba(158,168,165,1);
-    -moz-box-shadow: -38px 37px 35px -24px rgba(158,168,165,1);
-    box-shadow: -38px 37px 35px -24px rgba(158,168,165,1);
+.autocomplete-result {
+    -webkit-box-shadow: -38px 37px 35px -24px rgba(158, 168, 165, 1);
+    -moz-box-shadow: -38px 37px 35px -24px rgba(158, 168, 165, 1);
+    box-shadow: -38px 37px 35px -24px rgba(158, 168, 165, 1);
+    overflow-y: scroll;
+    max-height: 327px;
 }
 .autocomplete-result li{
     display: block;

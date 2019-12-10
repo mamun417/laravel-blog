@@ -47,10 +47,6 @@
     </div>
 </div>
 
-@push('js')
-    <script src="{{ asset('js/app.js') }}"></script>
-@endpush
-
 @section('custom-js')
 
     <script>
@@ -70,27 +66,24 @@
 
                     query = e.target.value;
 
-                    if(query !== ''){
-
-                        console.log(query);
+                    if (query.trim() !== ''){
 
                         currentApp = this;
 
                         axios.get('{{ route('frontend.posts.get-autocomplete-posts') }}', { params: { query:query } })
                             .then(function (response) {
 
-                                currentApp.posts = response.data;
-
-                                $('#show-suggestion').removeClass('hidden');
+                                if(response.data.length > 0){
+                                    $('#show-suggestion').removeClass('hidden');
+                                    currentApp.posts = response.data;
+                                }else {
+                                    $('#show-suggestion').addClass('hidden');
+                                }
                             }
                         );
                     }else{
-
-                        console.log(query);
-
                         $('#show-suggestion').addClass('hidden');
                     }
-
                 }
             }
         })

@@ -25,6 +25,10 @@
 
     <link href="{{ asset('frontend/common-css/custom_style.css') }}" rel="stylesheet">
 
+    <script src="{{ asset('frontend/common-js/jquery-3.1.1.min.js') }}"></script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
     @stack('css')
 
 </head>
@@ -35,8 +39,6 @@
 @yield('content')
 
 @include('frontend.element.footer')
-
-<script src="{{ asset('frontend/common-js/jquery-3.1.1.min.js') }}"></script>
 
 <script src="{{ asset('frontend/common-js/tether.min.js') }}"></script>
 

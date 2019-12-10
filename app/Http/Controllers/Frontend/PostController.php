@@ -79,10 +79,12 @@ class PostController extends Controller
 
         $query = request('query');
 
-        $posts = Post::publishedAndActive()
-            ->where('title', 'LIKE', "%$query%")
-            ->take(10)->get();
+        if(isset($query)){
+            $posts = Post::publishedAndActive()
+                ->where('title', 'LIKE', "%$query%")
+                ->take(15)->get();
 
-        return response()->json($posts);
+            return response()->json($posts);
+        }
     }
 }
