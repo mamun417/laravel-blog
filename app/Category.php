@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Observers\CategoryObserver;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,4 +17,8 @@ class Category extends Model
     public function posts(){
         return $this->belongsToMany(Post::class);
     }
+
+    protected $dispatchesEvents = [
+        'saved' => CategoryObserver::class
+    ];
 }

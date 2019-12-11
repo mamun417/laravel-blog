@@ -20,15 +20,13 @@ class FavoritePostController extends Controller
 
             $user->favoritePosts()->attach($post);
 
-            Session::flash('successMsg', 'Post added to your favorite list');
+            return response()->json(['status' => 'added', 'message' => 'Post added to your favorite list']);
 
         }else{
 
             $user->favoritePosts()->detach($post);
 
-            Session::flash('successMsg', 'Post remove from favorite list');
+            return response()->json(['status' => 'removed', 'message' => 'Post remove from favorite list']);
         }
-
-        return back();
     }
 }

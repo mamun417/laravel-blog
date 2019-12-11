@@ -28,7 +28,11 @@
 
             @if($posts->count() > 0)
 
-                @php($auth_user_favorite_posts = Auth::user()->favoritePosts()->pluck('post_id')->toArray())
+                @auth
+                    @php($auth_user_favorite_posts = Auth::user()->favoritePosts()->pluck('post_id')->toArray())
+                @elseauth
+                    @php($auth_user_favorite_posts = [])
+                @endauth
 
                 <div class="row">
                     @foreach($posts as $post)

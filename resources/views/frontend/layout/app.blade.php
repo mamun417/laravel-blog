@@ -77,5 +77,41 @@
 
 @yield('custom-js')
 
+<script>
+
+    var App = new Vue({
+        el: "#app",
+        data: {
+            posts: [],
+        },
+
+        mounted() {
+            console.log('Yap, vueJs run properly!');
+        },
+
+        methods:{
+            addToFavoritePost(e){
+
+                post_id = e.currentTarget.getAttribute('post_id');
+
+                url = '{{ route('frontend.post.favorite.store', ':post') }}';
+                url = url.replace(':post', post_id);
+
+                axios.get(url, /*{ params: { post:post_id } }*/)
+                    .then(function (response) {
+
+                        if(response.data.status === 'added'){
+
+                            //console.log(e.currentTarget.find('i'));
+                        }
+                        toastr.success(response.data.message);
+                    }
+                );
+            }
+        }
+    })
+
+</script>
+
 </body>
 </html>

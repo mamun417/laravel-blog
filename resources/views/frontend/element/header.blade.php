@@ -38,7 +38,7 @@
                 <a href="">
                     <div>
                         <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
-                        <span>This is text lorem ipsum goine here text lorem ipsum goine here</span><br>
+                        <span>@{{ post.title }}</span><br>
                         <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
                     </div>
                 </a>

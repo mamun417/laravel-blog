@@ -61,7 +61,7 @@ class PostController extends Controller
             Session::put($post_key, 1);
         }
 
-        return view('frontend.view-post', compact('post','categories', 'tags', 'random_posts'));
+        return view('frontend.view-post', compact('post','tags', 'random_posts'));
     }
 
     public function search(){
