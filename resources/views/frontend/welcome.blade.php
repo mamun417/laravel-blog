@@ -73,7 +73,7 @@
                                                 @guest
                                                     <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
                                                 @else
-                                                    <a @click="addToFavoritePost" :post_id={{ $post->id }} href="javascript:void(0){{--{{ route('frontend.post.favorite.store', $post->id) }}--}}">
+                                                    <a ref="mamun" @click="addToFavoritePost" :post_id={{ $post->id }} href="javascript:void(0){{--{{ route('frontend.post.favorite.store', $post->id) }}--}}">
                                                         <i class="ion-heart {{ in_array($post->id, (array) $auth_user_favorite_posts ) ? 'active-favorite-post':'' }}"></i>
                                                         {{ $post->favorite_users_count }}
                                                     </a>

@@ -90,6 +90,7 @@
         },
 
         methods:{
+
             addToFavoritePost(e){
 
                 post_id = e.currentTarget.getAttribute('post_id');
@@ -97,12 +98,17 @@
                 url = '{{ route('frontend.post.favorite.store', ':post') }}';
                 url = url.replace(':post', post_id);
 
+
+                console.log($(e.currentTarget).find('i').addClass('mamun'));
+
                 axios.get(url, /*{ params: { post:post_id } }*/)
                     .then(function (response) {
 
                         if(response.data.status === 'added'){
 
-                            //console.log(e.currentTarget.find('i'));
+                            //e.currentTarget.classList.add('class_name');
+
+                            //console.log(e.currentTarget.filterFindElements('i'));
                         }
                         toastr.success(response.data.message);
                     }
