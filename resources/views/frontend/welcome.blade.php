@@ -75,12 +75,12 @@
                                                 @else
                                                     <a ref="mamun" @click="addToFavoritePost" :post_id={{ $post->id }} href="javascript:void(0){{--{{ route('frontend.post.favorite.store', $post->id) }}--}}">
                                                         <i class="ion-heart {{ in_array($post->id, (array) $auth_user_favorite_posts ) ? 'active-favorite-post':'' }}"></i>
-                                                        {{ $post->favorite_users_count }}
+                                                        <span>{{ $post->favorite_users_count }}</span>
                                                     </a>
                                                 @endguest
                                             </li>
                                             <li><a href="#"><i class="ion-chatbubble"></i>{{ $post->comments_count }}</a></li>
-                                            <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
+                                            <li><a href="#"><i class="ion-eye"></i><span>{{ $post->view_count }}</span></a></li>
                                         </ul>
 
                                     </div>

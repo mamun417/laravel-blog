@@ -93,22 +93,27 @@
 
             addToFavoritePost(e){
 
-                post_id = e.currentTarget.getAttribute('post_id');
+                var post_id = e.currentTarget.getAttribute('post_id'),
+                    url = '{{ route('frontend.post.favorite.store', ':post') }}',
+                    url = url.replace(':post', post_id),
+                    thisTarget = e.currentTarget;
 
-                url = '{{ route('frontend.post.favorite.store', ':post') }}';
-                url = url.replace(':post', post_id);
-
-
-                console.log($(e.currentTarget).find('i').addClass('mamun'));
-
-                axios.get(url, /*{ params: { post:post_id } }*/)
+                axios.get(url)
                     .then(function (response) {
+
+                        var fav_user_counter = $(thisTarget).find('span');
 
                         if(response.data.status === 'added'){
 
+                            $(thisTarget).find('i').addClass('active-favorite-post');
+
+                            $(fav_user_counter).text( parseInt($(fav_user_counter).text())+1);
                             //e.currentTarget.classList.add('class_name');
 
-                            //console.log(e.currentTarget.filterFindElements('i'));
+                        }else{
+
+                            $(thisTarget).find('i').removeClass('active-favorite-post');
+                            $(fav_user_counter).text( parseInt($(fav_user_counter).text())-1);
                         }
                         toastr.success(response.data.message);
                     }
