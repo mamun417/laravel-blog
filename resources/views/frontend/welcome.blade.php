@@ -10,36 +10,37 @@
 
 @section('content')
 
-    <div id="app">
-        <div class="main-slider">
-            <div class="swiper-container position-static" data-slide-effect="slide" data-autoheight="false"
-                 data-swiper-speed="500" data-swiper-autoplay="10000" data-swiper-margin="0" data-swiper-slides-per-view="4"
-                 data-swiper-breakpoints="true" data-swiper-loop="true" >
-                <div class="swiper-wrapper">
+    <div class="main-slider">
+        <div class="swiper-container position-static" data-slide-effect="slide" data-autoheight="false"
+             data-swiper-speed="500" data-swiper-autoplay="10000" data-swiper-margin="0" data-swiper-slides-per-view="4"
+             data-swiper-breakpoints="true" data-swiper-loop="true" >
+            <div class="swiper-wrapper">
 
-                    @foreach($categories as $category)
-                        <div class="swiper-slide">
-                            <a class="slider-category" href="{{ route('frontend.category.posts', $category->slug) }}">
-                                <div class="blog-image">
-                                    <img src="{{ Storage::disk('public')->url('category/slider/'.$category->image) }}" alt="Blog Image">
-                                </div>
+                @foreach($categories as $category)
+                    <div class="swiper-slide">
+                        <a class="slider-category" href="{{ route('frontend.category.posts', $category->slug) }}">
+                            <div class="blog-image">
+                                <img src="{{ Storage::disk('public')->url('category/slider/'.$category->image) }}" alt="Blog Image">
+                            </div>
 
-                                <div class="category">
-                                    <div class="display-table center-text">
-                                        <div class="display-table-cell">
-                                            <h3><b>{{ $category->name }}</b></h3>
-                                        </div>
+                            <div class="category">
+                                <div class="display-table center-text">
+                                    <div class="display-table-cell">
+                                        <h3><b>{{ $category->name }}</b></h3>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                    @endforeach
-
-                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
 
             </div>
 
-        </div><!-- slider -->
+        </div>
+
+    </div><!-- slider -->
+
+    <div id="app">
 
         <section class="blog-area section">
             <div class="container">
@@ -73,7 +74,7 @@
                                                 @guest
                                                     <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $post->favorite_users_count }}</a>
                                                 @else
-                                                    <a ref="mamun" @click="addToFavoritePost" :post_id={{ $post->id }} href="javascript:void(0){{--{{ route('frontend.post.favorite.store', $post->id) }}--}}">
+                                                    <a @click="addToFavoritePost" :post_id={{ $post->id }} href="javascript:void(0){{--{{ route('frontend.post.favorite.store', $post->id) }}--}}">
                                                         <i class="ion-heart {{ in_array($post->id, (array) $auth_user_favorite_posts ) ? 'active-favorite-post':'' }}"></i>
                                                         <span>{{ $post->favorite_users_count }}</span>
                                                     </a>

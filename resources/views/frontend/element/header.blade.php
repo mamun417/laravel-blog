@@ -51,6 +51,14 @@
 
     <script>
 
+        import moment from 'moment';
+
+        Vue.filter('formatDate', function(value) {
+            if (value) {
+                return moment(String(value)).format('MM/DD/YYYY hh:mm')
+            }
+        }
+
         var App = new Vue({
             el: "#root",
             data: {
@@ -58,7 +66,7 @@
             },
 
             mounted() {
-                console.log('Yap, vueJs run properly!');
+
             },
 
             methods:{
