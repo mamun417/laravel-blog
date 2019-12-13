@@ -153,7 +153,7 @@
                                     @foreach($popular_posts as $key => $post)
                                         <tr class="gradeX">
                                             <td>{{ $key+1 }}</td>
-                                            <td style="text-align: left">{{ Str::limit($post->title, 50) }}</td>
+                                            <td style="text-align: left">{{ Str::limit($post->title, 30) }}</td>
                                             <td>{{ $post->view_count }}</td>
                                             <td>{{ $post->comments_count }}</td>
                                             <td>{{ $post->favorite_users_count }}</td>

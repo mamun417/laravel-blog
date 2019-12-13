@@ -68,7 +68,7 @@ class PostController extends Controller
 
         $query = request('query');
 
-        $posts = Post::publishedAndActive()
+        $posts = Post::with('user')->publishedAndActive()
             ->where('title', 'LIKE', "%$query%")
             ->paginate(3);
 
@@ -80,7 +80,7 @@ class PostController extends Controller
         $query = request('query');
 
         if(isset($query)){
-            $posts = Post::publishedAndActive()
+            $posts = Post::with('user')->publishedAndActive()
                 ->where('title', 'LIKE', "%$query%")
                 ->take(15)->get();
 

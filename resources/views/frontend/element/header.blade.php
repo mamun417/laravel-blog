@@ -1,4 +1,4 @@
-<div id="root">
+<div id="header">
     <header>
         <div class="container-fluid position-relative no-side-padding">
 
@@ -35,11 +35,11 @@
     <div id="show-suggestion" class="autocomplete-result hidden">
         <ul>
             <li v-for="post in posts">
-                <a href="">
+                <a :href="'{{ route('frontend.post.view', '') }}/'+post.slug">
                     <div>
-                        <img class="" src="http://glossybazar.com/demo/eshopper/public/admin/uploads/images/products/vtvnnu4x_remi%207%20pro.jpeg">
+                        <img class="" :src="'{{ Storage::disk('public')->url('post/') }}'+post.image">
                         <span>@{{ post.title }}</span><br>
-                        <span><small>Created on 5 sep 2019 by <b>Abdullah al mamun</b></small></span>
+                        <span><small>Created on @{{ post.created_at | formatDate('D MMM YY') }} by <b>@{{ post.user.name }}</b></small></span>
                     </div>
                 </a>
             </li>
@@ -51,16 +51,8 @@
 
     <script>
 
-        import moment from 'moment';
-
-        Vue.filter('formatDate', function(value) {
-            if (value) {
-                return moment(String(value)).format('MM/DD/YYYY hh:mm')
-            }
-        }
-
-        var App = new Vue({
-            el: "#root",
+        var Header = new Vue({
+            el: "#header",
             data: {
                 posts: [],
             },

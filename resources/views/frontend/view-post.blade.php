@@ -51,12 +51,13 @@
                                 </div><!-- post-info -->
 
                                 <h3 class="title">
-                                    <a href="#">
-                                        <b>{{ $post->title }}</b>
-                                    </a>
+                                    <b>{{ $post->title }}</b>
                                 </h3>
 
                                 <p class="para">
+
+                                    {{--{{ dd($post->body) }}--}}
+
                                     {!! html_entity_decode($post->body) !!}
                                 </p>
 
