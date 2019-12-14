@@ -82,6 +82,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Backend\Adm
         Route::get('posts/change-status/{post}', 'PostController@changeStatus')->name('posts.change.status');
         Route::get('posts/change-approve/{post}', 'PostController@changeApproveStatus')->name('posts.change.approve-status');
         Route::get('posts/pending', 'PostController@pendingList')->name('posts.pending');
+        Route::get('posts/get-latest-ten', 'PostController@getLatestTen')->name('posts.get-latest-ten');
         Route::resource('posts', 'PostController');
 
         //Subscriber route

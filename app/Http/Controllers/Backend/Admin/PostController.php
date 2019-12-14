@@ -56,6 +56,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::latest()->get();
+        $categories = [];
 
         $tags = Tag::latest()->get();
 
@@ -202,5 +203,15 @@ class PostController extends Controller
         $post->update(['status' => $status]);
 
         return back()->with('successMsg', 'Post publication status changed successfully');
+    }
+
+    public function getLatestTen(){
+
+        $categories = Category::latest()->pluck('name', 'id')->toArray();
+
+        $categories = [];
+        $categories[0] = ['value'=>'34', 'text'=>'iuhyui'];
+
+        return response()->json($categories);
     }
 }

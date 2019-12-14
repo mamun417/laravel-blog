@@ -115,10 +115,18 @@
     <script>
 
         $('.tokenize-categories').tokenize2({
+            dataSource: function(search, object){
+
+                $.get('{{ route('admin.posts.get-latest-ten') }}', {}, function (response) {
+
+                    object.trigger('tokenize:dropdown:fill', [response]);
+                });
+            },
+
             placeholder: "e.g. (laravel javascript vueJs)",
             searchFromStart: false,
             displayNoResultsMessage: true,
-            noResultsMessageText: "No results mached '%s'",
+            noResultsMessageText: "No results mached '%s'"
         });
 
         $('.tokenize-tags').tokenize2({
