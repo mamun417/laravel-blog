@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <div class="form-group" style="margin-bottom: 0">
+                        <div id="categories-section" class="form-group" style="margin-bottom: 0">
                             <label>Select Categories</label>
 
                             <select name="categories[]" class="tokenize-categories" multiple>
@@ -68,7 +68,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group" style="margin-bottom: 0">
+                        <div id="tags-section" class="form-group" style="margin-bottom: 0">
                             <label>Select Tags</label>
                             <select name="tags[]" class="tokenize-tags" multiple>
                                 @foreach($tags as $tag)
@@ -128,7 +128,15 @@
             noResultsMessageText: "No results mached '%s'"
         });
 
+
         $('.tokenize-tags').tokenize2({
+            dataSource: function(term, object){
+
+                $.get('{{ route('get-tag-list') }}', {term:term}, function (response) {
+                    object.trigger('tokenize:dropdown:fill', [response]);
+                });
+            },
+
             placeholder: "e.g. (wordpress jquery regex)",
             searchFromStart: false,
             displayNoResultsMessage: true,

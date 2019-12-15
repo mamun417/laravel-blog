@@ -1,5 +1,7 @@
 <?php
 
+use App\Category;
+use App\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,7 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RoleTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
+        /*$this->call(RoleTableSeeder::class);
+        $this->call(UsersTableSeeder::class);*/
+
+        factory(Category::class, 182)->create();
+        factory(Tag::class, 182)->create();
     }
 }

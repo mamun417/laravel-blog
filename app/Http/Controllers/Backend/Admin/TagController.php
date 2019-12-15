@@ -72,4 +72,22 @@ class TagController extends Controller
 
         return redirect()->route('admin.tags.index')->with('successMsg', 'Tag status changed successfully');
     }
+
+    public function getTagList(){
+
+        $term = request('term');
+
+        $tags = Tag::where('status', 1)
+            ->where('name', 'LIKE', "%$term%")
+            ->select('name', 'id')
+            ->take(20)->get();
+
+        $new_tags = [];
+
+        foreach ($tags as $tag){
+            $new_tags[] = ['value' => $tag->id, 'text' => $tag->name];
+        }
+
+        return response()->json($new_tags);
+    }
 }
