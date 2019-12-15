@@ -55,9 +55,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::latest()->get();
         $categories = [];
-
         $tags = Tag::latest()->get();
 
         return view('backend.admin.post.create', compact('categories', 'tags'));

@@ -47,6 +47,8 @@ Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend
     }
 );
 
+Route::get('posts/get-category-list', 'Backend\Admin\CategoryController@getCategoryList')->name('get-category-list');
+
 // subscriber route
 Route::post('subscribers', 'Frontend\SubscriberController@store')->name('frontend.subscribers.store');
 

@@ -165,4 +165,22 @@ class CategoryController extends Controller
 
         return back()->with('successMsg', 'Category publication status changed successfully');
     }
+
+    public function getCategoryList(){
+
+        $term = request('term');
+
+        $categories = Category::where('status', 1)
+            ->where('name', 'LIKE', "%$term%")
+            ->select('name', 'id')
+            ->take(20)->get();
+
+        $new_categories = [];
+
+        foreach ($categories as $category){
+            $new_categories[] = ['value' => $category->id, 'text' => $category->name];
+        }
+
+        return response()->json($new_categories);
+    }
 }

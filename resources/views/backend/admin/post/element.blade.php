@@ -115,10 +115,9 @@
     <script>
 
         $('.tokenize-categories').tokenize2({
-            dataSource: function(search, object){
+            dataSource: function(term, object){
 
-                $.get('{{ route('admin.posts.get-latest-ten') }}', {}, function (response) {
-
+                $.get('{{ route('get-category-list') }}', {term:term}, function (response) {
                     object.trigger('tokenize:dropdown:fill', [response]);
                 });
             },
