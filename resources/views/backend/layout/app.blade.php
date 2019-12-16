@@ -180,6 +180,7 @@
 <script>
     $(document).ready(function(){
         $('.dataTables-example').DataTable({
+            order: [],
             pageLength: 25,
             responsive: true,
             dom: '<"html5buttons"B>lTfgitp',

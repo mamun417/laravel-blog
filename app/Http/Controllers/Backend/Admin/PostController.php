@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Category;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Controller;
 use App\Notifications\AuthorPostApproved;
 use App\Notifications\AuthorPostCreate;
@@ -78,19 +79,9 @@ class PostController extends Controller
 
             $image = $request->file('img');
 
-            $currentDate = Carbon::now()->toDateString();
-
-            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-            // check is exits directory
-            if (!Storage::disk('public')->exists('post')){
-
-                Storage::disk('public')->makeDirectory('post');
-            }
-
-            // resize image for post and upload
-            $category_image = Image::make($image)->resize(1600, 1066)->stream();
-            Storage::disk('public')->put('post/'.$image_name, $category_image);
+            $image_name = CommonController::imageUpload(
+                $slug, false, $image,'post', ['width' => '1600', 'height' => '1066']
+            );
 
             $request['image'] = $image_name;
         }
@@ -145,27 +136,11 @@ class PostController extends Controller
 
             $image = $request->file('img');
 
-            $currentDate = Carbon::now()->toDateString();
-
-            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-            // check is exits directory
-            if (!Storage::disk('public')->exists('post')){
-
-                Storage::disk('public')->makeDirectory('post');
-            }
-
-            // resize image for post and upload
-            $category_image = Image::make($image)->resize(1600, 1066)->stream();
-            Storage::disk('public')->put('post/'.$image_name, $category_image);
+            $image_name = CommonController::imageUpload(
+                $slug, false, $image,'post', ['width' => '1600', 'height' => '1066'], $post->image
+            );
 
             $request['image'] = $image_name;
-
-            // delete old image
-            if (Storage::disk('public')->exists('post/'.$post->image)){
-
-                Storage::disk('public')->delete('post/'.$post->image);
-            }
         }
 
         $request['slug'] = $slug;
@@ -181,10 +156,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        if (Storage::disk('public')->exists('post/'.$post->image)){
-
-            Storage::disk('public')->delete('post/'.$post->image);
-        }
+        CommonController::deleteImage('post', $post->image);
 
         $post->categories()->detach();
         $post->tags()->detach();

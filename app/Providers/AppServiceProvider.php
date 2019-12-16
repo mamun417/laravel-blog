@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-        View::composer('frontend.welcome', function ($view){
+        View::composer(['frontend.welcome', 'frontend.element.footer'], function ($view){
 
             $categories = Cache::rememberForever('categories', function (){
                 return Category::latest()->get();

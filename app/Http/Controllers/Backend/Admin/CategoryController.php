@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Category;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -37,29 +38,15 @@ class CategoryController extends Controller
 
             $image = $request->file('img');
 
-            $currentDate = Carbon::now()->toDateString();
+            //image upload for header
+            $image_name = CommonController::imageUpload(
+                $slug, false, $image,'category', ['width' => '1600', 'height' => '479']
+            );
 
-            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-            // check is exits directory
-            if (!Storage::disk('public')->exists('category')){
-
-                Storage::disk('public')->makeDirectory('category');
-            }
-
-            // resize image for category and upload
-            $category_image = Image::make($image)->resize(1600, 479)->stream();
-            Storage::disk('public')->put('category/'.$image_name, $category_image);
-
-            // check is exits directory
-            if (!Storage::disk('public')->exists('category/slider')){
-
-                Storage::disk('public')->makeDirectory('category/slider');
-            }
-
-            // resize image for category slider and upload
-            $slider_image = Image::make($image)->resize(500, 333)->stream();
-            Storage::disk('public')->put('category/slider/'.$image_name, $slider_image);
+            //image upload for slider
+            CommonController::imageUpload(
+                $slug = false, $image_name, $image,'category/slider', ['width' => '500', 'height' => '333']
+            );
 
             $request['image'] = $image_name;
         }
@@ -94,42 +81,17 @@ class CategoryController extends Controller
 
             $image = $request->file('img');
 
-            $currentDate = Carbon::now()->toDateString();
+            //image upload for header
+            $image_name = CommonController::imageUpload(
+                $slug, false, $image,'category', ['width' => '1600', 'height' => '479'], $category->image
+            );
 
-            $image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-
-            // check is exits directory
-            if (!Storage::disk('public')->exists('category')){
-
-                Storage::disk('public')->makeDirectory('category');
-            }
-
-            // resize image for category and upload
-            $category_image = Image::make($image)->resize(1600, 479)->stream();
-            Storage::disk('public')->put('category/'.$image_name, $category_image);
-
-            // check is exits directory
-            if (!Storage::disk('public')->exists('category/slider')){
-
-                Storage::disk('public')->makeDirectory('category/slider');
-            }
-
-            // resize image for category slider and upload
-            $slider_image = Image::make($image)->resize(500, 333)->stream();
-            Storage::disk('public')->put('category/slider/'.$image_name, $slider_image);
+            //image upload for slider
+            CommonController::imageUpload(
+                $slug = false, $image_name, $image,'category/slider', ['width' => '500', 'height' => '333'], $category->image
+            );
 
             $request['image'] = $image_name;
-
-            // delete old image
-            if (Storage::disk('public')->exists('category/'.$category->image)){
-
-                Storage::disk('public')->delete('category/'.$category->image);
-            }
-
-            if (Storage::disk('public')->exists('category/slider/'.$category->image)){
-
-                Storage::disk('public')->delete('category/slider/'.$category->image);
-            }
         }
 
         $request['slug'] = $slug;
@@ -142,15 +104,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         // delete old image
-        if (Storage::disk('public')->exists('category/'.$category->image)){
-
-            Storage::disk('public')->delete('category/'.$category->image);
-        }
-
-        if (Storage::disk('public')->exists('category/slider/'.$category->image)){
-
-            Storage::disk('public')->delete('category/slider/'.$category->image);
-        }
+        CommonController::deleteImage('category', $category->image);
+        CommonController::deleteImage('category/slider', $category->image);
 
         $category->delete();
 
