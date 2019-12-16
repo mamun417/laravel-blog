@@ -16,7 +16,7 @@
                     <a href="{{ route('admin.dashboard') }}">Home</a>
                 </li>
                 <li>
-                    <a>Posts</a>
+                    <a href="{{ route('admin.posts.index') }}">Posts</a>
                 </li>
                 <li class="active">
                     <strong>Create</strong>

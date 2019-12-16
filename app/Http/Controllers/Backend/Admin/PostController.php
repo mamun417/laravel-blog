@@ -121,9 +121,9 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $categories = Category::latest()->get();
+        $categories = $post->categories()->active()->get();
 
-        $tags = Tag::latest()->get();
+        $tags = $post->tags()->active()->get();
 
         return view('backend.admin.post.edit', compact('post','categories', 'tags'));
     }

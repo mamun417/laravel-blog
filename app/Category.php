@@ -19,6 +19,10 @@ class Category extends Model
         return $this->belongsToMany(Post::class);
     }
 
+    public function scopeActive($query){
+        return $query->where('status', 1);
+    }
+
     protected $dispatchesEvents = [
         'saved' => CategoryObserver::class
     ];

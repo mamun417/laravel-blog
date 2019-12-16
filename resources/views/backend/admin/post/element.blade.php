@@ -59,8 +59,10 @@
                             <label>Select Categories</label>
 
                             <select name="categories[]" class="tokenize-categories" multiple>
+                                {{--@php($post_categories = $post->categories->pluck('id')->toArray())--}}
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ isset($post) ? in_array($category->id, $post->categories->pluck('id')->toArray()) ? 'selected':'' : '' }} >{{ $category->name }}</option>
+                                    {{--<option value="{{ $category->id }}" {{ isset($post) ? in_array($category->id, $post_categories) ? 'selected':'' : '' }} >{{ $category->name }}</option>--}}
+                                    <option value="{{ $category->id }}" {{ isset($post) ? 'selected' : '' }} >{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('categories')
@@ -72,7 +74,7 @@
                             <label>Select Tags</label>
                             <select name="tags[]" class="tokenize-tags" multiple>
                                 @foreach($tags as $tag)
-                                    <option value="{{ $tag->id }}" {{ isset($post) ? in_array($tag->id, $post->tags->pluck('id')->toArray()) ? 'selected':'' : '' }}>{{ $tag->name }}</option>
+                                    <option value="{{ $tag->id }}" {{ isset($post) ? 'selected' : '' }}>{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tags')
