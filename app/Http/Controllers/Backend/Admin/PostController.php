@@ -98,9 +98,9 @@ class PostController extends Controller
         //send notification to subscriber
         $subscribers = Subscriber::all();
 
-        foreach ($subscribers as $subscriber){
-            Notification::send($subscriber, new NewPostCreateNotify($post));
-        }
+       /* foreach ($subscribers as $subscriber){*/
+            Notification::send($subscribers, new NewPostCreateNotify($post));
+        /*}*/
 
         return redirect()->route('admin.posts.index')->with('successMsg', 'Post created successfully');
     }

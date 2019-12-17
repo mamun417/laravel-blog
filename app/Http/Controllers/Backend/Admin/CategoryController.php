@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Category;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
-use Storage;
 use Str;
 
 class CategoryController extends Controller
