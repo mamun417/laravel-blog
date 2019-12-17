@@ -18,4 +18,10 @@ class Tag extends Model
     public function scopeActive($query){
         return $query->where('status', 1);
     }
+
+    public static function getPosts(){
+        return Post::publishedAndActive()->with('user')
+            ->withCount(['favoriteUsers', 'comments'])
+            ->latest()->get()->toArray();
+    }
 }
