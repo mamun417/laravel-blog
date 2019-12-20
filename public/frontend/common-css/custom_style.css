@@ -21,9 +21,9 @@
 }
 
 .autocomplete-result {
-    -webkit-box-shadow: -38px 37px 35px -24px rgba(158, 168, 165, 1);
-    -moz-box-shadow: -38px 37px 35px -24px rgba(158, 168, 165, 1);
-    box-shadow: -38px 37px 35px -24px rgba(158, 168, 165, 1);
+    -webkit-box-shadow: 0 20px 30px -16px rgba(9,9,16,.2);
+    -moz-box-shadow: 0 20px 30px -16px rgba(9,9,16,.2);
+    box-shadow: 0 20px 30px -16px rgba(9,9,16,.2);
     overflow-y: scroll;
     max-height: 327px;
 }

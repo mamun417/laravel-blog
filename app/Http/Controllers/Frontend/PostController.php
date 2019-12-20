@@ -21,7 +21,7 @@ class PostController extends Controller
 
     public function postByCategory($slug){
 
-        $result = Category::with('posts')->where('slug', $slug)->first();
+        $result = Category::where('slug', $slug)->first();
 
         $posts = $result->posts()->publishedAndActive()->paginate(3);
 
@@ -45,6 +45,8 @@ class PostController extends Controller
             ->withCount(['favoriteUsers', 'comments'])
             ->publishedAndActive()
             ->where('slug', $slug)->first();
+
+        //dd($post->comments->where('parent_id', 0)->first()->replies->toArray());
 
         $tags = Tag::latest()->get();
 

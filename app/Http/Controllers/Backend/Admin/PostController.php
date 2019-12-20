@@ -107,6 +107,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        dd($post->comments()->get()->toArray());
+
         return view('backend.admin.post.view', compact('post'));
     }
 

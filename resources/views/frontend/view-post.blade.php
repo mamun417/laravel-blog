@@ -13,6 +13,9 @@
         .slider{
             background-image: url("{{ Storage::disk('public')->url('post/'.$post->image) }}");
         }
+        .comment .comment{
+            margin-left: 23px;
+        }
     </style>
 
 @endpush
@@ -94,9 +97,9 @@
 
                                 <h4 class="title"><b>CATEGORIES</b></h4>
                                 <ul>
-                                    @foreach(getCategories() as $category)
+                                    {{--@foreach(getCategories() as $category)
                                         <li><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>
-                                    @endforeach
+                                    @endforeach--}}
                                 </ul>
 
                             </div><!-- subscribe-area -->
@@ -105,9 +108,9 @@
 
                                 <h4 class="title"><b>TAGS</b></h4>
                                 <ul>
-                                    @foreach($tags as $tag)
+                                   {{-- @foreach($tags as $tag)
                                         <li><a href="{{ route('frontend.tag.posts', $tag->slug)  }}">{{ $tag->name }}</a></li>
-                                    @endforeach
+                                    @endforeach--}}
                                 </ul>
 
                             </div><!-- subscribe-area -->
@@ -213,30 +216,8 @@
 
                             <div class="commnets-area ">
 
-                                @foreach($post->comments as $comment)
-                                    <div class="comment">
+                                @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
 
-                                        <div class="post-info">
-
-                                            <div class="left-area">
-                                                <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$comment->user->image) }}" alt="Profile Image"></a>
-                                            </div>
-
-                                            <div class="middle-area">
-                                                <a class="name" href="#"><b>{{ $comment->user->name }}</b></a>
-                                                <h6 class="date">on {{ $comment->created_at->diffForHumans() }}</h6>
-                                            </div>
-
-                                            {{--<div class="right-area">
-                                                <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                            </div>--}}
-
-                                        </div><!-- post-info -->
-
-                                        <p>{{ $comment->comment }}</p>
-
-                                    </div>
-                                @endforeach
                             </div><!-- commnets-area -->
 
                             <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>

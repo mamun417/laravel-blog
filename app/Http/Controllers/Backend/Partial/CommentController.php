@@ -14,7 +14,7 @@ class CommentController extends Controller
 
         if (Auth::user()->role->id == 1){
 
-            $comments = Comment::latest()->get();
+            $comments = Comment::with(['user', 'post', 'post.user'])->latest()->get();
 
         }else{
 

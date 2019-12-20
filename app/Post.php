@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static publishedAndActive()
  * @method static withCount(string $string)
  * @method static sum(string $string)
+ * @method static find($post)
  */
 class Post extends Model
 {
@@ -31,8 +32,16 @@ class Post extends Model
         return $this->belongsToMany(User::class, 'fav_post_user', 'post_id')->withTimestamps();
     }
 
-    public function comments(){
+    /*public function comments(){
         return $this->hasMany(Comment::class);
+    }*/
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
     }
 
     public function scopePublished($query){
