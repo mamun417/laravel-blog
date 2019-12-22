@@ -45,6 +45,72 @@
     margin-right: 12px;
 }
 
+/**********Comment reply***********/
+.comment-owner{
+    float: left;
+}
+.comment-owner img{
+    height: 32px;
+    width: 32px;
+    border-radius: 100%;
+}
+.comment-body, .comment-box{
+    margin-left: 38px;
+}
+.single-comment {
+    padding-bottom: 12px;
+}
+.comment-info{
+    padding: 5px 10px;
+    background-color: #f2f3f5;
+    border-radius: 18px;
+    display: inline-block;
+}
+.comment-action{
+    margin-left: 10px;
+    margin-top: 2px;
+    font-size: 12px;
+    color: #385898;
+}
+.comment-body a{
+    cursor: pointer;
+    color: #385898!important;
+    font-size: 13px;
+}
+.comment-replies {
+    margin-top: -8px;
+    padding: 8px 0 0 54px;
+}
+.comment-replies .comment-body{
+    margin-left: 25px;
+}
+.comment-replies img{
+    height: 20px;
+    width: 20px;
+    vertical-align: -webkit-baseline-middle;
+}
+.comment-box textarea{
+    border-radius: 18px;
+    height: 34px;
+    background: #f2f3f5;
+    resize: none;
+    overflow: hidden;
+}
+.comment-box textarea:focus{
+    background-color: #f2f3f5;
+}
+
+.comment .post-info .left-area {
+    height: 40px!important;
+    width: 40px!important;
+    margin-top: -22px!important;
+}
+.comment .post-info .middle-area {
+    padding-left: 50px!important;
+}
+
+
+
 @media only screen and (max-width: 992px) {
     .autocomplete-result {
         width: 100%;
