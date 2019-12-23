@@ -118,6 +118,32 @@
                         toastr.success(response.data.message);
                     }
                 );
+            },
+
+            showReplyForm(e){
+
+                var replyForm = '<div class="comment-form-section">' +
+                    '<div class="comment-owner">' +
+                        '<img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}">' +
+                    '</div>' +
+                    '<div class="comment-box">' +
+                        '<textarea onkeyup="this.style.height = \'1px\'; this.style.height = (5+this.scrollHeight)+\'px\'" placeholder="Write a reply" class="form-control"></textarea>' +
+                    '</div>' +
+                '</div>';
+
+                var reply_type = e.currentTarget.getAttribute('reply_type');
+
+
+                if(reply_type === 'onlyReply'){
+
+                    var comment_id = e.currentTarget.getAttribute('comment_id');
+
+                    $('#replis-'+comment_id).find('.single-comment').last().after(replyForm);
+
+                }else if(reply_type === 'mentionReply'){
+
+                    $(e.currentTarget).parents('.single-comment').after(replyForm);
+                }
             }
         }
     })

@@ -215,7 +215,7 @@
 
                             <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
 
-                            <div class="commnets-area ">
+                            <div class="commnets-area">
 
                                 <div class="single-comment">
                                     <div class="comment-owner">
@@ -230,7 +230,7 @@
                                                 <li><a href="javascript:void(0)">Like</a></li>
                                                 <li>
                                                     <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">Reply</a>
+                                                    <a reply_type="onlyReply" comment_id="12" @click="showReplyForm" href="javascript:void(0)">Reply</a>
                                                 </li>
                                                 <li>
                                                     <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
@@ -241,7 +241,7 @@
                                     </div>
                                 </div>
 
-                                <div class="comment-replies">
+                                <div class="comment-replies" id="replis-12">
                                     <div class="single-comment">
                                         <div class="comment-owner">
                                             <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
@@ -254,8 +254,54 @@
                                                 <ul>
                                                     <li><a href="javascript:void(0)">Like</a></li>
                                                     <li>
+                                                        <span aria-hidden="true" class="">&nbsp;·&nbsp;</span>
+                                                        <a reply_type="mentionReply" @click="showReplyForm" href="javascript:void(0)">Reply</a>
+                                                    </li>
+                                                    <li>
                                                         <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                        <a href="javascript:void(0)">Reply</a>
+                                                        <a href="javascript:void(0)">10h</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-comment">
+                                        <div class="comment-owner">
+                                            <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
+                                        </div>
+                                        <div class="comment-body">
+                                            <div class="comment-info">
+                                                <a href="javascript:void(0)"><b>Nasir Hossain</b></a> will by the  of looking at its layout.
+                                            </div>
+                                            <div class="comment-action">
+                                                <ul>
+                                                    <li><a href="javascript:void(0)">Like</a></li>
+                                                    <li>
+                                                        <span aria-hidden="true" class="">&nbsp;·&nbsp;</span>
+                                                        <a reply_type="mentionReply" @click="showReplyForm" href="javascript:void(0)">Reply</a>
+                                                    </li>
+                                                    <li>
+                                                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
+                                                        <a href="javascript:void(0)">10h</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-comment">
+                                        <div class="comment-owner">
+                                            <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
+                                        </div>
+                                        <div class="comment-body">
+                                            <div class="comment-info">
+                                                <a href="javascript:void(0)"><b>Nasir Hossain</b></a> will by the  of looking at its layout.
+                                            </div>
+                                            <div class="comment-action">
+                                                <ul>
+                                                    <li><a href="javascript:void(0)">Like</a></li>
+                                                    <li>
+                                                        <span aria-hidden="true" class="">&nbsp;·&nbsp;</span>
+                                                        <a reply_type="mentionReply" @click="showReplyForm" href="javascript:void(0)">Reply</a>
                                                     </li>
                                                     <li>
                                                         <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
@@ -288,6 +334,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="single-comment">
@@ -362,28 +409,26 @@
                                     </div>
                                 </div>
 
-                                <div class="single-comment">
+                                <div class="comment-form-section">
                                     <div class="comment-owner">
-                                        <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
+                                        <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}">
                                     </div>
                                     <div class="comment-box">
                                         <textarea onkeyup="this.style.height = '1px'; this.style.height = (5+this.scrollHeight)+'px'" placeholder="Write a comment" class="form-control"></textarea>
                                     </div>
                                 </div>
 
-
                                 @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
 
-                            </div><!-- commnets-area -->
+                            </div>
 
                             <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>
                         @endif
 
-                    </div><!-- col-lg-8 col-md-12 -->
+                    </div>
 
-                </div><!-- row -->
-
-            </div><!-- container -->
+                </div>
+            </div>
         </section>
     </div>
 
