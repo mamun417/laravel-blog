@@ -122,9 +122,15 @@
 
             showReplyForm(e){
 
+                @auth
+                    @php($image = Auth::user()->image)
+                @else
+                    @php($image = '')
+                @endauth
+
                 var replyForm = '<div class="comment-form-section">' +
                     '<div class="comment-owner">' +
-                        '<img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}">' +
+                        '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
                     '</div>' +
                     '<div class="comment-box">' +
                         '<textarea onkeyup="this.style.height = \'1px\'; this.style.height = (5+this.scrollHeight)+\'px\'" placeholder="Write a reply" class="form-control"></textarea>' +

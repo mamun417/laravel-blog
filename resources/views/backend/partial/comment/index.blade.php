@@ -46,6 +46,7 @@
                                 <tbody>
 
                                 @foreach($comments as $comment)
+
                                     <tr class="gradeX">
                                         <td>
                                             <div class="media">
@@ -58,23 +59,23 @@
                                                     <h4 class="media-heading">
                                                         {{ $comment->user->name }} <small>{{ $comment->created_at->diffForHumans() }}</small>
                                                     </h4>
-                                                    <p>{{ $comment->comment }}</p>
-                                                    <a target="_blank" href="{{ route('frontend.post.view',$comment->post->slug.'#comments') }}">Reply</a>
+                                                    <p>{{ $comment->body }}</p>
+                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->commentable->slug.'#comments') }}">Reply</a>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->post->slug) }}">
-                                                        <img class="media-object" src="{{ Storage::disk('public')->url('post/'.$comment->post->image) }}" width="64" height="64">
+                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->commentable->slug) }}">
+                                                        <img class="media-object" src="{{ Storage::disk('public')->url('post/'.$comment->commentable->image) }}" width="64" height="64">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
-                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->post->slug) }}">
-                                                        <h4 class="media-heading">{{ $comment->post->title }}</h4>
+                                                    <a target="_blank" href="{{ route('frontend.post.view', $comment->commentable->slug) }}">
+                                                        <h4 class="media-heading">{{ $comment->commentable->title }}</h4>
                                                     </a>
-                                                    <p>by <strong>{{ $comment->post->user->name }}</strong></p>
+                                                    <p>by <strong>{{ $comment->commentable->user->name }}</strong></p>
                                                 </div>
                                             </div>
                                         </td>

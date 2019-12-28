@@ -21,11 +21,15 @@ class Comment extends Model
         return $this->hasMany(Comment::class, 'parent_id', 'id');
     }
 
-    public function post(){
-        return $this->belongsTo(Post::class);
-    }
+    /*public function post(){
+        return $this->morphOne('App\Post','commentable');
+    }*/
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function mentionedUser(){
+        return $this->belongsTo(User::class, 'mentioned_id');
     }
 }

@@ -5,14 +5,14 @@
         </div>
         <div class="comment-body">
             <div class="comment-info">
-                <a href="javascript:void(0)"><b>{{ $comment->user->name }}</b></a> {{ $comment->body }}
+                <a href="javascript:void(0)"><b>{{ $comment->user->name }}</b></a> @if($comment->mentioned_id != 0)<a href="javascript:void(0)"><strong>{{ $comment->mentionedUser->name }}</strong></a>@endif {{ $comment->body }}.
             </div>
             <div class="comment-action">
                 <ul>
                     <li><a href="javascript:void(0)">Like</a></li>
                     <li>
-                        <span aria-hidden="true">&nbsp;·&nbsp;</span>
-                        <a reply_type="onlyReply" comment_id="{{ $comment->id }}" @click="showReplyForm" href="javascript:void(0)">Reply</a>
+                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
+                        <a @click="showReplyForm" reply_type="mentionReply" href="javascript:void(0)">Reply</a>
                     </li>
                     <li>
                         <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
@@ -24,9 +24,8 @@
     </div>
 
     @if($comment->replies->count() > 0)
-        <div class="comment-replies" id="replis-{{ $comment->id }}">
-            @include('frontend.comments_replies', ['comments' => $comment->replies])
-        </div>
+        @include('frontend.comments_replies', ['comments' => $comment->replies])
     @endif
 
 @endforeach
+

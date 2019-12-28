@@ -211,218 +211,42 @@
                             </form>
                         </div>--}}
 
-                        @if($post->comments->count() > 0)
+                        @if($post->comments_count > 0)
 
                             <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
 
                             <div class="commnets-area">
 
-                                <div class="single-comment">
-                                    <div class="comment-owner">
-                                        <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="comment-info">
-                                            <a href="javascript:void(0)"><b>Abdullah al mamun</b></a> will by the readable when looking at its layout.
-                                        </div>
-                                        <div class="comment-action">
-                                            <ul>
-                                                <li><a href="javascript:void(0)">Like</a></li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a reply_type="onlyReply" comment_id="12" @click="showReplyForm" href="javascript:void(0)">Reply</a>
-                                                </li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">10h</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="comment-replies" id="replis-12">
-                                    <div class="single-comment">
-                                        <div class="comment-owner">
-                                            <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                        </div>
-                                        <div class="comment-body">
-                                            <div class="comment-info">
-                                                <a href="javascript:void(0)"><b>Nasir Hossain</b></a> will by the  of looking at its layout.
-                                            </div>
-                                            <div class="comment-action">
-                                                <ul>
-                                                    <li><a href="javascript:void(0)">Like</a></li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="">&nbsp;·&nbsp;</span>
-                                                        <a reply_type="mentionReply" @click="showReplyForm" href="javascript:void(0)">Reply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                        <a href="javascript:void(0)">10h</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-comment">
-                                        <div class="comment-owner">
-                                            <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                        </div>
-                                        <div class="comment-body">
-                                            <div class="comment-info">
-                                                <a href="javascript:void(0)"><b>Nasir Hossain</b></a> will by the  of looking at its layout.
-                                            </div>
-                                            <div class="comment-action">
-                                                <ul>
-                                                    <li><a href="javascript:void(0)">Like</a></li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="">&nbsp;·&nbsp;</span>
-                                                        <a reply_type="mentionReply" @click="showReplyForm" href="javascript:void(0)">Reply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                        <a href="javascript:void(0)">10h</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-comment">
-                                        <div class="comment-owner">
-                                            <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                        </div>
-                                        <div class="comment-body">
-                                            <div class="comment-info">
-                                                <a href="javascript:void(0)"><b>Nasir Hossain</b></a> will by the  of looking at its layout.
-                                            </div>
-                                            <div class="comment-action">
-                                                <ul>
-                                                    <li><a href="javascript:void(0)">Like</a></li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="">&nbsp;·&nbsp;</span>
-                                                        <a reply_type="mentionReply" @click="showReplyForm" href="javascript:void(0)">Reply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                        <a href="javascript:void(0)">10h</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-comment">
-                                        <div class="comment-owner">
-                                            <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                        </div>
-                                        <div class="comment-body">
-                                            <div class="comment-info">
-                                                <a href="javascript:void(0)"><b>Abdullah al mamun</b></a> <a href="javascript:void(0)"><strong>Nasir Hossain</strong></a> will b of a page when at its layout.
-                                            </div>
-                                            <div class="comment-action">
-                                                <ul>
-                                                    <li><a href="javascript:void(0)">Like</a></li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                        <a href="javascript:void(0)">Reply</a>
-                                                    </li>
-                                                    <li>
-                                                        <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                        <a href="javascript:void(0)">10h</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="single-comment">
-                                    <div class="comment-owner">
-                                        <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="comment-info">
-                                            <a href="javascript:void(0)"><b>Abdullah al mamun</b></a> will by the content of a page when looking at its layout.
-                                        </div>
-                                        <div class="comment-action">
-                                            <ul>
-                                                <li><a href="javascript:void(0)">Like</a></li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">Reply</a>
-                                                </li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">10h</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="single-comment">
-                                    <div class="comment-owner">
-                                        <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="comment-info">
-                                            <a href="javascript:void(0)"><b>Abdullah al mamun</b></a> will by page when looking at its layout.
-                                        </div>
-                                        <div class="comment-action">
-                                            <ul>
-                                                <li><a href="javascript:void(0)">Like</a></li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">Reply</a>
-                                                </li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">10h</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="single-comment">
-                                    <div class="comment-owner">
-                                        <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-12-5df2c010dc4f0.png">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="comment-info">
-                                            <a href="javascript:void(0)"><b>Abdullah al mamun</b></a> will by the when looking at its layout.
-                                        </div>
-                                        <div class="comment-action">
-                                            <ul>
-                                                <li><a href="javascript:void(0)">Like</a></li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">Reply</a>
-                                                </li>
-                                                <li>
-                                                    <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
-                                                    <a href="javascript:void(0)">10h</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
 
                                 <div class="comment-form-section">
                                     <div class="comment-owner">
-                                        <img src="{{ Storage::disk('public')->url('profile/'.Auth::user()->image) }}">
+
+                                        @auth
+                                            @php($image = Auth::user()->image)
+                                        @else
+                                            @php($image = '')
+                                        @endauth
+
+                                        <img src="{{ Storage::disk('public')->url('profile/'.$image) }}">
                                     </div>
+
                                     <div class="comment-box">
-                                        <textarea onkeyup="this.style.height = '1px'; this.style.height = (5+this.scrollHeight)+'px'" placeholder="Write a comment" class="form-control"></textarea>
+                                        <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
+                                            @csrf
+
+                                            <textarea name="comment" requiredmi onkeydown="this.style.height = '1px'; this.style.height = (5+this.scrollHeight)+'px'" placeholder="Write a comment" class="form-control"></textarea>
+                                            @error('comment')
+                                                <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <input type="submit" value="Submit" class="btn btn-success">
+                                        </form>
                                     </div>
                                 </div>
 
-                                @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
-
                             </div>
 
-                            <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>
+                            {{--<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>--}}
                         @endif
 
                     </div>

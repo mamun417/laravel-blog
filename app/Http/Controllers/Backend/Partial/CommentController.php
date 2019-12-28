@@ -14,7 +14,7 @@ class CommentController extends Controller
 
         if (Auth::user()->role->id == 1){
 
-            $comments = Comment::with(['user', 'post', 'post.user'])->latest()->get();
+            $comments = Comment::with(['user'])->latest()->get();
 
         }else{
 
@@ -36,7 +36,7 @@ class CommentController extends Controller
 
     public function delete(Comment $comment){
 
-        if ($comment->post->user_id == Auth::id()){
+        if (Auth::user()->role->id == 1) {
 
             $comment->delete();
 
@@ -44,7 +44,15 @@ class CommentController extends Controller
 
         }else{
 
-            Session::flash('errorMsg', 'You are not authorize to delete this comment');
+            if ($comment->post->user_id == Auth::id()){
+
+                $comment->delete();
+
+                Session::flash('successMsg', 'Comment delete successfully');
+
+            }else{
+                Session::flash('errorMsg', 'You are not authorize to delete this comment');
+            }
         }
 
         return back();
