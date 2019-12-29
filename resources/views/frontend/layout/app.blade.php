@@ -122,6 +122,8 @@
 
             showReplyForm(e){
 
+                if(e.currentTarget.getAttribute('rep_form') === "1") return;
+
                 @auth
                     @php($image = Auth::user()->image)
                 @else
@@ -133,22 +135,39 @@
                         '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
                     '</div>' +
                     '<div class="comment-box">' +
-                        '<textarea onkeyup="this.style.height = \'1px\'; this.style.height = (5+this.scrollHeight)+\'px\'" placeholder="Write a reply" class="form-control"></textarea>' +
+                        '<textarea onkeyup="this.style.height = \'1px\'; this.style.height = (1+this.scrollHeight)+\'px\'" placeholder="Write a reply" class="form-control"></textarea>' +
                     '</div>' +
                 '</div>';
 
-                var reply_type = e.currentTarget.getAttribute('reply_type');
+                $(e.currentTarget).attr('rep_form', 1);
 
+                var reply_type = e.currentTarget.getAttribute('reply_type'),
+                    parent_div = $(e.currentTarget).parents('.single-comment');
 
                 if(reply_type === 'onlyReply'){
 
-                    var comment_id = e.currentTarget.getAttribute('comment_id');
+                    var checkReplies = $(parent_div).next().hasClass('comment-replies');
 
-                    $('#replis-'+comment_id).find('.single-comment').last().after(replyForm);
+                    if(checkReplies){
+
+                        var last = $(parent_div).next('.comment-replies').find('.single-comment').last();
+
+                        $(last).after(replyForm);
+
+                        $(last).next('.comment-form-section').find('textarea').focus();
+
+                    }else{
+                        $(parent_div).after('<div class="comment-replies">'+replyForm+'</div>');
+                        $(parent_div).next('.comment-replies').find('textarea').focus();
+                    }
 
                 }else if(reply_type === 'mentionReply'){
 
-                    $(e.currentTarget).parents('.single-comment').after(replyForm);
+                    var mentioned_user_name = $(e.currentTarget).parents('.comment-body').find('.comment-info a b').text();
+
+                    $(parent_div).after(replyForm);
+
+                    $(parent_div).next('.comment-form-section').find('textarea').html(mentioned_user_name).focus();
                 }
             }
         }

@@ -12,7 +12,7 @@
                     <li><a href="javascript:void(0)">Like</a></li>
                     <li>
                         <span aria-hidden="true">&nbsp;·&nbsp;</span>
-                        <a reply_type="onlyReply" comment_id="{{ $comment->id }}" @click="showReplyForm" href="javascript:void(0)">Reply</a>
+                        <a reply_type="onlyReply" @click="showReplyForm" rep_form="0" href="javascript:void(0)">Reply</a>
                     </li>
                     <li>
                         <span aria-hidden="true" class="_6cok">&nbsp;·&nbsp;</span>
