@@ -27,8 +27,6 @@
 
     <script src="{{ asset('frontend/common-js/jquery-3.1.1.min.js') }}"></script>
 
-    <script src="{{ asset('js/app.js') }}"></script>
-
     @stack('css')
 
 </head>
@@ -50,6 +48,8 @@
 
 <!-- Toastr -->
 <script src="{{ asset('backend/js/plugins/toastr/toastr.min.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 
 <script>
     $(function () {
@@ -79,19 +79,61 @@
 
 <script>
 
+    function addToFavoritePost(e){
+
+        var post_id = $(e).attr('post_id'),
+            url = '{{ route('frontend.post.favorite.store', ':post') }}',
+            url = url.replace(':post', post_id);
+
+        axios.get(url).then(function (response) {
+
+            var fav_user_counter = $(e).find('span');
+
+            if(response.data.status === 'added'){
+
+                $(e).find('i').addClass('active-favorite-post');
+
+                $(fav_user_counter).text( parseInt($(fav_user_counter).text())+1);
+
+            }else{
+
+                $(e).find('i').removeClass('active-favorite-post');
+                $(fav_user_counter).text( parseInt($(fav_user_counter).text())-1);
+            }
+            toastr.success(response.data.message);
+        });
+    }
+</script>
+
+{{--<script>
+
     var App = new Vue({
         el: "#app",
         data: {
-            posts: [],
+            reply_form: '',
         },
 
         mounted() {
 
+            @auth
+                @php($image = Auth::user()->image)
+            @else
+                @php($image = '')
+            @endauth
+
+            this.reply_form = '<div class="comment-form-section">' +
+                '<div class="comment-owner">' +
+                    '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
+                '</div>' +
+                '<div class="comment-box">' +
+                    '<textarea @keyup="typingComment" placeholder="Write a reply" class="form-control"></textarea>' +
+                '</div>' +
+            '</div>';
         },
 
         methods:{
 
-            addToFavoritePost(e){
+            /*addToFavoritePost(e){
 
                 var post_id = e.currentTarget.getAttribute('post_id'),
                     url = '{{ route('frontend.post.favorite.store', ':post') }}',
@@ -118,26 +160,13 @@
                         toastr.success(response.data.message);
                     }
                 );
-            },
+            },*/
 
             showReplyForm(e){
 
                 if(e.currentTarget.getAttribute('rep_form') === "1") return;
 
-                @auth
-                    @php($image = Auth::user()->image)
-                @else
-                    @php($image = '')
-                @endauth
-
-                var replyForm = '<div class="comment-form-section">' +
-                    '<div class="comment-owner">' +
-                        '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
-                    '</div>' +
-                    '<div class="comment-box">' +
-                        '<textarea onkeyup="this.style.height = \'1px\'; this.style.height = (1+this.scrollHeight)+\'px\'" placeholder="Write a reply" class="form-control"></textarea>' +
-                    '</div>' +
-                '</div>';
+                var replyForm = this.reply_form;
 
                 $(e.currentTarget).attr('rep_form', 1);
 
@@ -163,17 +192,26 @@
 
                 }else if(reply_type === 'mentionReply'){
 
-                    var mentioned_user_name = $(e.currentTarget).parents('.comment-body').find('.comment-info a b').text();
+                    var mentioned_user_name = $(e.currentTarget).parents('.comment-body').find('.comment-info a b').text(),
+                        mentioned_name_length = mentioned_user_name.length;
 
                     $(parent_div).after(replyForm);
 
-                    $(parent_div).next('.comment-form-section').find('textarea').html(mentioned_user_name).focus();
+                    $($(parent_div).next('.comment-form-section').find('textarea').html(document.createTextNode(mentioned_user_name +' ')).focus())[0].setSelectionRange(mentioned_name_length+1, mentioned_name_length+1);
                 }
+            },
+
+            typingComment(e){
+
+                alert('ok');
+
+                this.style.height = '1px';
+                this.style.height = (1+this.scrollHeight)+'px';
             }
         }
     })
 
-</script>
+</script>--}}
 
 </body>
 </html>

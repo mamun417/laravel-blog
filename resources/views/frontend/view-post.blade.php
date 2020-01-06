@@ -235,7 +235,7 @@
                                         <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
                                             @csrf
 
-                                            <textarea name="comment" required onkeydown="this.style.height = '1px'; this.style.height = (1+this.scrollHeight)+'px'" placeholder="Write a comment" class="form-control"></textarea>
+                                            <textarea id="mamun" @keyup="typingComment" name="comment" required onkeydown="event.which === 13 ? alert('fd') : this.style.height = '1px'; this.style.height = (1+this.scrollHeight)+'px'" placeholder="Write a comment" class="form-control"></textarea>
                                             @error('comment')
                                                 <span class="help-block m-b-none text-danger">{{ $message }}</span>
                                             @enderror
