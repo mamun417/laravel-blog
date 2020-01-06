@@ -85,7 +85,7 @@ class PostController extends Controller
                 ->where('title', 'LIKE', "%$query%")
                 ->take(15)->get();
 
-            return response()->json($posts);
+            return view('frontend.partial.product-suggestion-list', compact('posts'));
         }
     }
 }
