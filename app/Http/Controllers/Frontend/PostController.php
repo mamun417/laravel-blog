@@ -80,12 +80,10 @@ class PostController extends Controller
 
         $query = request('query');
 
-        if(isset($query)){
-            $posts = Post::with('user')->publishedAndActive()
-                ->where('title', 'LIKE', "%$query%")
-                ->take(15)->get();
+        $posts = Post::with('user')->publishedAndActive()
+            ->where('title', 'LIKE', "%$query%")
+            ->take(15)->get();
 
-            return view('frontend.partial.product-suggestion-list', compact('posts'));
-        }
+        return view('frontend.partial.product-suggestion-list', compact('posts'));
     }
 }

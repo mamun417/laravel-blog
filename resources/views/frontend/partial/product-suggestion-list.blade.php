@@ -1,7 +1,7 @@
 <ul>
     @foreach($posts as $post)
         <li>
-            <a href="{{ route('frontend.post.view', $post->id) }}">
+            <a href="{{ route('frontend.post.view', $post->slug) }}">
                 <div>
                     <img class="" src="{{ Storage::disk('public')->url('post/'.$post->image) }}">
                     <span>{{ $post->title }}</span><br>

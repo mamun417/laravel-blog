@@ -32,17 +32,7 @@
 </header>
 
 <div id="show-suggestion" class="autocomplete-result hidden">
-    {{--<ul>
-        <li v-for="post in posts">
-            <a :href="'{{ route('frontend.post.view', '') }}/'+post.slug">
-                <div>
-                    <img class="" :src="'{{ Storage::disk('public')->url('post/') }}'+post.image">
-                    <span>@{{ post.title }}</span><br>
-                    <span><small>Created on @{{ post.created_at | formatDate('D MMM YY') }} by <b>@{{ post.user.name }}</b></small></span>
-                </div>
-            </a>
-        </li>
-    </ul>--}}
+
 </div>
 
 @section('custom-js')
@@ -50,65 +40,24 @@
     <script>
         function getSuggestion(e){
 
-            query = $(e).val();
+            var query = $(e).val();
 
-            if (query.trim() !== ''){
-
-                axios.get('{{ route('frontend.posts.get-autocomplete-posts') }}', { params: { query:query } })
-                    .then(function (response) {
-
-                        if(response.data.length > 0){
-                            $('#show-suggestion').removeClass('hidden').html(response.data);
-                        }else {
-                            $('#show-suggestion').addClass('hidden');
-                        }
-                    }
-                );
-            }else{
-                $('#show-suggestion').addClass('hidden');
+            if (query.trim() === ''){
+                $('#show-suggestion').html('').addClass('hidden');
+                return;
             }
-        }
-    </script>
 
-    {{--<script>
+            axios.get('{{ route('frontend.posts.get-autocomplete-posts') }}', { params: { query:query } })
+                .then(function (response) {
 
-        var Header = new Vue({
-            el: "#header",
-            data: {
-                posts: [],
-            },
-
-            mounted() {
-
-            },
-
-            methods:{
-                getSuggestion(e){
-
-                    query = e.target.value;
-
-                    if (query.trim() !== ''){
-
-                        currentApp = this;
-
-                        axios.get('{{ route('frontend.posts.get-autocomplete-posts') }}', { params: { query:query } })
-                            .then(function (response) {
-
-                                if(response.data.length > 0){
-                                    $('#show-suggestion').removeClass('hidden');
-                                    currentApp.posts = response.data;
-                                }else {
-                                    $('#show-suggestion').addClass('hidden');
-                                }
-                            }
-                        );
-                    }else{
+                    if(response.data.length > 0){
+                        $('#show-suggestion').removeClass('hidden').html(response.data);
+                    }else {
                         $('#show-suggestion').addClass('hidden');
                     }
                 }
-            }
-        })
-
-    </script>--}}
+            );
+        }
+    </script>
 
 @endsection
