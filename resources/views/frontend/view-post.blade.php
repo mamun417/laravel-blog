@@ -217,6 +217,15 @@
                         <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
 
                         <div class="commnets-area">
+                           {{-- <span><strong>Sadikur</strong></span>
+                            <div class="comment-form-section">
+                                <div class="comment-owner">
+                                    <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-28-5e076061da78d.jpg">
+                                </div>
+                                <div class="comment-box">
+                                    <textarea @keyup="typingComment" placeholder="Write a reply" class="form-control"></textarea>
+                                </div>
+                            </div>--}}
 
                             @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
 
@@ -236,7 +245,7 @@
                                     <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
                                         @csrf
 
-                                        <textarea id="mamun" @keyup="typingComment" name="comment" required
+                                        <textarea id="mamun" onkeyup="typingComment(this)" name="comment" required
                                                   onkeydown="event.which === 13 ? alert('fd') : this.style.height = '1px'; this.style.height = (1+this.scrollHeight)+'px'"
                                                   placeholder="Write a comment" class="form-control"></textarea>
                                         @error('comment')
@@ -276,11 +285,9 @@
                     '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
                 '</div>' +
                 '<div class="comment-box">' +
-                    '<textarea @keyup="typingComment" placeholder="Write a reply" class="form-control"></textarea>' +
+                    '<textarea onkeyup="typingComment(this)" placeholder="Write a reply" class="form-control"></textarea>' +
                 '</div>' +
             '</div>';
-
-             console.log(reply_form);
         });
 
         function showReplyForm(e) {
@@ -289,7 +296,7 @@
 
             var replyForm = reply_form;
 
-            $(e.currentTarget).attr('rep_form', 1);
+            $(e).attr('rep_form', 1);
 
             var reply_type = $(e).attr('reply_type'),
                 parent_div = $(e).parents('.single-comment');
@@ -313,14 +320,20 @@
 
             }else if(reply_type === 'mentionReply'){
 
-                var mentioned_user_name = $(e).parents('.comment-body').find('.comment-info a b').text(),
-                    mentioned_name_length = mentioned_user_name.length;
+                $(e).parents('.comment-body').find('a').first().attr("style", "color: #ED5666!important");
+
+                /*var mentioned_user_name = $(e).parents('.comment-body').find('.comment-info a b').text(),
+                    mentioned_name_length = mentioned_user_name.length;*/
 
                 $(parent_div).after(replyForm);
 
-                $($(parent_div).next('.comment-form-section').find('textarea').html(document.createTextNode(mentioned_user_name +' ')).focus())[0].setSelectionRange(mentioned_name_length+1, mentioned_name_length+1);
+                $($(parent_div).next('.comment-form-section').find('textarea').focus())[0].setSelectionRange(1, 1);
             }
         }
 
+        function typingComment(e){
+            e.style.height = '1px';
+            e.style.height = (e.scrollHeight) + 'px';
+        }
     </script>
 @endsection

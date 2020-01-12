@@ -35,29 +35,3 @@
 
 </div>
 
-@section('custom-js')
-
-    <script>
-        function getSuggestion(e){
-
-            var query = $(e).val();
-
-            if (query.trim() === ''){
-                $('#show-suggestion').html('').addClass('hidden');
-                return;
-            }
-
-            axios.get('{{ route('frontend.posts.get-autocomplete-posts') }}', { params: { query:query } })
-                .then(function (response) {
-
-                    if(response.data.length > 0){
-                        $('#show-suggestion').removeClass('hidden').html(response.data);
-                    }else {
-                        $('#show-suggestion').addClass('hidden');
-                    }
-                }
-            );
-        }
-    </script>
-
-@endsection
