@@ -272,29 +272,9 @@
 @section('custom-js')
     <script>
 
-        $(document).ready(function () {
-
-            @auth
-                @php($image = Auth::user()->image)
-            @else
-                @php($image = '')
-            @endauth
-
-            reply_form = '<div class="comment-form-section">' +
-                '<div class="comment-owner">' +
-                    '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
-                '</div>' +
-                '<div class="comment-box">' +
-                    '<textarea onkeyup="typingComment(this)" placeholder="Write a reply" class="form-control"></textarea>' +
-                '</div>' +
-            '</div>';
-        });
-
         function showReplyForm(e) {
 
             if($(e).attr('rep_form') === "1") return;
-
-            var replyForm = reply_form;
 
             $(e).attr('rep_form', 1);
 
@@ -302,6 +282,8 @@
                 parent_div = $(e).parents('.single-comment');
 
             if(reply_type === 'onlyReply'){
+
+                var replyForm = getReplyForm(0, $(e).attr('parent_id'));
 
                 var checkReplies = $(parent_div).next().hasClass('comment-replies');
 
@@ -325,15 +307,56 @@
                 /*var mentioned_user_name = $(e).parents('.comment-body').find('.comment-info a b').text(),
                     mentioned_name_length = mentioned_user_name.length;*/
 
-                $(parent_div).after(replyForm);
+                $(parent_div).after(getReplyForm($(e).attr('mention_id'), $(e).attr('parent_id')));
 
                 $($(parent_div).next('.comment-form-section').find('textarea').focus())[0].setSelectionRange(1, 1);
             }
         }
 
+        @auth
+            @php($image = Auth::user()->image)
+        @else
+            @php($image = '')
+        @endauth
+
+        function getReplyForm(mention_id = 0, parent_id = 0) {
+
+            return reply_form = '<div class="comment-form-section">' +
+                '<div class="comment-owner">' +
+                    '<img src="{{ Storage::disk('public')->url('profile/'.$image) }}">' +
+                '</div>' +
+                '<div class="comment-box">' +
+                    '<textarea onkeyup="typingComment(this)" parent_id='+parent_id+' mention_id='+mention_id+' placeholder="Write a reply" class="form-control"></textarea>' +
+                '</div>' +
+            '</div>';
+        }
+
         function typingComment(e){
+
+            if(event.which === 13){
+
+                var parent_id = $(e).attr('parent_id'),
+                    mention_id = $(e).attr('mention_id'),
+                    comment = $(e).val();
+
+                storeComment(parent_id, mention_id, comment);
+            }
+
             e.style.height = '1px';
             e.style.height = (e.scrollHeight) + 'px';
+        }
+
+        function storeComment(parent_id, mention_id, comment){
+
+            axios.post('{{ route('frontend.post.comment.store', $post->id) }}', { parent_id:parent_id, comment:comment, mention_id:mention_id })
+                .then(function (response) {
+
+                    if(response.data.status === 'success'){
+                        location.reload();
+                    }else{
+                        toastr.error('There is a problem');
+                    }
+                });
         }
     </script>
 @endsection
