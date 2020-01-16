@@ -46,7 +46,7 @@ class PostController extends Controller
             ->publishedAndActive()
             ->where('slug', $slug)->first();
 
-        /*$tags = Tag::latest()->get();
+        $tags = Tag::latest()->take(10)->get();
 
         $random_posts = Post::with(['user', 'comments'])
             ->withCount(['favoriteUsers', 'comments'])
@@ -59,10 +59,9 @@ class PostController extends Controller
         if (!Session::has($post_key)){
             $post->increment('view_count');
             Session::put($post_key, 1);
-        }*/
+        }
 
-        return view('frontend.view-post', compact('post'));
-        //return view('frontend.view-post', compact('post','tags', 'random_posts'));
+        return view('frontend.view-post', compact('post','tags', 'random_posts'));
     }
 
     public function search(){

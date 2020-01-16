@@ -12,24 +12,23 @@ class CommentController extends Controller
 {
     public function store(Request $request, $post)
     {
-        info($request->all());
-
-        info($request->comment);
-
-        /*$request->validate([
+        $request->validate([
             'comment' => 'required|max:555',
-        ]);*/
+        ]);
+
+        $user_id = Auth::user()->id;
+        $mention_id = $request->mention_id;
 
         $comment = new Comment;
-        $comment->user_id = Auth::user()->id;
-        $comment->parent_id = $request->parent_id ?? 0;
-        $comment->mentioned_id = $request->mention_id;
+        $comment->user_id = $user_id;
+        $comment->parent_id = $request->parent_id;
+        $comment->mentioned_id = $mention_id == $user_id ? 0 : $mention_id;
         $comment->body = $request->comment;
+
         $post = Post::find($post);
+
         $post->comments()->save($comment);
 
         return response()->json(['status' => 'success']);
-
-        //return back()->with('successMsg', 'Your comment post successfully');
     }
 }

@@ -25,13 +25,13 @@
 
 @section('content')
 
-    {{-- <div class="slider">
+     <div class="slider">
          <div class="display-table  center-text">
-             --}}{{--<h1 class="title display-table-cell"><b>DESIGN</b></h1>--}}{{--
+             <h1 class="title display-table-cell"><b>DESIGN</b></h1>
          </div>
-     </div><!-- slider -->--}}
+     </div><!-- slider -->
 
-    {{--<section class="post-area section">
+    <section class="post-area section">
         <div class="container">
 
             <div class="row">
@@ -60,9 +60,6 @@
                             </h3>
 
                             <p class="para">
-
-                                --}}{{--{{ dd($post->body) }}--}}{{--
-
                                 {!! html_entity_decode($post->body) !!}
                             </p>
 
@@ -99,9 +96,9 @@
 
                             <h4 class="title"><b>CATEGORIES</b></h4>
                             <ul>
-                                --}}{{--@foreach(getCategories() as $category)
+                                @foreach(getCategories(10) as $category)
                                     <li><a href="{{ route('frontend.category.posts', $category->slug) }}">{{ $category->name }}</a></li>
-                                @endforeach--}}{{--
+                                @endforeach
                             </ul>
 
                         </div><!-- subscribe-area -->
@@ -110,9 +107,9 @@
 
                             <h4 class="title"><b>TAGS</b></h4>
                             <ul>
-                               --}}{{-- @foreach($tags as $tag)
+                                @foreach($tags as $tag)
                                     <li><a href="{{ route('frontend.tag.posts', $tag->slug)  }}">{{ $tag->name }}</a></li>
-                                @endforeach--}}{{--
+                                @endforeach
                             </ul>
 
                         </div><!-- subscribe-area -->
@@ -124,7 +121,7 @@
             </div><!-- row -->
 
         </div><!-- container -->
-    </section><!-- post-area -->--}}
+    </section><!-- post-area -->
 
     <section class="recomended-area section">
         <div class="container">
@@ -136,7 +133,7 @@
                     @php($auth_user_favorite_posts = [])
                 @endauth
 
-                {{--@foreach($random_posts as $random_post)
+                @foreach($random_posts as $random_post)
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100">
                             <div class="single-post post-style-1">
@@ -158,7 +155,7 @@
                                             @guest
                                                 <a href="javascript:void(0)" onclick="toastr.error('You have to login first!');"><i class="ion-heart"></i>{{ $random_post->favorite_users_count }}</a>
                                             @else
-                                                <a @click="addToFavoritePost" :post_id={{ $random_post->id }} href="javascript:void(0)--}}{{--{{ route('frontend.post.favorite.store', $post->id) }}--}}{{--">
+                                                <a @click="addToFavoritePost" :post_id={{ $random_post->id }} href="javascript:void(0){{ route('frontend.post.favorite.store', $post->id) }}">
                                                     <i class="ion-heart {{ in_array($random_post->id, (array) $auth_user_favorite_posts ) ? 'active-favorite-post':'' }}"></i>
                                                     <span>{{ $random_post->favorite_users_count }}</span>
                                                 </a>
@@ -172,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach--}}
+                @endforeach
 
             </div><!-- row -->
 
@@ -185,12 +182,47 @@
             <div class="row">
 
                 <div class="col-lg-8 col-md-12">
-                    {{--<div class="comment-form">
+                    <div class="comment-form">
                         <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
                             @csrf
 
                             @auth
-                                <div class="row">
+
+                                @if($post->comments_count > 0)
+
+                                    <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
+
+                                    <div class="commnets-area">
+                                        @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
+
+                                        <div class="comment-form-section">
+                                            <div class="comment-owner">
+
+                                                @auth
+                                                    @php($image = Auth::user()->image)
+                                                @else
+                                                    @php($image = '')
+                                                @endauth
+
+                                                <img src="{{ Storage::disk('public')->url('profile/'.$image) }}">
+                                            </div>
+
+                                            <div class="comment-box">
+                                                <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
+                                                    @csrf
+
+                                                    <textarea onkeyup="typingComment(this)" name="comment" parent_id="0" mention_id="0" required
+                                                              placeholder="Write a comment" class="form-control"></textarea>
+                                                    @error('comment')
+                                                    <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{--<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>--}}
+                                @endif
+                                {{--<div class="row">
                                     <div class="col-sm-12">
                                     <textarea name="comment" rows="2" class="text-area-messge form-control" required
                                               placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
@@ -203,63 +235,14 @@
                                     <div class="col-sm-12">
                                         <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
                                     </div>
-                                </div>
+                                </div>--}}
                             @else
                                 <p>For post a new comment, You need to login first.
                                     <a class="text-success" href="{{ route('login') }}">Login</a>
                                 </p>
                             @endauth
                         </form>
-                    </div>--}}
-
-                    @if($post->comments_count > 0)
-
-                        <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
-
-                        <div class="commnets-area">
-                           {{-- <span><strong>Sadikur</strong></span>
-                            <div class="comment-form-section">
-                                <div class="comment-owner">
-                                    <img src="http://127.0.0.1:8000/storage/profile/new-admin-name-2019-12-28-5e076061da78d.jpg">
-                                </div>
-                                <div class="comment-box">
-                                    <textarea @keyup="typingComment" placeholder="Write a reply" class="form-control"></textarea>
-                                </div>
-                            </div>--}}
-
-                            @include('frontend.comments', ['comments' => $post->comments->where('parent_id', 0)])
-
-                            <div class="comment-form-section">
-                                <div class="comment-owner">
-
-                                    @auth
-                                        @php($image = Auth::user()->image)
-                                    @else
-                                        @php($image = '')
-                                    @endauth
-
-                                    <img src="{{ Storage::disk('public')->url('profile/'.$image) }}">
-                                </div>
-
-                                <div class="comment-box">
-                                    <form action="{{ route('frontend.post.comment.store', $post->id) }}" method="post">
-                                        @csrf
-
-                                        <textarea id="mamun" onkeyup="typingComment(this)" name="comment" required
-                                                  onkeydown="event.which === 13 ? alert('fd') : this.style.height = '1px'; this.style.height = (1+this.scrollHeight)+'px'"
-                                                  placeholder="Write a comment" class="form-control"></textarea>
-                                        @error('comment')
-                                        <span class="help-block m-b-none text-danger">{{ $message }}</span>
-                                        @enderror
-                                        <input type="submit" value="Submit" class="btn btn-success">
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        {{--<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>--}}
-                    @endif
+                    </div>
 
                 </div>
 
@@ -340,6 +323,7 @@
                     comment = $(e).val();
 
                 storeComment(parent_id, mention_id, comment);
+                return;
             }
 
             e.style.height = '1px';

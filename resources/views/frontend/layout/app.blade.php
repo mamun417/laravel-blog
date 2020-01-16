@@ -23,11 +23,11 @@
     <!-- Toastr style -->
     <link href="{{ asset('backend/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('frontend/common-css/custom_style.css') }}" rel="stylesheet">
-
     <script src="{{ asset('frontend/common-js/jquery-3.1.1.min.js') }}"></script>
 
     @stack('css')
+
+    <link href="{{ asset('frontend/common-css/custom_style.css') }}" rel="stylesheet">
 
 </head>
 <body>

@@ -99,8 +99,8 @@
     vertical-align: -webkit-baseline-middle;
 }
 .comment-box textarea{
-    border-radius: 18px;
-    height: 34px;
+    border-radius: 18px!important;
+    height: 34px!important;
     background: #f2f3f5;
     resize: none;
     overflow: hidden;

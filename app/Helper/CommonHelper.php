@@ -2,9 +2,9 @@
 
 use App\Category;
 
-function getCategories(){
+function getCategories($quantity = 999999){
 
-        return Category::latest()->get();
+        return Category::latest()->take($quantity)->get();
     }
 
 
