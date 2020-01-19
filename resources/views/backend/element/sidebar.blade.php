@@ -13,7 +13,7 @@
                         <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->name }}</strong> </span>
                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span>
                     </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                    <ul class="dropdown-menu m-t-xs">
                         <li><a href="{{ Auth::user()->role->name === 'admin' ? route('admin.settings.update') : route('author.settings.update') }}"><i class="fa fa-user-circle-o"></i> Profile</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ route('logout') }}"
