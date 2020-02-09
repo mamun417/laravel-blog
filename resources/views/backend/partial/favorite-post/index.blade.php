@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Favorite Favorite Posts')
+@section('title', 'Favorite Posts')
 
 @push('css')
 

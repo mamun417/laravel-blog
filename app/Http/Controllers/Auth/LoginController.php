@@ -41,7 +41,6 @@ class LoginController extends Controller
             $this->redirectTo = route('admin.dashboard');
 
         }else {
-
             $this->redirectTo = route('author.dashboard');
         }
 

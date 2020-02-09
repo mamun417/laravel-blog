@@ -47,6 +47,7 @@ Route::group(['as' => 'frontend.', 'prefix' => 'posts', 'namespace' => 'Frontend
     }
 );
 
+//tokenize get get list by this route
 Route::get('get-category-list', 'Backend\Admin\CategoryController@getCategoryList')->name('get-category-list');
 Route::get('get-tag-list', 'Backend\Admin\TagController@getTagList')->name('get-tag-list');
 

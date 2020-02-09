@@ -11,7 +11,7 @@ class TagController extends Controller
 {
     public function index()
     {
-        $tags = Tag::with('posts')->latest()->get();
+        $tags = Tag::with('posts')->take(2)->get();
 
         return view('backend.admin.tag.index', compact('tags'));
     }

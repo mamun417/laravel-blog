@@ -15,8 +15,6 @@
     <link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
-    {{--data table--}}
-    <link href="{{ asset('backend/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="{{ asset('backend/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
@@ -69,12 +67,9 @@
 <script src="{{ asset('backend/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('backend/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
-{{--data table--}}
-<script src="{{ asset('backend/js/plugins/dataTables/datatables.min.js') }}"></script>
 
 <!-- Peity -->
 <script src="{{ asset('backend/js/plugins/peity/jquery.peity.min.js') }}"></script>
-<script src="{{ asset('backend/js/demo/peity-demo.js') }}"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('backend/js/inspinia.js') }}"></script>
@@ -173,36 +168,6 @@
             document.getElementById('row-delete-form'+rowId).submit();
         });
     }
-
-</script>
-
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function(){
-        $('.dataTables-example').DataTable({
-            order: [],
-            pageLength: 25,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                { extend: 'copy'},
-                {extend: 'csv'},
-                {extend: 'excel', title: 'ExampleFile'},
-                {extend: 'pdf', title: 'ExampleFile'},
-
-                {extend: 'print',
-                    customize: function (win){
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                    }
-                }
-            ]
-        });
-    });
 
 </script>
 
