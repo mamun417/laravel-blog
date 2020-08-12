@@ -188,7 +188,7 @@
 
                             @auth
 
-                                @if($post->comments_count > 0)
+                               {{-- @if($post->comments_count > 0)--}}
 
                                     <h4><b>COMMENTS({{ $post->comments_count }})</b></h4>
 
@@ -221,7 +221,7 @@
                                         </div>
                                     </div>
                                     {{--<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>--}}
-                                @endif
+                               {{-- @endif--}}
                                 {{--<div class="row">
                                     <div class="col-sm-12">
                                     <textarea name="comment" rows="2" class="text-area-messge form-control" required
