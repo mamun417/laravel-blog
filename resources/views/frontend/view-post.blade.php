@@ -261,18 +261,18 @@
 
             $(e).attr('rep_form', 1);
 
-            var reply_type = $(e).attr('reply_type'),
+            let reply_type = $(e).attr('reply_type'),
                 parent_div = $(e).parents('.single-comment');
 
             if(reply_type === 'onlyReply'){
 
-                var replyForm = getReplyForm(0, $(e).attr('parent_id'));
+                let replyForm = getReplyForm(0, $(e).attr('parent_id'));
 
-                var checkReplies = $(parent_div).next().hasClass('comment-replies');
+                let checkReplies = $(parent_div).next().hasClass('comment-replies');
 
                 if(checkReplies){
 
-                    var last = $(parent_div).next('.comment-replies').find('.single-comment').last();
+                    let last = $(parent_div).next('.comment-replies').find('.single-comment').last();
 
                     $(last).after(replyForm);
 
@@ -287,7 +287,7 @@
 
                 $(e).parents('.comment-body').find('a').first().attr("style", "color: #ED5666!important");
 
-                /*var mentioned_user_name = $(e).parents('.comment-body').find('.comment-info a b').text(),
+                /*let mentioned_user_name = $(e).parents('.comment-body').find('.comment-info a b').text(),
                     mentioned_name_length = mentioned_user_name.length;*/
 
                 $(parent_div).after(getReplyForm($(e).attr('mention_id'), $(e).attr('parent_id')));
@@ -318,7 +318,7 @@
 
             if(event.which === 13){
 
-                var parent_id = $(e).attr('parent_id'),
+                let parent_id = $(e).attr('parent_id'),
                     mention_id = $(e).attr('mention_id'),
                     comment = $(e).val();
 
