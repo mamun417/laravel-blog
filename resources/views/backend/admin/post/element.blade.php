@@ -13,9 +13,10 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Title</label>
-                            <input name="title" value="{{ isset($post)?$post->title:old('title') }}" type="text" placeholder="Enter title" class="form-control">
+                            <input name="title" value="{{ isset($post)?$post->title:old('title') }}" type="text"
+                                   placeholder="Enter title" class="form-control">
                             @error('title')
-                                <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -31,15 +32,22 @@
                                     <span class="fileinput-exists">Change</span>
                                     <input name="img" type="file" accept="image/*">
                                 </span>
-                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                   data-dismiss="fileinput">Remove</a>
                             </div>
                             @error('img')
-                                <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div>
-                            <label> <input name="status" {{ isset($post) && $post->status?'checked':old('status') ? 'checked':''}}  type="checkbox" class="i-checks"> Publication Status </label>
+                            <label>
+                                @php($check_status = isset($post) ? $post->status : old('status'))
+                                <input name="status"
+                                       {{ $check_status ? 'checked':'' }}
+                                       type="checkbox" class="i-checks">
+                                Publication Status
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -62,11 +70,12 @@
                                 {{--@php($post_categories = $post->categories->pluck('id')->toArray())--}}
                                 @foreach($categories as $category)
                                     {{--<option value="{{ $category->id }}" {{ isset($post) ? in_array($category->id, $post_categories) ? 'selected':'' : '' }} >{{ $category->name }}</option>--}}
-                                    <option value="{{ $category->id }}" {{ isset($post) ? 'selected' : '' }} >{{ $category->name }}</option>
+                                    <option
+                                        value="{{ $category->id }}" {{ isset($post) ? 'selected' : '' }} >{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('categories')
-                                <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -74,17 +83,20 @@
                             <label>Select Tags</label>
                             <select name="tags[]" class="tokenize-tags" multiple>
                                 @foreach($tags as $tag)
-                                    <option value="{{ $tag->id }}" {{ isset($post) ? 'selected' : '' }}>{{ $tag->name }}</option>
+                                    <option
+                                        value="{{ $tag->id }}" {{ isset($post) ? 'selected' : '' }}>{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tags')
-                                <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div>
-                            <button class="btn btn-danger" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-arrow-left"></i> Back</strong></button>
-                            <button class="btn btn-primary" style="margin-bottom: 0" type="submit"><strong><i class="fa fa-upload"></i> Published</strong></button>
+                            <button class="btn btn-danger" style="margin-bottom: 0" type="submit"><strong><i
+                                        class="fa fa-arrow-left"></i> Back</strong></button>
+                            <button class="btn btn-primary" style="margin-bottom: 0" type="submit"><strong><i
+                                        class="fa fa-upload"></i> Published</strong></button>
                         </div>
                     </div>
                 </div>
@@ -101,9 +113,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <textarea name="body" rows="6" class="summernote form-control">{{ html_entity_decode(isset($post)?$post->body:old('body')) }}</textarea>
+                            <textarea name="body" rows="6"
+                                      class="summernote form-control">{{ html_entity_decode(isset($post)?$post->body:old('body')) }}</textarea>
                             @error('body')
-                                <span class="help-block m-b-none text-danger">{{ $message }}</span>
+                            <span class="help-block m-b-none text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -117,9 +130,9 @@
     <script>
 
         $('.tokenize-categories').tokenize2({
-            dataSource: function(term, object){
+            dataSource: function (term, object) {
 
-                $.get('{{ route('get-category-list') }}', {term:term}, function (response) {
+                $.get('{{ route('get-category-list') }}', {term: term}, function (response) {
                     object.trigger('tokenize:dropdown:fill', [response]);
                 });
             },
