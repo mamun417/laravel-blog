@@ -18,6 +18,8 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@blog.com',
             'password' => bcrypt('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('users')->insert([
@@ -26,6 +28,8 @@ class UsersTableSeeder extends Seeder
             'username' => 'author',
             'email' => 'author@blog.com',
             'password' => bcrypt('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

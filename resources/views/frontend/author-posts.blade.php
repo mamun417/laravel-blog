@@ -33,7 +33,7 @@
                     @elseauth
                         @php($auth_user_favorite_posts = [])
                     @endauth
-                
+
                     <div class="row">
 
                         <div class="col-lg-8 col-md-12">
